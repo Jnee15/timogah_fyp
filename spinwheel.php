@@ -16,7 +16,7 @@
         <div class="container">
             <canvas id="wheel"></canvas>
             <button id="spin-button">Spin</button>
-            <img src="arrow.png" alt="spinner arrow" />
+            <img src="img/arrow.png" alt="spinner arrow" />
         </div>
         <div id="final-value">
             <p>Click On The Spin Button To Start</p>
