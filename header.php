@@ -22,8 +22,6 @@
                         <div class="left">Hyperlocal & Nationwide delivery available.</div>
                         <div class="right">
 								<div>
-                                    <a href="" class="link">Order Tracking</a>
-                                    |
                                     <a href="wishlist.php" class="link">My Wishlist</a>
 								</div>
                         </div>
@@ -83,7 +81,6 @@
 										<div class="dropdownn">
 										<a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><img src="img/profile.jpg"/></a>
 										<div class="dropdownn-content">
-											<a href="admin/login.php">Admin</a>
 											<a href="signin_form.php">Login</a>
 											<a href="signup_form.php">Register</a>
 										</div>
