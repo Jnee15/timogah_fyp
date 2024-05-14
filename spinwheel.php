@@ -44,6 +44,7 @@ if ($result) {
         <div id="result">
             <p>Click On The Spin Button To Start</p>
         </div>
+        <br>
         <div class="redeem-section">
             <h2>Redeem Voucher</h2>
             <form id="redeem-form">
@@ -55,9 +56,9 @@ if ($result) {
                 <button type="button" id="redeem-button">Redeem</button>
             </form>
             <div id="redeem-message"></div>
-
+            <br>
             <div class="redeemed-vouchers">
-                <h2>Redeemed Vouchers</h2>
+                <h2>Your Vouchers</h2>
                 <ul>
                     <?php
                     $sql_user_vouchers = "SELECT voucher_value FROM user_vouchers WHERE user_id = $user_id";
