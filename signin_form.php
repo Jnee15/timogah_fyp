@@ -135,7 +135,7 @@ white-space: nowrap;
 }
 	</style>
 </head>
-	<body style="background-color: #999999;">
+	<body style="background-color: #ffb6fe;">
     <div id="toast"><div id="desc"> login desc</div></div>
 		<div class="limiter">
 		<div class="container-login100">
