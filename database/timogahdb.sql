@@ -220,15 +220,12 @@ CREATE TABLE `user_info` (
   `password` varchar(300) NOT NULL,
   `mobile` varchar(10) NOT NULL,
   `address1` varchar(300) NOT NULL,
-  `address2` varchar(11) NOT NULL
+  `address2` varchar(11) NOT NULL,
+  `points` int(10) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user_info`
---
-
-INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'Samarahan', 'Sarawak');
+INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`, `points`) VALUES
+(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'Samarahan', 'Sarawak', 0);
 
 --
 -- Triggers `user_info`
@@ -468,7 +465,3 @@ ALTER TABLE `order_products`
   ADD CONSTRAINT `order_products` FOREIGN KEY (`order_id`) REFERENCES `orders_info` (`order_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

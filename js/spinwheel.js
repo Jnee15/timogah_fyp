@@ -1,7 +1,9 @@
 const wheel = document.getElementById("wheel");
 const spinButton = document.getElementById("spin-button");
 const finalValue = document.getElementById("final-value");
-let totalPoints = 0;
+const result = document.getElementById("result");
+
+let totalPoints = parseInt(finalValue.querySelector("p").textContent.split(": ")[1]);
 
 const rotationValues = [
     { minDegree: 0, maxDegree: 30, value: 2 },
@@ -55,21 +57,44 @@ let myChart = new Chart(wheel, {
 const valueGenerator = (angleValue) => {
     for (let i of rotationValues) {
         if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-            totalPoints += i.value;
-            finalValue.innerHTML = `<p>You landed on: ${i.value}. Total points: ${totalPoints}</p>`;
+            const pointsEarned = i.value;
+            totalPoints += pointsEarned;
+            finalValue.innerHTML = `<p>Points: ${totalPoints}</p>`;
+            result.innerHTML = `<p>You earned ${pointsEarned} points. Total points: ${totalPoints}</p>`; // Clear previous result and add new one
+            updatePoints(totalPoints); // Send the total points to the server
             spinButton.disabled = false;
             break;
         }
     }
 };
 
+const updatePoints = (points) => {
+    fetch('update_points.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ points: points })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Points updated successfully.');
+            } else {
+                console.error('Failed to update points.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+};
 
 let count = 0;
 let resultValue = 101;
 
 spinButton.addEventListener("click", () => {
     spinButton.disabled = true;
-    finalValue.innerHTML = `<p>Good Luck!</p>`;
+    result.innerHTML = `<p>Good Luck!</p>`; // Clear previous result message
     let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
     let rotationInterval = window.setInterval(() => {
         myChart.options.rotation = myChart.options.rotation + resultValue;

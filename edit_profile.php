@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'db.php';
+include "header.php";
 
 // Check if user is logged in
 if (!isset($_SESSION['uid'])) {
@@ -45,7 +45,7 @@ $user = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Timogah</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
