@@ -138,7 +138,7 @@ session_start();
                 </a>
                 <div class="userdropdown">
                     <a href="myorders.php"><i class="fa fa-shopping-basket" aria-hidden="true"></i>My Order</a>
-                    <a href="" data-toggle="modal" data-target="#profile"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</a>
+                    <a href="edit_profile.php"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</a>
                     <a href="logout.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Log out</a>
                 </div>
             </div>';
