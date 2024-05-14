@@ -107,10 +107,10 @@
 					<div class="col-md-12">
 						<div class="section-title">
 							<h3 class="title">Timogah's Pick</h3>
+							<br><br>
 						</div>
 					</div>
 					<!-- /section title -->
-
 					<!-- Products tab & slick -->
 					<div class="col-md-12 mainn mainn-raised">
 						<div class="row">
