@@ -208,6 +208,15 @@ CREATE TABLE `reviews` (
   `rating` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE `user_vouchers` (
+  `voucher_id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `voucher_value` int(10) NOT NULL,
+  PRIMARY KEY (`voucher_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 --
 -- Table structure for table `user_info`
 --

@@ -107,7 +107,7 @@ span.price {
     <div class="container-fluid">
         <div class="row-checkout">
         <?php
-        if(isset($_SESSION["uid"])){
+        if (isset($_SESSION["uid"])) {
             $sql = "SELECT * FROM user_info WHERE user_id='$_SESSION[uid]'";
             $query = mysqli_query($con, $sql);
             $row = mysqli_fetch_array($query);
@@ -116,20 +116,17 @@ span.price {
             <div class="col-75">
                 <div class="container-checkout">
                 <form id="checkout_form" action="checkout_process.php" method="POST" class="was-validated">
-
                     <div class="row-checkout">
-                    
                     <div class="col-50">
                         <h3>Billing Address</h3>
                         <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                        <input type="text" id="fname" class="form-control" name="firstname" pattern="^[a-zA-Z ]+$"  value="'.$row["first_name"].' '.$row["last_name"].'">
+                        <input type="text" id="fname" class="form-control" name="firstname" pattern="^[a-zA-Z ]+$" value="'.$row["first_name"].' '.$row["last_name"].'">
                         <label for="email"><i class="fa fa-envelope"></i> Email</label>
                         <input type="text" id="email" name="email" class="form-control" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$" value="'.$row["email"].'" required>
                         <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
                         <input type="text" id="adr" name="address" class="form-control" value="'.$row["address1"].'" required>
                         <label for="city"><i class="fa fa-institution"></i> City</label>
                         <input type="text" id="city" name="city" class="form-control" value="'.$row["address2"].'" pattern="^[a-zA-Z ]+$" required>
-
                         <div class="row">
                         <div class="col-50">
                             <label for="state">State</label>
@@ -141,7 +138,6 @@ span.price {
                         </div>
                         </div>
                     </div>
-                    
                     <div class="col-50">
                         <h3>Payment</h3>
                         <label for="fname">Accepted Cards</label>
@@ -151,17 +147,14 @@ span.price {
                         <i class="fa fa-cc-mastercard" style="color:red;"></i>
                         <i class="fa fa-cc-discover" style="color:orange;"></i>
                         </div>
-                        
                         <label for="cname">Name on Card</label>
                         <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$" required>
-                        
                         <div class="form-group" id="card-number-field">
                             <label for="cardNumber">Card Number</label>
                             <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
                         </div>
                         <label for="expdate">Exp Date</label>
                         <input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22" required>
-                        
                         <div class="row">
                         <div class="col-50">
                             <div class="form-group CVV">
@@ -173,9 +166,14 @@ span.price {
                     </div>
                     </div>
 
-                    <label>
-                        <input type="checkbox" id="apply_discount" name="apply_discount" value="yes"> Apply $1 Discount
-                    </label>
+					<label for="voucher-select">Select Voucher</label>
+					<select id="voucher-select" name="voucher" class="form-control">
+						<option value="0" selected>No Voucher</option>
+						<option value="100">RM1.00 Discount (100 points)</option>
+						<option value="200">RM2.00 Discount (200 points)</option>
+						<option value="300">RM3.00 Discount (300 points)</option>
+					</select>
+
                     <label>
                         <input type="CHECKBOX" name="q" class="roomselect" value="conform" required> Shipping address same as billing
                     </label>';
@@ -183,23 +181,23 @@ span.price {
                     $i = 1;
                     $total = 0;
                     $total_count = $_POST['total_count'];
-                    while($i <= $total_count) {
+                    while ($i <= $total_count) {
                         $item_name_ = $_POST['item_name_' . $i];
                         $amount_ = $_POST['amount_' . $i];
                         $quantity_ = $_POST['quantity_' . $i];
-                        $total = $total + $amount_;
+                        $total += $amount_;
                         $sql = "SELECT product_id FROM products WHERE product_title='$item_name_'";
                         $query = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($query);
                         $product_id = $row["product_id"];
-                        echo "  
+                        echo "
                         <input type='hidden' name='prod_id_$i' value='$product_id'>
                         <input type='hidden' name='prod_price_$i' value='$amount_'>
                         <input type='hidden' name='prod_qty_$i' value='$quantity_'>
                         ";
                         $i++;
                     }
-                    
+
                 echo '
                 <input type="hidden" name="total_count" value="'.$total_count.'">
                 <input type="hidden" name="total_price" value="'.$total.'">
@@ -218,7 +216,7 @@ span.price {
                 <?php
                 if (isset($_POST["cmd"])) {
                     $user_id = $_POST['custom'];
-                    $apply_discount = isset($_POST['apply_discount']) && $_POST['apply_discount'] == 'yes';
+                    $voucher_value = isset($_POST['voucher']) ? intval($_POST['voucher']) : 100;
 
                     $i = 1;
                     echo "
@@ -244,31 +242,31 @@ span.price {
                         $item_number_ = $_POST['item_number_' . $i];
                         $amount_ = $_POST['amount_' . $i];
                         $quantity_ = $_POST['quantity_' . $i];
-                        $total = $total + $amount_;
+                        $total += $amount_;
                         $sql = "SELECT product_id FROM products WHERE product_title='$item_name_'";
                         $query = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($query);
                         $product_id = $row["product_id"];
 
                         echo "
-                        <tr><td><p>$item_number_</p></td><td><p>$item_name_</p></td><td><p>$quantity_</p></td><td><p>$amount_</p></td></tr>";
+                        <tr><td><p>$item_number_</p></td><td><p>$item_name_</p></td><td><p>$quantity_</p></td><td><p>RM$amount_</p></td></tr>";
                         
                         $i++;
                     }
 
-                    // Apply a $1 discount if opted-in
-                    $discount = $apply_discount ? 0 : 1;
+                    // Calculate discount based on voucher value
+                    $discount = $voucher_value / 100;
                     $total_after_discount = $total - $discount;
 
                     echo "
                     </tbody>
                     </table>
                     <hr>
-                    <h3>Subtotal<span class='price' style='color:black'><b>$$total</b></span></h3>";
+                    <h3>Subtotal<span class='price' style='color:black'><b>RM$total</b></span></h3>";
                     
-                    echo "<h3 id='discount' style='display:none;'>Discount<span class='price' style='color:black'><b>-$discount</b></span></h3>";
+                    echo "<h3 id='discount'>Discount<span class='price' style='color:black'><b>RM-$discount</b></span></h3>";
                     
-                    echo "<h3>Total<span class='price' style='color:black'><b id='total_after_discount'>$$total_after_discount</b></span></h3>";
+                    echo "<h3>Total<span class='price' style='color:black'><b id='total_after_discount'>RM$total_after_discount</b></span></h3>";
                 }
                 ?>
             </div>
@@ -281,20 +279,29 @@ include "footer.php";
 ?>
 
 <script>
-document.getElementById('apply_discount').addEventListener('change', function() {
-    var discount = 1;
+	document.addEventListener('DOMContentLoaded', function() {
+        var voucherValue = parseInt(document.getElementById('voucher-select').value);
+        var discount = voucherValue / 100;
+        var total = <?php echo $total; ?>;
+        var totalAfterDiscountElement = document.getElementById('total_after_discount');
+        var discountElement = document.getElementById('discount');
+
+        var totalAfterDiscount = total - discount;
+
+        discountElement.textContent = 'Discount: RM-' + discount.toFixed(2);
+        totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
+    });
+	
+document.getElementById('voucher-select').addEventListener('change', function() {
+    var voucherValue = parseInt(this.value);
+    var discount = voucherValue / 100;
     var total = <?php echo $total; ?>;
     var totalAfterDiscountElement = document.getElementById('total_after_discount');
     var discountElement = document.getElementById('discount');
 
-    if (this.checked) {
-        var totalAfterDiscount = total - discount;
-        discountElement.style.display = 'block';
-    } else {
-        var totalAfterDiscount = total;
-        discountElement.style.display = 'none';
-    }
+    var totalAfterDiscount = total - discount;
 
-    totalAfterDiscountElement.textContent = '$' + totalAfterDiscount.toFixed(2);
+    discountElement.textContent = 'Discount: RM-' + discount.toFixed(2);
+    totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
 });
 </script>
