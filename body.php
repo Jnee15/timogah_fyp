@@ -10,15 +10,26 @@
     <div class="carousel-inner">
 
       <div class="item active">
-        <img src="img/banner1.png" alt="banner1" style="width:100%;">
+        <img src="img/banner1.png" alt="Los Angeles" style="width:100%;">
+        
       </div>
 
       <div class="item">
-        <img src="img/emart.jpeg" alt="emart" style="width:100%;">
+        <img src="img/Farley.jpeg" style="width:100%;">
+        
       </div>
     
       <div class="item">
-        <img src="img/Farley.jpeg" alt="Farley" style="width:100%;">
+        <img src="img/banner4.jpg" alt="New York" style="width:100%;">
+        
+      </div>
+      <div class="item">
+        <img src="img/banner1.jpg" alt="New York" style="width:100%;">
+        
+      </div>
+      <div class="item">
+        <img src="img/banner3.jpg" alt="New York" style="width:100%;">
+        
       </div>
   
     </div>

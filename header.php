@@ -8,23 +8,18 @@ session_start();
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 		<title>Timogah</title>
 
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"/>
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
-
 		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
 		<link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
-
 		<link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
-
 		<link rel="stylesheet" href="css/font-awesome.min.css">
-
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 		<link type="text/css" rel="stylesheet" href="css/accountbtn.css"/>
 
-    </head>
-        <style>
+    <style>
         .mainn-raised {
             
             margin: -7px 0px 0px;
@@ -32,21 +27,22 @@ session_start();
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 
         }
+       
         .glyphicon{
-            display: inline-block;
-            font: normal normal normal 14px/1 FontAwesome;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            }
-            .glyphicon-chevron-left:before{
-                content:"\f053"
-            }
-            .glyphicon-chevron-right:before{
-                content:"\f054"
-            }
-        </style>
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        }
+        .glyphicon-chevron-left:before{
+            content:"\f053"
+        }
+        .glyphicon-chevron-right:before{
+            content:"\f054"
+        }
+    </style>
     
 	<body>
 		<!-- HEADER -->
@@ -149,17 +145,11 @@ session_start();
 
                 <!-- Cart -->
                 <div class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <a href="cart.php" style="width:100%;">
                         <i class="fa fa-shopping-cart"></i>
-                        <span>Your Cart</span>
+                        <span>Cart</span>
                         <div class="badge qty">0</div>
                     </a>
-                    <div class="cart-dropdown">
-                        <div class="cart-list" id="cart_product"></div>
-                        <div class="cart-btns">
-                            <a href="cart.php" style="width:100%;"><i class="fa fa-edit"></i> edit cart</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

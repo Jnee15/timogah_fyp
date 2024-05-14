@@ -115,6 +115,5 @@ $cat_id = $_GET['cat_id'];
 		</div>
 </div>
 <?php
-include "newslettter.php";
 include "footer.php";
 ?>
