@@ -103,7 +103,7 @@ include "header.php";
                                     </div>
 
                                     <div class="product-preview">
-                                        <img src="product_images/'.$row['product_image'].'g" alt="">
+                                        <img src="product_images/'.$row['product_image'].'" alt="">
                                     </div>
 
                                     <div class="product-preview">
@@ -189,6 +189,10 @@ include "header.php";
 							';
 							$_SESSION['product_id'] = $row['product_id'];
 							}
+
+							else {
+									echo "No products found";
+								}
 						} 
 						?>		
 					

@@ -144,7 +144,7 @@ session_start();
 			<div id="responsive-nav">
 				<ul class="main-nav nav navbar-nav">
 					<li><a href="store.php" class="link">Stores</a></li>
-					<li><a href="category.php" class="link">Products Category</a></li>					
+					<li><a href="store.php" class="link">Products Category</a></li>					
 				</ul>
 			</div>
 		</div>
