@@ -44,10 +44,23 @@ if ($result) {
         <div id="result">
             <p>Click On The Spin Button To Start</p>
         </div>
+        <div class="redeem-section">
+            <h2>Redeem Voucher</h2>
+            <form id="redeem-form">
+                <select id="voucher-select" name="voucher">
+                    <option value="50">RM0.50 Discount (50 points)</option>
+                    <option value="100">Free Shipping (100 points)</option>
+                    <option value="500">RM5.00 Discount (500 points)</option>
+                </select>
+                <button type="button" id="redeem-button">Redeem</button>
+            </form>
+            <div id="redeem-message"></div>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
     <script src="js/spinwheel.js"></script>
 </body>
 </html>
+
 

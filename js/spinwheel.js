@@ -2,6 +2,9 @@ const wheel = document.getElementById("wheel");
 const spinButton = document.getElementById("spin-button");
 const finalValue = document.getElementById("final-value");
 const result = document.getElementById("result");
+const redeemButton = document.getElementById("redeem-button");
+const voucherSelect = document.getElementById("voucher-select");
+const redeemMessage = document.getElementById("redeem-message");
 
 let totalPoints = parseInt(finalValue.querySelector("p").textContent.split(": ")[1]);
 
@@ -88,6 +91,30 @@ const updatePoints = (points) => {
             console.error('Error:', error);
         });
 };
+
+const redeemVoucher = () => {
+    const selectedVoucher = voucherSelect.value;
+    fetch('redeem_voucher.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `voucher=${selectedVoucher}`
+    })
+        .then(response => response.json())
+        .then(data => {
+            redeemMessage.innerHTML = data.message;
+            if (data.success) {
+                totalPoints -= parseInt(selectedVoucher);
+                finalValue.innerHTML = `<p>Points: ${totalPoints}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+};
+
+redeemButton.addEventListener("click", redeemVoucher);
 
 let count = 0;
 let resultValue = 101;
