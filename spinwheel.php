@@ -48,8 +48,8 @@ if ($result) {
             <h2>Redeem Voucher</h2>
             <form id="redeem-form">
                 <select id="voucher-select" name="voucher">
-                    <option value="50">RM0.50 Discount (50 points)</option>
-                    <option value="100">Free Shipping (100 points)</option>
+                    <option value="100">RM1.00 Discount (100 points)</option>
+                    <option value="200">RM2.00 Discount (200 points)</option>
                     <option value="500">RM5.00 Discount (500 points)</option>
                 </select>
                 <button type="button" id="redeem-button">Redeem</button>
