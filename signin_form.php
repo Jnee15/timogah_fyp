@@ -135,7 +135,7 @@ white-space: nowrap;
 }
 	</style>
 </head>
-	<body style="background-color: #ffb6fe;">
+	<body style="background-color: #999999;">
     <div id="toast"><div id="desc"> login desc</div></div>
 		<div class="limiter">
 		<div class="container-login100">
@@ -187,6 +187,7 @@ white-space: nowrap;
         <div class="alert alert-danger"><h4 id="e_msg"></h4></div>
 		</form>
 		</div>
+        <div class="login100-more" style="background-image: url('img/timogahlogo.png');"></div>
 		</div>
 		</div>
 

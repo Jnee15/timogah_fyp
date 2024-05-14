@@ -25,9 +25,11 @@ if(isset($_SESSION["uid"])){
 <link rel="stylesheet" type="text/css" href="css/utils.css">
 
 </head>
-	<body style="background-color: #ffb6fe;">
+	<body style="background-color: #999999;">
 		<div class="limiter">
 		<div class="container-login100">
+		<div class="login100-more" style="background-image: url('img/timogahlogo.png');-webkit-transform: scaleX(-1);
+  transform: scaleX(-1);"></div>
 		<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
 		<form id="signup_form" onsubmit="return false" class="login100-form validate-form">
 		<span class="login100-form-title p-b-59">

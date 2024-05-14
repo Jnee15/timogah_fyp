@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -8,18 +9,33 @@ session_start();
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title>Timogah</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"/>
+
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
 		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
 		<link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+
 		<link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+
 		<link rel="stylesheet" href="css/font-awesome.min.css">
+
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 		<link type="text/css" rel="stylesheet" href="css/accountbtn.css"/>
-    </head>
+		
+
+         
     <style>
+        #navigation {
+          background: #FF4E50;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #F9D423, #FF4E50);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #F9D423, #FF4E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+          
+        }
         .mainn-raised {
             
             margin: -7px 0px 0px;
@@ -27,7 +43,28 @@ session_start();
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 
         }
-    </style>
+       
+        .glyphicon{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+    .glyphicon-chevron-left:before{
+        content:"\f053"
+    }
+    .glyphicon-chevron-right:before{
+        content:"\f054"
+    }
+        
+
+       
+        
+        </style>
+
+    </head>
 	<body>
 		<!-- HEADER -->
 		<header>
@@ -59,7 +96,7 @@ session_start();
             <!-- LOGO -->
             <div class="header-logo">
 				<a class="logo" href="index.php">
-					<img src="img/timogahlogo.png" />
+					<img src="img/timogah.png" />
 				</a>            
 			</div>
             <!-- /LOGO -->
@@ -69,8 +106,8 @@ session_start();
                 <form onsubmit="return false">
                     <select class="input-select">
                         <option value="0">All Categories</option>
-                        <option value="1">Fresh Products</option>
-                        <option value="1">Handicrafts</option>
+                        <option value="1">Fresh Vegetables</option>
+                        <option value="1">Handcraft</option>
                     </select>
                     <input class="input" id="search" type="text" placeholder="Search here">
                     <button id="search_btn" class="search-btn">Search</button>
@@ -86,46 +123,45 @@ session_start();
                     </a>
                 </div>
                 <!-- ACCOUNT -->
-                <div>
-                    <?php
-                        include "database/dbconnection.php";
-                        if(isset($_SESSION["uid"])){
-                            $sql = "SELECT first_name FROM user_info WHERE user_id='$_SESSION[uid]'";
-                            $query = mysqli_query($con,$sql);
-                            $row=mysqli_fetch_array($query);
-                            
-                            echo '
-                            <div class="dropdownn">
-                                <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><i class="fa fa-user-o"></i> HI '.$row["first_name"].'</a>
-                                <div class="dropdownn-content">
-                                <a href="myorders.php"  ><i class="fa fa-shopping-basket" aria-hidden="true"></i>My Order</a>
-                                <a href="" data-toggle="modal" data-target="#profile"><i class="fa fa-user-circle" aria-hidden="true" ></i>My Profile</a>
-                                <a href="logout.php"  ><i class="fa fa-sign-in" aria-hidden="true"></i>Log out</a>
-                                
-                                </div>
-                            </div>';
+<div>
+    <?php
+        include "db.php";
+        if(isset($_SESSION["uid"])){
+            $sql = "SELECT first_name FROM user_info WHERE user_id='$_SESSION[uid]'";
+            $query = mysqli_query($con,$sql);
+            $row=mysqli_fetch_array($query);
+            
+            echo '
+            <div class="dropdownn">
+                <a href="#" class="dropdownn-toggle" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-user-o"></i> HI '.$row["first_name"].'
+                </a>
+                <div class="userdropdown">
+                    <a href="myorders.php"><i class="fa fa-shopping-basket" aria-hidden="true"></i>My Order</a>
+                    <a href="" data-toggle="modal" data-target="#profile"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</a>
+                    <a href="logout.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Log out</a>
+                </div>
+            </div>';
 
-                        }else{ 
-                            echo '
-                            <div class="dropdownn">
-                                <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" >
-								<div class="icon-container">
-									<i class="fa fa-user"></i> 
-									<span>My Account</span>
-								</div>
-								</a>
-                                <div class="dropdownn-content">
-                                <a href="admin/login.php" ><i class="fa fa-user" aria-hidden="true" ></i>Admin</a>
-                                <a href="signin_form.php"><i class="fa fa-sign-in" aria-hidden="true" ></i>Login</a>
-                                <a href="signup_form.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
-                                
-                                </div>
-                            </div>';
-                            
-                        }
-                    ?>
-                               
-                </div>    
+        }else{ 
+            echo '
+            <div class="dropdownn">
+                <a href="#" class="dropdownn-toggle" data-toggle="modal" data-target="#myModal">
+                    <div class="icon-container">
+                        <i class="fa fa-user"></i>
+                        <span>My Account</span>
+                    </div>
+                </a>
+                <div class="userdropdown">
+                    <a href="admin/login.php"><i class="fa fa-user" aria-hidden="true"></i>Admin</a>
+                    <a href="signin_form.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+                    <a href="signup_form.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
+                </div>
+            </div>';
+            
+        }
+		?>
+	</div>
 
                 <!-- Cart -->
                 <div class="dropdown">
@@ -139,21 +175,12 @@ session_start();
         </div>
     </div>
 
-	<nav id='navigation'>
-		<div class="container">
-			<div id="responsive-nav">
-				<ul class="main-nav nav navbar-nav">
-					<li><a href="store.php" class="link">Stores</a></li>
-					<li><a href="store.php" class="link">Products Category</a></li>					
-				</ul>
+		</header>
+		<nav id='navigation'>
+			<div class="container" id="get_category_home">
 			</div>
-		</div>
-	</nav>
-
-</div>
-
-		<!-- NAVIGATION -->
-		
+		</nav>
+            
 		<div class="modal fade" id="Modal_login" role="dialog">
                         <div class="modal-dialog">
 													
@@ -196,3 +223,4 @@ session_start();
 
                         </div>
                       </div>
+		

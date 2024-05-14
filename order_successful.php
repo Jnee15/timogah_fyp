@@ -80,7 +80,6 @@
         <p>We received your purchase request;<br/> we'll be in touch shortly!</p>
         <div class="heading">
             <br><br><br>
-                <a href="store.php" style="float:left" class="continue">Continue Shopping</a>
                 <a href="myorders.php" style="float:right" class="continue">My Orders</a>
             </div>
       </div>

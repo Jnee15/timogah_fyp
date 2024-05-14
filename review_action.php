@@ -2,7 +2,7 @@
 <?php
 session_start();
 $ip_add = getenv("REMOTE_ADDR");
-include "database/dbconnection.php";
+include "db.php";
 if(isset($_POST["review_action"])){
     $p_id = $_POST["proId"];
     echo'<div class="col-md-3">

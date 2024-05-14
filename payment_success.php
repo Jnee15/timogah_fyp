@@ -18,7 +18,7 @@ if (isset($_GET["st"])) {
 
 		
 
-		include_once("database/dbconnection.php");
+		include_once("db.php");
 		$sql = "SELECT p_id,qty FROM cart WHERE user_id = '$cm_user_id'";
 		$query = mysqli_query($con,$sql);
 		if (mysqli_num_rows($query) > 0) {
@@ -77,7 +77,6 @@ if (isset($_GET["st"])) {
 											<p>Hello <?php echo "<b>".$_SESSION["name"]."</b>"; ?>,Your payment process is 
 											successfully completed and your Transaction id is <b><?php echo $trx_id; ?></b><br/>
 											you can continue your Shopping <br/></p>
-											<a href="index.php" class="btn btn-success btn-lg">Continue Shopping</a>
 										</div>
 										<div class="panel-footer"></div>
 									</div>

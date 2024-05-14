@@ -78,7 +78,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
-(1, 'Fresh Vegitables'),
+(1, 'Fresh Vegetables'),
 (2, 'Fresh Fruits'),
 (3, 'Handicrafts');
 
@@ -183,14 +183,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords`) VALUES
-(1, 1, 1, 'Sawi Hijau', 3.60, 'Sawi Hijau, 200g', 'vegi1.png', 'vegetable '),
-(2, 1, 1, 'Kailan', 3.60, 'Kailan, 200g', 'vegi2.png', 'vegetable'),
-(3, 1, 1, 'Lengkuas/Galangal', 13.50, 'Lengkuas/Galangal, 1kg', 'vegi3.png', 'vegetable'),
-(4, 1, 1, 'Taugeh', 3.70, 'Taugeh, 1kg', 'vegi4.png', 'vegetable'),
-(5, 2, 2, 'Otel Banana', 4.80, 'Pisang Otel/ Otel Banana,1kg', 'fruit1.png', 'fruit'),
-(6, 3, 3, 'Bemban', 65, 'Bemban,1pc', 'handi1.png', 'handcraft'),
-(7, 3, 3, 'Rattan Handbag', 48, 'Rattan Handbag,1pc', 'handi2.png', 'handcraft'),
-(8, 3, 3, 'Bottle handcraft bag', 38, 'Bottle handcraft bag, 1pc', 'handi3.png', 'handcraft');
+(1, 1, 1, 'Sawi Hijau', 3.60, 'Sawi Hijau, 200g', 'vegi1.png', 'Sawi Hijau '),
+(2, 1, 1, 'Kailan', 3.60, 'Kailan, 200g', 'vegi2.png', 'Kailan'),
+(3, 1, 1, 'Lengkuas/Galangal', 13.50, 'Lengkuas/Galangal, 1kg', 'vegi3.png', 'Lengkuas/Galangal'),
+(4, 1, 1, 'Taugeh', 3.70, 'Taugeh, 1kg', 'vegi4.png', 'Taugeh'),
+(5, 2, 2, 'Otel Banana', 4.80, 'Pisang Otel/ Otel Banana,1kg', 'fruit1.png', 'banana'),
+(6, 3, 3, 'Bemban', 65, 'Bemban,1pc', 'handi1.png', 'handcraft Bemban'),
+(7, 3, 3, 'Rattan Handbag', 48, 'Rattan Handbag,1pc', 'handi2.png', 'handcraft Rattan Handbag'),
+(8, 3, 3, 'Bottle handcraft bag', 38, 'Bottle handcraft bag, 1pc', 'handi3.png', 'handcraft Bottle handcraft bag');
 
 -- --------------------------------------------------------
 

@@ -56,7 +56,7 @@ include "header.php";
 					<!-- Product main img -->
 					
 					<?php 
-								include 'database/dbconnection.php';
+								include 'db.php';
 								$product_id = $_GET['p'];
 								
 								$sql = " SELECT * FROM products AS P,categories AS C WHERE P.product_cat = C.cat_id  AND P.product_id = '$product_id'";
@@ -103,7 +103,7 @@ include "header.php";
                                     </div>
 
                                     <div class="product-preview">
-                                        <img src="product_images/'.$row['product_image'].'" alt="">
+                                        <img src="product_images/'.$row['product_image'].'g" alt="">
                                     </div>
 
                                     <div class="product-preview">
@@ -130,7 +130,7 @@ include "header.php";
 										
 									</div>
 									<div>
-										<h3 class="product-price">$'.$row['product_price'].'<del class="product-old-price">$990.00</del></h3>
+										<h3 class="product-price">$'.$row['product_price'].'<del class="product-old-price">$30.00</del></h3>
 										<span class="product-available">In Stock</span>
 									</div>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -168,7 +168,6 @@ include "header.php";
 
 									<ul class="product-btns">
 										<li><a href="#" pid="'.$row['product_id'].'"  id="wishlist" ><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
 									</ul>
 
 									<ul class="product-links">
@@ -189,10 +188,6 @@ include "header.php";
 							';
 							$_SESSION['product_id'] = $row['product_id'];
 							}
-
-							else {
-									echo "No products found";
-								}
 						} 
 						?>		
 					
@@ -204,7 +199,7 @@ include "header.php";
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
 								<?php
-												include 'database/dbconnection.php';
+												include 'db.php';
 												$product_id = $_GET['p'];
 									
 												$product_query = "SELECT COUNT(*) AS count FROM reviews WHERE product_id='$product_id'";
@@ -302,7 +297,7 @@ include "header.php";
 					</div>
                     
 								<?php
-                    include 'database/dbconnection.php';
+                    include 'db.php';
 								$product_id = $_GET['p'];
                     
 					$product_query = "SELECT * FROM products,categories WHERE product_cat=cat_id AND product_id BETWEEN $product_id AND $product_id+3";
@@ -334,7 +329,7 @@ include "header.php";
 									<div class='product-body'>
 										<p class='product-category'>$cat_name</p>
 										<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>$990.00</del></h4>
+										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>$30.00</del></h4>
 										<div class='product-rating'>";
 										$rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating  FROM reviews WHERE product_id='$pro_id '";
 										$run_review_query = mysqli_query($con,$rating_query);
@@ -359,8 +354,6 @@ include "header.php";
 										echo "</div>
 										<div class='product-btns'>
 											<button pid='$pro_id' id='wishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
-											<button class='add-to-compare'><i class='fa fa-exchange'></i><span class='tooltipp'>add to compare</span></button>
-											<button class='quick-view'><i class='fa fa-eye'></i><span class='tooltipp'>quick view</span></button>
 										</div>
 									</div>
 									<div class='add-to-cart'>
@@ -386,13 +379,6 @@ include "header.php";
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /Section -->
-
-		<!-- NEWSLETTER -->
-		
-		<!-- /NEWSLETTER -->
-
-		<!-- FOOTER -->
 <?php
 include "footer.php";
 

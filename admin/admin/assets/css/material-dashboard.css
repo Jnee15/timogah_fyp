@@ -12962,21 +12962,6 @@ textarea {
   z-index: -1;
 }
 
-.form-newsletter .input-group,
-.form-newsletter .form-group {
-  float: left;
-  width: 78%;
-  margin-right: 2%;
-  margin-top: 9px;
-  padding-top: 5px;
-}
-
-.form-newsletter .btn {
-  float: left;
-  width: 20%;
-  margin: 9px 0 0;
-}
-
 .form-file-upload .input-group-btn:last-child>.btn-round {
   border-radius: 30px;
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $ip_add = getenv("REMOTE_ADDR");
-include "database/dbconnection.php";
+include "db.php";
 
 if(isset($_POST["categoryhome"])){
 	
@@ -23,14 +23,6 @@ if(isset($_POST["categoryhome"])){
 								echo"<li><a href='products.php?cat_id=".$cid."'>$cat_name</a></li>";
 							}
 						}
-
-						// <li><a href='electronics.php'>Electronics</a></li>
-						// <li><a href='ladies_wears.php'>Ladies Wears</a></li>
-						// <li><a href='mens_wear.php'>Mens Wear</a></li>
-						// <li><a href='kids_wear.php'>Kids Wear</a></li>
-						// <li><a href='furnitures.php'>Furnitures</a></li>
-						// <li><a href='home_appliances.php'>Home Appliances</a></li>
-						// <li><a href='electronics_gadgets.php'>Electronics Gadgets</a></li>
                     
 				 echo"</ul>
 					<!-- /NAV -->
@@ -85,7 +77,7 @@ if(isset($_POST["getProducthome"])){
 									<div class='product-body'>
 										<p class='product-category'>$cat_name</p>
 										<h3 class='product-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price'>$pro_price<del class='product-old-price'>$990.00</del></h4>
+										<h4 class='product-price'>$pro_price<del class='product-old-price'>$30.00</del></h4>
 									</div></a>
 								</div>
                         
@@ -133,7 +125,7 @@ if(isset($_POST["gethomeProduct"])){
 									<div class='product-body'>
 										<p class='product-category'>$cat_name</p>
 										<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>$990.00</del></h4>
+										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>$30.00</del></h4>
 										<div class='product-rating'>";
 										$rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating  FROM reviews WHERE product_id='$pro_id '";
 										$run_review_query = mysqli_query($con,$rating_query);
@@ -158,8 +150,6 @@ if(isset($_POST["gethomeProduct"])){
 										echo "</div>
 										<div class='product-btns'>
 											<button pid='$pro_id' id='wishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
-											<button class='add-to-compare'><i class='fa fa-exchange'></i><span class='tooltipp'>add to compare</span></button>
-											<button class='quick-view'><i class='fa fa-eye'></i><span class='tooltipp'>quick view</span></button>
 										</div>
 									</div>
 									<div class='add-to-cart'>

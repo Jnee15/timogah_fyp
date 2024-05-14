@@ -2082,12 +2082,6 @@ textarea.form-control:active {
   padding-right: 40px;
 }
 
-.form.form-newsletter .form-group {
-  float: left;
-  width: 78%;
-  margin-right: 2%;
-  margin-top: 9px;
-}
 
 .input-group .input-group-btn {
   padding: 0 12px;
