@@ -183,7 +183,7 @@ if(isset($_POST["rating_reviews"])){
                     }
                 echo'
             </div>
-            <a class="review-link" href="#review-form">'.$r_count.' Review(s) | Add your review</a>
+            <div class="review-link" href="#review-form">'.$r_count.' Review(s)</div>
             ';
             }
     
