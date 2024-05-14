@@ -14,7 +14,7 @@ body {
     background-color: #eccfffec;
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 40%;
+    top: 50%;
     left: 50%;
     padding: 3em;
     border-radius: 1em;
@@ -82,3 +82,24 @@ img {
         right: -5%;
     }
 }
+
+select {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+button {
+    background-color: #0026ce;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+

@@ -31,7 +31,29 @@ if ($result) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=sap" rel="stylesheet" />
     <link rel="stylesheet" href="css/spinwheel.css" />
 </head>
+<style>
+        #back-to-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: linear-gradient(to bottom, #b00000, #db0000);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #back-to-home:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
 <body>
+    <a id="back-to-home" href="index.php">Continue Shopping</a>
+
     <div class="wrapper">
         <div id="final-value">
             <p>Points Earn: <?php echo $_SESSION['points']; ?></p>

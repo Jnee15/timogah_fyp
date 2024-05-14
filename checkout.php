@@ -107,10 +107,15 @@ span.price {
     <div class="container-fluid">
         <div class="row-checkout">
         <?php
-        if (isset($_SESSION["uid"])) {
-            $sql = "SELECT * FROM user_info WHERE user_id='$_SESSION[uid]'";
-            $query = mysqli_query($con, $sql);
-            $row = mysqli_fetch_array($query);
+		if (isset($_SESSION["uid"])) {
+			$user_id = $_SESSION['uid'];
+			$sql = "SELECT * FROM user_info WHERE user_id='$user_id'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+
+			$sql_vouchers = "SELECT voucher_id, voucher_value FROM user_vouchers WHERE user_id='$user_id'";
+			$voucher_query = mysqli_query($con, $sql_vouchers);
+			$vouchers = mysqli_fetch_all($voucher_query, MYSQLI_ASSOC);
 
             echo '
             <div class="col-75">
@@ -166,13 +171,13 @@ span.price {
                     </div>
                     </div>
 
-					<label for="voucher-select">Select Voucher</label>
-					<select id="voucher-select" name="voucher" class="form-control">
-						<option value="0" selected>No Voucher</option>
-						<option value="100">RM1.00 Discount (100 points)</option>
-						<option value="200">RM2.00 Discount (200 points)</option>
-						<option value="300">RM3.00 Discount (300 points)</option>
-					</select>
+					<label for="vouchers">Apply Voucher</label>
+            <select id="vouchers" name="voucher_id" class="form-control">
+                <option value="0">Select Voucher</option>';
+                foreach ($vouchers as $voucher) {
+                    echo '<option value="'.$voucher['voucher_id'].'">RM'.$voucher['voucher_value'].' Discount</option>';
+                }
+				echo '  </select>
 
                     <label>
                         <input type="CHECKBOX" name="q" class="roomselect" value="conform" required> Shipping address same as billing
@@ -280,7 +285,7 @@ include "footer.php";
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-        var voucherValue = parseInt(document.getElementById('voucher-select').value);
+        var voucherValue = parseInt(document.getElementById('vouchers').value);
         var discount = voucherValue / 100;
         var total = <?php echo $total; ?>;
         var totalAfterDiscountElement = document.getElementById('total_after_discount');
@@ -292,7 +297,7 @@ include "footer.php";
         totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
     });
 	
-document.getElementById('voucher-select').addEventListener('change', function() {
+document.getElementById('vouchers').addEventListener('change', function() {
     var voucherValue = parseInt(this.value);
     var discount = voucherValue / 100;
     var total = <?php echo $total; ?>;
