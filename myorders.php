@@ -1,10 +1,6 @@
 <?php
-include "db.php";
-
+include "database/dbconnection.php";
 include "header.php";
-
-
-                         
 ?>
 
 <link href="css/myorders.css" rel="stylesheet"/>					
@@ -153,9 +149,7 @@ include "header.php";
                 
                 
                 </ul>
-            </div> 
-                <!--<li class="items even">Item 2</li>-->
-            
+            </div>             
                 
         </div>
     </div>

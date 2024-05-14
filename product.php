@@ -56,7 +56,7 @@ include "header.php";
 					<!-- Product main img -->
 					
 					<?php 
-								include 'db.php';
+								include 'database/dbconnection.php';
 								$product_id = $_GET['p'];
 								
 								$sql = " SELECT * FROM products AS P,categories AS C WHERE P.product_cat = C.cat_id  AND P.product_id = '$product_id'";
@@ -200,7 +200,7 @@ include "header.php";
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
 								<?php
-												include 'db.php';
+												include 'database/dbconnection.php';
 												$product_id = $_GET['p'];
 									
 												$product_query = "SELECT COUNT(*) AS count FROM reviews WHERE product_id='$product_id'";
@@ -298,7 +298,7 @@ include "header.php";
 					</div>
                     
 								<?php
-                    include 'db.php';
+                    include 'database/dbconnection.php';
 								$product_id = $_GET['p'];
                     
 					$product_query = "SELECT * FROM products,categories WHERE product_cat=cat_id AND product_id BETWEEN $product_id AND $product_id+3";

@@ -18,7 +18,7 @@ session_start();
 		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 		<link type="text/css" rel="stylesheet" href="css/accountbtn.css"/>
-
+    </head>
     <style>
         .mainn-raised {
             
@@ -27,23 +27,7 @@ session_start();
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 
         }
-       
-        .glyphicon{
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        }
-        .glyphicon-chevron-left:before{
-            content:"\f053"
-        }
-        .glyphicon-chevron-right:before{
-            content:"\f054"
-        }
     </style>
-    
 	<body>
 		<!-- HEADER -->
 		<header>
@@ -159,7 +143,7 @@ session_start();
 		<div class="container">
 			<div id="responsive-nav">
 				<ul class="main-nav nav navbar-nav">
-					<li><a href="stores.php" class="link">Stores</a></li>
+					<li><a href="store.php" class="link">Stores</a></li>
 					<li><a href="category.php" class="link">Products Category</a></li>					
 				</ul>
 			</div>
