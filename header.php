@@ -203,7 +203,7 @@ session_start();
                         </div>
                       </div>
                 <div class="modal fade" id="Modal_register" role="dialog">
-                        <div class="modal-dialog" style="">
+                        <div class="modal-dialog">
 
                           <!-- Modal content-->
                           <div class="modal-content">

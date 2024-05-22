@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'db.php';
 include "header.php";
 
@@ -42,6 +43,7 @@ $user = mysqli_fetch_assoc($result);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,6 +51,7 @@ $user = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="container">
         <h2>Profile</h2>
@@ -103,4 +106,9 @@ $user = mysqli_fetch_assoc($result);
         <?php endif; ?>
     </script>
 </body>
+
 </html>
+
+<?php
+ob_end_flush();
+?>

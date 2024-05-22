@@ -28,7 +28,7 @@ CREATE TABLE `admin_info` (
 --
 
 INSERT INTO `admin_info` (`admin_id`, `admin_name`, `admin_email`, `admin_password`) VALUES
-(1, 'admin', 'admin@gmail.com', 'Admin123#pw');
+(1, 'admin', 'admin@gmail.com', md5('Admin123#pw'));
 
 -- --------------------------------------------------------
 
