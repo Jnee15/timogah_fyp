@@ -1,5 +1,4 @@
-
-    <?php
+<?php
 session_start();
 include("../../db.php");
 $user_id=$_REQUEST['user_id'];
@@ -57,19 +56,13 @@ include "topheader.php";
                         <input type="text" name="password" id="password" class="form-control" value="<?php echo $user_password; ?>">
                       </div>
                     </div>
-                  
-                  
-                  
-                
               </div>
               <div class="card-footer">
                 <button type="submit" id="btn_save" name="btn_save" class="btn btn-fill btn-primary">Update</button>
               </div>
               </form>    
             </div>
-          </div>
-         
-          
+          </div>         
         </div>
       </div>
       <?php

@@ -49,9 +49,8 @@ if (isset($_POST['reg_user'])) {
     }
   }
 
-  // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
-    $password = md5($password_1);//encrypt the password before saving in the database
+    $password = md5($password_1);
 
     $query = "INSERT INTO admin_info (admin_name, admin_email, admin_password)
           VALUES('$username', '$email', '$password')";
@@ -63,11 +62,6 @@ if (isset($_POST['reg_user'])) {
     header('location: ./admin/');
   }
 }
-
-
-
-
-
 
 if (isset($_POST['login_admin'])) {
   $admin_username = mysqli_real_escape_string($db, $_POST['admin_username']);
@@ -81,12 +75,12 @@ if (isset($_POST['login_admin'])) {
   }
 
   if (count($errors) == 0) {
-    $password = md5($password); // Hash the password using md5
+    $password = md5($password); 
     $query = "SELECT * FROM admin_info WHERE admin_email='$admin_username' AND admin_password='$password'";
     $results = mysqli_query($db, $query);
 
     if (mysqli_num_rows($results) == 1) {
-      $_SESSION['admin_email'] = $admin_username; // Correct variable
+      $_SESSION['admin_email'] = $admin_username; 
       $_SESSION['admin_name'] = $admin_username;
       $_SESSION['success'] = "You are now logged in";
       header('location: ./admin/');

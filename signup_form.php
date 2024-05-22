@@ -9,7 +9,7 @@ if(isset($_SESSION["uid"])){
 <title>Register Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="icon" sizes="76x76" href="img/timogahlogo.png">
 
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"/>
@@ -75,38 +75,25 @@ if(isset($_SESSION["uid"])){
 		<input class="input100" type="text" name="address2" id="address2" placeholder="City">
 		<span class="focus-input100"></span>
 		</div>
-		<div class="flex-m w-full p-b-33">
-		<div class="contact100-form-checkbox">
-		<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-		<label class="label-checkbox100" for="ckb1">
-		<span class="txt1">
-		I agree to the
-		<a href="#" class="txt2 hov1">
-		Terms of User
-		</a>
-		</span>
-		</label>
-		</div>
-		</div>
 		<div class="container-login100-form-btn">
-		<div class="wrap-login100-form-btn">
-			<div class="login100-form-bgbtn"></div>
-			<button class="login100-form-btn" type="submit">
-				Sign Up
-			</button>
-			
-		</div>
+			<div class="wrap-login100-form-btn">
+				<div class="login100-form-bgbtn"></div>
+				<button class="login100-form-btn" type="submit">
+					Sign Up
+				</button>
+				
+			</div>
 		
-		<a href="signin_form.php" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-		Sign in
-		<i class="fa fa-long-arrow-right m-l-5"></i>
-		</a>
+			<a href="signin_form.php" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+			Sign in
+			<i class="fa fa-long-arrow-right m-l-5"></i>
+			</a>
 
-		<a href="index.php" class="dis-block txt3 hov1 p-r-30 p-t-40 p-b-10 p-l-180">
-		Skip SignUp 
-		<i class="fa fa-long-arrow-right m-l-5"></i>
-		</a>
-		<div class="col-md-8" id="signup_msg"></div>
+			<a href="index.php" class="dis-block txt3 hov1 p-r-30 p-t-40 p-b-10 p-l-180">
+			Skip SignUp 
+			<i class="fa fa-long-arrow-right m-l-5"></i>
+			</a>
+			<div class="col-md-8" id="signup_msg"></div>
 		</div>
 		</form>
 		</div>
@@ -115,7 +102,6 @@ if(isset($_SESSION["uid"])){
 
 		<script src="js/jquery.min.js"></script>
 				<script src="js/bootstrap.min.js"></script>
-				
 				<script src="js/login_reg.js"></script>
 				<script src="js/actions.js"></script>
 

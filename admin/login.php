@@ -26,8 +26,6 @@
                     <div class="signin-image">
                         <figure><img src="./assets/images/signup-image.jpg" alt="sing up image"></figure>
                         <a href="../index.php" class="signup-image-link">Back To Home</a>
-                        
-                        
                     </div>
 
                     <div class="signin-form">
@@ -55,8 +53,7 @@
 
     </div>
 
-    <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 </html>

@@ -21,7 +21,7 @@ if (isset($_POST["login_user_with_product"])) {
 <title>Login Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="icon" sizes="76x76" href="img/timogahlogo.png">
 
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"/>
@@ -154,19 +154,6 @@ white-space: nowrap;
 		<span class="label-input100">Password</span>
 		<input class="input100" type="password" name="password" placeholder="*************">
 		<span class="focus-input100"></span>
-		</div>
-		<div class="flex-m w-full p-b-33">
-		<div class="contact100-form-checkbox">
-		<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-		<label class="label-checkbox100" for="ckb1">
-		<span class="txt1">
-		I agree to the
-		<a href="#" class="txt2 hov1">
-		Terms of User
-		</a>
-		</span>
-		</label>
-		</div>
 		</div>
 		<div class="container-login100-form-btn">
 		<div class="wrap-login100-form-btn">

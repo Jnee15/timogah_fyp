@@ -1,5 +1,4 @@
-
-    <?php
+<?php
 session_start();
 include("../../db.php");
 if(isset($_GET['action']) && $_GET['action']!="" && $_GET['action']=='delete')

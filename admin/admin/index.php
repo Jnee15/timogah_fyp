@@ -5,7 +5,7 @@ include("../../db.php");
 
 include "sidenav.php";
 include "topheader.php";
-include "activitity.php";
+include "status.php";
 
 ?>
       <!-- End Navbar -->
