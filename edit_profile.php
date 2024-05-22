@@ -19,11 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
-    $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
     // Update user details
     if (!empty($password)) {
-        $sql = "UPDATE user_info SET first_name='$first_name', last_name='$last_name', email='$email', password='$password_hash' WHERE user_id='$user_id'";
+        $sql = "UPDATE user_info SET first_name='$first_name', last_name='$last_name', email='$email', password='$password' WHERE user_id='$user_id'";
     } else {
         $sql = "UPDATE user_info SET first_name='$first_name', last_name='$last_name', email='$email' WHERE user_id='$user_id'";
     }
