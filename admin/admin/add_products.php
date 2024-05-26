@@ -2,10 +2,14 @@
 session_start();
 include("../../db.php");
 
+$brandsQuery = "SELECT * FROM `brands`";
+$brandsResult = mysqli_query($con, $brandsQuery);
+$categoriesQuery = "SELECT * FROM `categories`";
+$categoriesResult = mysqli_query($con, $categoriesQuery);
 
 if(isset($_POST['btn_save']))
 {
-$product_name=$_POST['product_name'];
+$product_title=$_POST['product_title'];
 $details=$_POST['details'];
 $price=$_POST['price'];
 $c_price=$_POST['c_price'];
@@ -13,7 +17,6 @@ $product_type=$_POST['product_type'];
 $brand=$_POST['brand'];
 $tags=$_POST['tags'];
 
-//picture coding
 $picture_name=$_FILES['picture']['name'];
 $picture_type=$_FILES['picture']['type'];
 $picture_tmp_name=$_FILES['picture']['tmp_name'];
@@ -26,9 +29,9 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 		$pic_name=time()."_".$picture_name;
 		move_uploaded_file($picture_tmp_name,"../product_images/".$pic_name);
 		
-mysqli_query($con,"insert into products (product_cat, product_brand,product_title,product_price, product_desc, product_image,product_keywords) values ('$product_type','$brand','$product_name','$price','$details','$pic_name','$tags')") or die ("query incorrect");
+mysqli_query($con,"insert into products (product_cat, product_brand,product_title,product_price, product_desc, product_image,product_keywords) values ('$product_type','$brand','$product_title','$price','$details','$pic_name','$tags')") or die ("query incorrect");
 
- header("location: sumit_form.php?success=1");
+ header("location: submit_form.php?success=1");
 }
 
 mysqli_close($con);
@@ -55,7 +58,7 @@ include "topheader.php";
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Product Title</label>
-                        <input type="text" id="product_name" required name="product_name" class="form-control">
+                        <input type="text" id="product_title" required name="product_title" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -97,21 +100,34 @@ include "topheader.php";
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Product Category</label>
-                        <input type="number" id="product_type" name="product_type" required="[1-6]" class="form-control">
+                              <select id="product_type" name="product_type" required class="form-control" style="background-color: black;">
+                                <?php
+                                while ($row = mysqli_fetch_assoc($categoriesResult)) {
+                                    echo "<option value='" . $row['cat_id'] . "'>" . $row['cat_title'] . "</option>";
+                                }
+                                ?>
+                            </select>
                       </div>
                     </div>
+
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="">Product Brand</label>
-                        <input type="number" id="brand" name="brand" required class="form-control">
+                          <label for="">Product Brand</label>
+                          <select id="brand" name="brand" required class="form-control" style="background-color: black;">
+                            <option value="" disabled selected>Select...</option>
+                              <?php
+                              while ($row = mysqli_fetch_assoc($brandsResult)) {
+                                  echo "<option value='" . $row['brand_id'] . "'>" . $row['brand_title'] . "</option>";
+                              }
+                              ?>
+                          </select>
                       </div>
-                    </div>
-                     
-                  
+                  </div>
+
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Product Keywords</label>
-                        <input type="text" id="tags" name="tags" required class="form-control" >
+                        <input type="text" id="tags" name="tags" required class="form-control" style="background-color: black;">
                       </div>
                     </div>
                   </div>

@@ -9,7 +9,7 @@ session_start();
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="icon" sizes="76x76" href="img/timogahlogo.png">
 		<title>Timogah</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"/>
@@ -153,9 +153,9 @@ session_start();
                     </div>
                 </a>
                 <div class="userdropdown">
-                    <a href="admin/login.php"><i class="fa fa-user" aria-hidden="true"></i>Admin</a>
                     <a href="signin_form.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
                     <a href="signup_form.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
+                    <a href="admin/login.php"><i class="fa fa-user" aria-hidden="true"></i>Admin</a>
                 </div>
             </div>';
             

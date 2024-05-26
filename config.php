@@ -7,16 +7,6 @@ $username = "";
 $email    = "";
 $errors = array(); 
 
-// // connect to the database
-// define('DB_SERVER', 'localhost');
-//    define('DB_USERNAME', 'supportReddy');
-//    define('DB_PASSWORD', '');
-//    define('DB_DATABASE', 'ecommerece');
-//    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-// if (!$db) {
-//     die("Connection failed: " . mysqli_connect_error());
-// }
-
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form

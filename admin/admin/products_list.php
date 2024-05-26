@@ -67,9 +67,9 @@ include "topheader.php";
 
                         $result=mysqli_query($con,"select product_id,product_image, product_title,product_price from products  where  product_cat=1 or product_cat=2 or product_cat=3 Limit $page1,12")or die ("query 1 incorrect.....");
 
-                        while(list($product_id,$image,$product_name,$price)=mysqli_fetch_array($result))
+                        while(list($product_id,$image,$product_title,$price)=mysqli_fetch_array($result))
                         {
-                          $substr = substr($product_name,0,36);
+                          $substr = substr($product_title,0,36);
                           // $price = round($price*0.014,2);
                         echo "<tr><td><img src='../../product_images/$image' style='width:50px; height:50px; border:groove #000'></td><td>$substr</td>
                         <td>RM $price</td>

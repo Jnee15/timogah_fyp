@@ -24,8 +24,8 @@
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="./assets/images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="../index.php" class="signup-image-link">Back To Home</a>
+                        <figure><img src="./assets/images/signin-image.jpg" alt="sing up image"></figure>
+                        <a href="../index.php" class="signin-image-link">Back To Home</a>
                     </div>
 
                     <div class="signin-form">

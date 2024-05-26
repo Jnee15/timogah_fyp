@@ -6,11 +6,11 @@ $product_id=$_REQUEST['product_id'];
 
 $result=mysqli_query($con,"SELECT `product_id`, `product_cat`, `product_brand`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords` from products  where product_id='$product_id'") or die ("query 1 incorrect.......");
 
-list($product_id,$product_type,$brand,$product_name,$price,$details,$pic_name,$tags)=mysqli_fetch_array($result);
+list($product_id,$product_type,$brand,$product_title,$price,$details,$pic_name,$tags)=mysqli_fetch_array($result);
 
 if(isset($_POST['btn_save']))
 {
-$product_name=$_POST['product_name'];
+$product_title=$_POST['product_title'];
 $details=$_POST['details'];
 $price=$_POST['price'];
 $product_type=$_POST['product_type'];
@@ -30,13 +30,13 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 	
 		$pic_name=time()."_".$picture_name;
         move_uploaded_file($picture_tmp_name,"../../product_images/".$pic_name);
-        mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_name', 
+        mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_title', 
         `product_cat`= '$product_type',`product_brand`='$brand',
         `product_price`='$price',`product_desc`='$details',`product_image`='$pic_name',`product_keywords`='$tags' WHERE `product_id` = '$product_id'") or die("Query 2 is inncorrect..........");
     header("location: products_list.php");
    
 }else{
-    mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_name', 
+    mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_title', 
         `product_cat`= '$product_type',`product_brand`='$brand',
         `product_price`='$price',`product_desc`='$details',`product_image`='$pic_name',`product_keywords`='$tags' WHERE `product_id` = '$product_id'") or die("Query 2 is inncorrect..........");
     header("location: products_list.php");
@@ -67,7 +67,7 @@ include "topheader.php";
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Product Title</label>
-                        <input type="text" id="product_name" required name="product_name" value="<?php echo $product_name; ?>" class="form-control">
+                        <input type="text" id="product_title" required name="product_title" value="<?php echo $product_title; ?>" class="form-control">
                       </div>
                     </div>
                     

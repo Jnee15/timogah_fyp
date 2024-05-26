@@ -34,7 +34,6 @@ var breakCards = true;
 var searchVisible = 0;
 var transparent = true;
 
-var transparentDemo = true;
 var fixedTop = false;
 
 var mobile_menu_visible = 0,

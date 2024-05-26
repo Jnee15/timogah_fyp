@@ -33,7 +33,7 @@ include "topheader.php";
                 <th>mobile</th>
                 <th>city</th>
                 <th>Address</th>
-	<th><a href="addsuppliers.php" class="btn btn-success">Add New</a></th>
+	<th><a href="add_admin.php" class="btn btn-success">Add New</a></th>
                     </tr></thead>
                     <tbody>
                       <?php 

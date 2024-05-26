@@ -4,7 +4,7 @@
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+                        <a class="navbar-brand" href="index.php">Dashboard</a>
                         <div class="navbar-wrapper">
                         <a class="navbar-brand" style="color: #fff;">Welcome: <span style="font-weight:bold; color:#fff;"><?php  if (isset($_SESSION['admin_name'])) : ?><?php echo $_SESSION['admin_name']; ?>
              <?php endif ?></span></a>

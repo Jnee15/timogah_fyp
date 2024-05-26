@@ -16616,7 +16616,7 @@ label {
 .card.bg-primary,
 .card.card-rotate.bg-primary .front,
 .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  background: red;
 }
 
 .card .card-header-info .card-icon,
@@ -16625,7 +16625,7 @@ label {
 .card.bg-info,
 .card.card-rotate.bg-info .front,
 .card.card-rotate.bg-info .back {
-  background: linear-gradient(60deg, #26c6da, #00acc1);
+  background: red;
 }
 
 .card .card-header-success .card-icon,
@@ -18800,7 +18800,7 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .btn.btn-primary {
   color: #fff;
-  background-color: #913f9e;
+  background-color: #cb2b1f;
   border-color: #913f9e;
   box-shadow: 0 2px 2px 0 rgba(145, 63, 158, 0.14), 0 3px 1px -2px rgba(145, 63, 158, 0.2), 0 1px 5px 0 rgba(145, 63, 158, 0.12);
 }
@@ -19519,7 +19519,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .sidebar[data-color="purple"] li.active>a {
-  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background: linear-gradient(60deg, #ff7a00, #ff9100);
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 }
 
@@ -19601,7 +19601,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .navbar .notification {
-  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background: linear-gradient(60deg, #ff7a00, #ff9100);
   border: 0;
   height: 18px;
   min-width: 18px;
@@ -19649,7 +19649,7 @@ Copyright (c) 2015 Daniel Eden
   animation: heartbeat 1s infinite;
   -webkit-background-clip: text;
   background-clip: text;
-  background-image: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background-image: linear-gradient(60deg, #ff7a00, #ff9100);
   color: transparent;
 }
 
@@ -19691,7 +19691,7 @@ Copyright (c) 2015 Daniel Eden
 .dark-edition .card .card-footer .stats a {
   -webkit-background-clip: text;
   background-clip: text;
-  background-image: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background-image: linear-gradient(60deg, #ff7a00, #ff9100);
   color: transparent;
 }
 
@@ -19737,7 +19737,7 @@ Copyright (c) 2015 Daniel Eden
 .dark-edition .card.bg-primary,
 .dark-edition .card.card-rotate.bg-primary .front,
 .dark-edition .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background: linear-gradient(60deg, #ff7a00, #ff9100);
 }
 
 .dark-edition .primary-link {
@@ -21058,7 +21058,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .dark-edition .dropdown:not(.show-dropdown) .dropdown-menu li>a:focus,
 .dark-edition .dropdown:not(.show-dropdown) .dropdown-menu li>a:active {
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
-  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background: linear-gradient(60deg, #ff7a00, #ff9100);
   color: #fff;
 }
 
@@ -21141,7 +21141,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 
 .dark-edition .alert.alert-primary {
-  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background: linear-gradient(60deg, #ff7a00, #ff9100);
   background-color: unset;
 }
 
