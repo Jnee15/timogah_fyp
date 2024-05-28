@@ -21,7 +21,7 @@ $(document).ready(function(){
 	}
     function cathome(){
 		$.ajax({
-			url	:	"homeaction.php",
+			url	:	"item_page.php",
 			method:	"POST",
 			data	:	{categoryhome:1},
 			success	:	function(data){
@@ -92,7 +92,7 @@ $(document).ready(function(){
     gethomeproduts();
     function gethomeproduts(){
 		$.ajax({
-			url	:	"homeaction.php",
+			url	:	"item_page.php",
 			method:	"POST",
 			data	:	{gethomeProduct:1},
 			success	:	function(data){
@@ -102,7 +102,7 @@ $(document).ready(function(){
 	}
     function producthome(){
 		$.ajax({
-			url	:	"homeaction.php",
+			url	:	"item_page.php",
 			method:	"POST",
 			data	:	{getProducthome:1},
 			success	:	function(data){
