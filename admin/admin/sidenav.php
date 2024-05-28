@@ -47,10 +47,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item <?php if ($current_page == 'add_admin.php') { echo 'active'; } ?>">
-                    <a class="nav-link" href="add_admin.php">
+                <li class="nav-item <?php if ($current_page == 'add_user.php') { echo 'active'; } ?>">
+                    <a class="nav-link" href="add_user.php">
                         <i class="material-icons">person</i>
-                        <p>Add Admins</p>
+                        <p>Add Users</p>
                     </a>
                 </li>
                 <li class="nav-item <?php if ($current_page == 'add_products.php') { echo 'active'; } ?>">

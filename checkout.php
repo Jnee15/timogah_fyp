@@ -113,14 +113,14 @@ span.price {
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
 
-			$sql_vouchers = "SELECT voucher_id, voucher_value FROM user_vouchers WHERE user_id='$user_id'";
+			$sql_vouchers = "SELECT voucher_id, voucher_discount FROM user_vouchers WHERE user_id='$user_id'";
 			$voucher_query = mysqli_query($con, $sql_vouchers);
 			$vouchers = mysqli_fetch_all($voucher_query, MYSQLI_ASSOC);
 
             echo '
             <div class="col-75">
                 <div class="container-checkout">
-                <form id="checkout_form" action="checkout_process.php" method="POST" class="was-validated">
+                  <form id="checkout_form" action="checkout_process.php" method="POST" class="was-validated">
                     <div class="row-checkout">
                     <div class="col-50">
                         <h3>Billing Address</h3>
@@ -146,45 +146,46 @@ span.price {
 
 
                     </div>
-                    <div class="col-50">
-                        <h3>Payment</h3>
-                        <label for="fname">Accepted Cards</label>
-                        <div class="icon-container">
-                        <i class="fa fa-cc-visa" style="color:navy;"></i>
-                        <i class="fa fa-cc-amex" style="color:blue;"></i>
-                        <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                        <i class="fa fa-cc-discover" style="color:orange;"></i>
-                        </div>
-                        <label for="cname">Name on Card</label>
-                        <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$" required>
-                        <div class="form-group" id="card-number-field">
-                            <label for="cardNumber">Card Number</label>
-                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
-                        </div>
-                        <label for="expdate">Exp Date</label>
-                        <input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22" required>
-                        <div class="row">
-                        <div class="col-50">
-                            <div class="form-group CVV">
-                                <label for="cvv">CVV</label>
-                                <input type="text" class="form-control" name="cvv" id="cvv" required>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+                    
+                    <div class="col-50" id="payment-section">
+                      <h3>Payment</h3>
+                      <label for="fname">Accepted Cards</label>
+                      <div class="icon-container">
+                          <i class="fa fa-cc-visa" style="color:navy;"></i>
+                          <i class="fa fa-cc-amex" style="color:blue;"></i>
+                          <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                          <i class="fa fa-cc-discover" style="color:orange;"></i>
+                      </div>
+                      <label for="cname">Name on Card</label>
+                      <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$" required>
+                      <div class="form-group" id="card-number-field">
+                          <label for="cardNumber">Card Number</label>
+                          <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                      </div>
+                      <label for="expdate">Exp Date</label>
+                      <input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22" required>
+                      <div class="row">
+                          <div class="col-50">
+                              <div class="form-group CVV">
+                                  <label for="cvv">CVV</label>
+                                  <input type="text" class="form-control" name="cvv" id="cvv" required>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
 
 					<label for="vouchers">Apply Voucher</label>
             <select id="vouchers" name="voucher_id" class="form-control">
                 <option value="0">Select Voucher</option>';
                 foreach ($vouchers as $voucher) {
-                    echo '<option value="'.$voucher['voucher_id'].'">RM'.$voucher['voucher_value'].' Discount</option>';
+                    echo '<option value="'.$voucher['voucher_id'].'">RM'.$voucher['voucher_discount'].' Discount</option>';
                 }
 				echo '  </select>
 
-                    <label>
-                        <input type="CHECKBOX" name="q" class="roomselect" value="conform" required> Shipping address same as billing
-                    </label>';
+                  <label for="pay_with_voucher">
+                    <input type="checkbox" id="pay_with_voucher" name="pay_with_voucher"> Pay Only using voucher
+                  </label>';
 
                     $i = 1;
                     $total = 0;
@@ -224,7 +225,7 @@ span.price {
                 <?php
                 if (isset($_POST["cmd"])) {
                     $user_id = $_POST['custom'];
-                    $voucher_value = isset($_POST['voucher']) ? intval($_POST['voucher']) : 100;
+                    $voucher_discount = isset($_POST['voucher']);
 
                     $i = 1;
                     echo "
@@ -262,9 +263,8 @@ span.price {
                         $i++;
                     }
 
-                    // Calculate discount based on voucher value
-                    $discount = $voucher_value / 100;
-                    $total_after_discount = $total - $discount;
+                    // Calculate discount
+                    $total_after_discount = $total - $voucher_discount;
 
                     echo "
                     </tbody>
@@ -272,7 +272,7 @@ span.price {
                     <hr>
                     <h3>Subtotal<span class='price' style='color:black'><b>RM$total</b></span></h3>";
                     
-                    echo "<h3 id='discount'>Discount<span class='price' style='color:black'><b>RM-$discount</b></span></h3>";
+                    echo "<h3 id='discount'>Discount<span class='price' style='color:black'><b>RM-$voucher_discount</b></span></h3>";
                     
                     echo "<h3>Total<span class='price' style='color:black'><b id='total_after_discount'>RM$total_after_discount</b></span></h3>";
                 }
@@ -287,29 +287,42 @@ include "footer.php";
 ?>
 
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var payWithVoucherCheckbox = document.getElementById('pay_with_voucher');
+      var paymentSection = document.getElementById('payment-section');
+
+      payWithVoucherCheckbox.addEventListener('change', function() {
+          if (this.checked) {
+              paymentSection.style.display = 'none';
+          } else {
+              paymentSection.style.display = 'block';
+          }
+      });
+  });
+
 	document.addEventListener('DOMContentLoaded', function() {
         var voucherValue = parseInt(document.getElementById('vouchers').value);
-        var discount = voucherValue / 100;
+        var discount = voucherValue;
         var total = <?php echo $total; ?>;
         var totalAfterDiscountElement = document.getElementById('total_after_discount');
         var discountElement = document.getElementById('discount');
 
         var totalAfterDiscount = total - discount;
 
-        discountElement.textContent = 'Discount: RM-' + discount.toFixed(2);
+        discountElement.textContent = 'Discount: RM -' + discount.toFixed(2);
         totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
     });
 	
 document.getElementById('vouchers').addEventListener('change', function() {
     var voucherValue = parseInt(this.value);
-    var discount = voucherValue / 100;
+    var discount = voucherValue;
     var total = <?php echo $total; ?>;
     var totalAfterDiscountElement = document.getElementById('total_after_discount');
     var discountElement = document.getElementById('discount');
 
     var totalAfterDiscount = total - discount;
 
-    discountElement.textContent = 'Discount: RM-' + discount.toFixed(2);
+    discountElement.textContent = 'Discount: RM -' + discount.toFixed(2);
     totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
 });
 </script>
