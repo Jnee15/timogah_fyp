@@ -6,12 +6,7 @@ SET time_zone = "+00:00";
 --
 
 DELIMITER $$
-USE timogahdb;
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)
-BEGIN
-    SELECT * FROM categories WHERE cat_id = cid;
-END;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)  SELECT * FROM categories WHERE cat_id=cid$$
 
 DELIMITER ;
 
@@ -235,22 +230,21 @@ CREATE TABLE `user_info` (
   `password` varchar(300) NOT NULL,
   `mobile` varchar(10) NOT NULL,
   `address` varchar(300) NOT NULL,
-  `city` varchar(255) NOT NULL,  
+  `city` varchar(11) NOT NULL,  
   `state` varchar(255) NOT NULL,
-  `zip` varchar(10) NOT NULL,
+  `zip` int(10) NOT NULL,
   `points` int(10) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`, `state`, `zip`, `points`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan', 'Sarawak', '90100', 0);
+INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
+(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 0);
 
 --
 -- Triggers `user_info`
 --
 DELIMITER $$
-CREATE TRIGGER `after_user_info_insert` AFTER INSERT ON `user_info` FOR EACH ROW 
-BEGIN 
-  INSERT INTO user_info_backup VALUES(NEW.user_id, NEW.first_name, NEW.last_name, NEW.email, NEW.password, NEW.mobile, NEW.address, NEW.city, NEW.state, NEW.zip);
+CREATE TRIGGER `after_user_info_insert` AFTER INSERT ON `user_info` FOR EACH ROW BEGIN 
+INSERT INTO user_info_backup VALUES(new.user_id,new.first_name,new.last_name,new.email,new.password,new.mobile,new.address,new.city,new.state,new.zip,new.points);
 END
 $$
 DELIMITER ;
@@ -269,15 +263,18 @@ CREATE TABLE `user_info_backup` (
   `password` varchar(300) NOT NULL,
   `mobile` varchar(10) NOT NULL,
   `address` varchar(300) NOT NULL,
-  `city` varchar(255) NOT NULL,  
+  `city` varchar(11) NOT NULL,  
   `state` varchar(255) NOT NULL,
-  `zip` varchar(10) NOT NULL,
+  `zip` int(10) NOT NULL,
   `points` int(10) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
 -- Dumping data for table `user_info_backup`
-INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`, `state`, `zip`, `points`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan', 'Sarawak', '90100', 0);
+--
+
+INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
+(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 0);
 
 -- --------------------------------------------------------
 

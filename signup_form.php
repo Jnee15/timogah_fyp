@@ -89,6 +89,17 @@ if(isset($_SESSION["uid"])){
                         <input class="input100" type="text" name="city" id="city" placeholder="City">
                         <span class="focus-input100"></span>
                     </div>
+                    <div class="wrap-input100 validate-input" data-validate="State is required">
+                        <span class="label-input100">State</span>
+                        <input class="input100" type="text" name="state" id="state" placeholder="State">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Postcode is required">
+                        <span class="label-input100">Postcode</span>
+                        <input class="input100" type="text" name="zip" id="zip" placeholder="Postcode">
+                        <span class="focus-input100"></span>
+                        <span id="zip-error" class="text-danger"></span>
+                    </div>
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
@@ -120,15 +131,18 @@ if(isset($_SESSION["uid"])){
         const repasswordInput = document.getElementById('repassword');
         const emailInput = document.getElementById('email');
         const mobileInput = document.getElementById('mobile');
+        const zipInput = document.getElementById('zip');
         const passwordError = document.getElementById('password-error');
         const repasswordError = document.getElementById('repassword-error');
         const emailError = document.getElementById('email-error');
         const mobileError = document.getElementById('mobile-error');
+        const zipError = document.getElementById('zip-error');
         
         passwordInput.addEventListener('input', validatePassword);
         repasswordInput.addEventListener('input', validatePasswordMatch);
         emailInput.addEventListener('input', validateEmail);
         mobileInput.addEventListener('input', validateMobile);
+        zipInput.addEventListener('input', validateZip);
 
         function validatePassword() {
             const password = passwordInput.value;
@@ -169,6 +183,19 @@ if(isset($_SESSION["uid"])){
                 mobileError.textContent = '';
             }
         }
+
+        function validateZip() {
+            const zip = zipInput.value;
+            const zipValidation = /^[0-9]{5}$/;
+            if (!zipValidation.test(zip)) {
+                zipError.textContent = 'Postcode number must be 5 digits';
+            } else {
+                zipError.textContent = '';
+            }
+        }
+
+
+
     });
     </script>
 </body>
