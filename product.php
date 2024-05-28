@@ -20,8 +20,6 @@ include "header.php";
     var _hash = "!";
     var noBackPlease = function () {
         global.location.href += "#";
-		// making sure we have the fruit available for juice....
-		// 50 milliseconds for just once do not cost much (^__^)
         global.setTimeout(function () {
             global.location.href += "!";
         }, 50);
