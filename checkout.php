@@ -140,7 +140,7 @@ span.price {
                         </div>
                         <div class="col-50">
                             <label for="zip">Zip</label>
-                            <input type="text" id="zip" name="zip" class="form-control" value="'.$row["zip"].'" pattern="^[0-9]{6}(?:-[0-9]{4})?$" required>
+                            <input type="text" id="zip" name="zip" class="form-control" value="'.$row["zip"].'" pattern="^[0-9]{5}+$" required>
                         </div>
                         </div>
 
