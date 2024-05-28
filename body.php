@@ -34,68 +34,6 @@
     </a>
   </div>
 </div>
-     
-
-
-		<!-- SECTION -->
-		<div class="section mainn mainn-raised">
-		
-		
-			<!-- container -->
-			<div class="container">
-			
-				<!-- row -->
-				<div class="row">
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<a href="product.php?p=1"><div class="shop">
-							<div class="shop-img">
-								<img src="product_images/vegi1.png" alt="vegetables" style="width: 350px; height: 350px;">
-							</div>
-							<div class="shop-body">
-								<h3>Fresh Vegetables<br>Collection</h3>
-								<a href="product.php?p=1" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div></a>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<a href="product.php?p=5"><div class="shop">
-							<div class="shop-img">
-								<img src="product_images/fruit1.png" alt="fruits" style="width: 350px; height: 350px;">
-							</div>
-							<div class="shop-body">
-								<h3>Fresh Fruits<br>Collection</h3>
-								<a href="product.php?p=5" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div></a>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<a href="product.php?p=7"><div class="shop">
-							<div class="shop-img">
-								<img src="product_images/handi1.png" alt="handcrafts" style="width: 350px; height: 350px;">
-							</div>
-							<div class="shop-body">
-								<h3>Handcrafts<br>Collection</h3>
-								<a href="product.php?p=7" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-                            </div></a>
-					</div>
-					<!-- /shop -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
-		  
-		
-
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -144,15 +82,11 @@
 								<div class='product'>
 									<a href='product.php?p=$pro_id'><div class='product-img'>
 										<img src='product_images/$pro_image' style='max-height: 170px;' alt=''>
-										<div class='product-label'>
-											<span class='sale'>-30%</span>
-											<span class='new'>NEW</span>
-										</div>
 									</div></a>
 									<div class='product-body'>
 										<p class='product-category'>$cat_name</p>
 										<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>$30.00</del></h4>
+										<h4 class='product-price header-cart-item-info'>RM$pro_price</h4>
 										<div class='product-rating'>";
 										$rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating  FROM reviews WHERE product_id='$pro_id '";
 										$run_review_query = mysqli_query($con,$rating_query);

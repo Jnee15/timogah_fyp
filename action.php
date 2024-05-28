@@ -79,96 +79,89 @@ if(isset($_POST["brand"])){
 		echo "</div>";
 	}
 }
+
 if(isset($_POST["page"])){
-	$cid = $_POST["cid"];
-	$sql = "SELECT * FROM products Where product_cat='$cid'";
-	$run_query = mysqli_query($con,$sql);
-	$count = mysqli_num_rows($run_query);
-	$pageno = ceil($count/9);
-	for($i=1;$i<=$pageno;$i++){
-		echo "
-			<li><a href='#product-row' page='$i' id='page' cid='$cid'  class='active'>$i</a></li>
-            
-            
-		";
-	}
+    if(isset($_POST["cid"])){
+        $cid = $_POST["cid"];
+    } else {
+        $cid = ""; 
+    }
+    $sql = "SELECT * FROM products Where product_cat='$cid'";
+    $run_query = mysqli_query($con,$sql);
+    $count = mysqli_num_rows($run_query);
+    $pageno = ceil($count/9);
+    for($i=1;$i<=$pageno;$i++){
+        echo "
+            <li><a href='#product-row' page='$i' id='page' cid='$cid'  class='active'>$i</a></li>
+        ";
+    }
 }
+
 if(isset($_POST["getProduct"])){
-	$limit = 9;
-	if(isset($_POST["setPage"])){
-		$pageno = $_POST["pageNumber"];
-		$start = ($pageno * $limit) - $limit;
-	}else{
-		$start = 0;
-	}
-	if(isset($_POST["cid"])){
-		$cat_id = $_POST["cid"];
-	}else{
-		$cat_id = $_POST["cat_id"];
-	}
-	
-	$product_query = "SELECT * FROM products,categories WHERE product_cat = '$cat_id' AND product_cat=cat_id LIMIT $start,$limit";
-	$run_query = mysqli_query($con,$product_query);
-	if(mysqli_num_rows($run_query) > 0){
-		while($row = mysqli_fetch_array($run_query)){
-			$pro_id    = $row['product_id'];
-			$pro_cat   = $row['product_cat'];
-			$pro_brand = $row['product_brand'];
-			$pro_title = $row['product_title'];
-			$pro_price = $row['product_price'];
-			$pro_image = $row['product_image'];
-            
+    $limit = 9;
+    if(isset($_POST["setPage"])){
+        $pageno = $_POST["pageNumber"];
+        $start = ($pageno * $limit) - $limit;
+    } else {
+        $start = 0;
+    }
+    if(isset($_POST["cid"])){
+        $cat_id = $_POST["cid"];
+    } else {
+        $cat_id = isset($_POST["cat_id"]) ? $_POST["cat_id"] : "";
+    }
+
+    $product_query = "SELECT * FROM products,categories WHERE product_cat = '$cat_id' AND product_cat=cat_id LIMIT $start,$limit";
+    $run_query = mysqli_query($con,$product_query);
+    if(mysqli_num_rows($run_query) > 0){
+        while($row = mysqli_fetch_array($run_query)){
+            $pro_id    = $row['product_id'];
+            $pro_cat   = $row['product_cat'];
+            $pro_brand = $row['product_brand'];
+            $pro_title = $row['product_title'];
+            $pro_price = $row['product_price'];
+            $pro_image = $row['product_image'];
             $cat_name = $row["cat_title"];
-			echo "
-				
-                        
-                        <div class='col-md-4 col-xs-6' >
-								<a href='product.php?p=$pro_id'><div class='product'>
-									<div class='product-img'>
-										<img src='product_images/$pro_image' style='max-height: 170px;' alt=''>
-										<div class='product-label'>
-											<span class='sale'>-30%</span>
-											<span class='new'>NEW</span>
-										</div>
-									</div></a>
-									<div class='product-body'>
-										<p class='product-category'>$cat_name</p>
-										<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>$30.00</del></h4>
-										<div class='product-rating'>";
-										$rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating  FROM reviews WHERE product_id='$pro_id '";
-										$run_review_query = mysqli_query($con,$rating_query);
-										$review_row = mysqli_fetch_array($run_review_query);
-										if($review_row > 0){
-											$avg_count=$review_row["avg_rating"];
-												$i=1;
-												while($i <= round($avg_count)){
-													$i++;
-													echo'
-													<i class="fa fa-star"></i>';
-												}
-												$i=1;
-												while($i <= 5-round($avg_count)){
-													$i++;
-													echo'
-													<i class="fa fa-star-o empty"></i>';
-												}
-											
-										}
-										echo "</div>
-										<div class='product-btns'>
-											<button pid='$pro_id' id='wishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
-										</div>
-									</div>
-									<div class='add-to-cart'>
-										<button pid='$pro_id' id='product' class='add-to-cart-btn block2-btn-towishlist' href='#'><i class='fa fa-shopping-cart'></i> add to cart</button>
-									</div>
-								</div>
-							</div>
-                        
-			";
-		}
-	}
+            echo "
+                <div class='col-md-4 col-xs-6'>
+                    <a href='product.php?p=$pro_id'><div class='product'>
+                        <div class='product-img'>
+                            <img src='product_images/$pro_image' style='max-height: 170px;' alt=''>
+                        </div></a>
+                        <div class='product-body'>
+                            <p class='product-category'>$cat_name</p>
+                            <h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
+                            <h4 class='product-price header-cart-item-info'>RM$pro_price</h4>
+                            <div class='product-rating'>";
+                                $rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating  FROM reviews WHERE product_id='$pro_id '";
+                                $run_review_query = mysqli_query($con,$rating_query);
+                                $review_row = mysqli_fetch_array($run_review_query);
+                                if($review_row > 0){
+                                    $avg_count=$review_row["avg_rating"];
+                                    $i=1;
+                                    while($i <= round($avg_count)){
+                                        $i++;
+                                        echo '<i class="fa fa-star"></i>';
+                                    }
+                                    $i=1;
+                                    while($i <= 5-round($avg_count)){
+                                        $i++;
+                                        echo '<i class="fa fa-star-o empty"></i>';
+                                    }
+                                }
+                            echo "</div>
+                            <div class='product-btns'>
+                                <button pid='$pro_id' id='wishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
+                            </div>
+                        </div>
+                        <div class='add-to-cart'>
+                            <button pid='$pro_id' id='product' class='add-to-cart-btn block2-btn-towishlist' href='#'><i class='fa fa-shopping-cart'></i> add to cart</button>
+                        </div>
+                    </div>
+                </div>
+            ";
+        }
+    }
 }
 
 
@@ -205,15 +198,11 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 								<a href='product.php?p=$pro_id'><div class='product'>
 									<div class='product-img'>
 										<img  src='product_images/$pro_image'  style='max-height: 170px;' alt=''>
-										<div class='product-label'>
-											<span class='sale'>-30%</span>
-											<span class='new'>NEW</span>
-										</div>
 									</div></a>
 									<div class='product-body'>
 										<p class='product-category'>$cat_name</p>
 										<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>$30.00</del></h4>
+										<h4 class='product-price header-cart-item-info'>RM$pro_price</h4>
 										<div class='product-rating'>";
 										$rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating  FROM reviews WHERE product_id='$pro_id '";
 										$run_review_query = mysqli_query($con,$rating_query);
@@ -269,7 +258,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 						<b>Product is already added into the cart Continue Shopping..!</b>
 				</div>
-			";//not in video
+			";
 		} else {
 			$sql = "INSERT INTO `cart`
 			(`p_id`, `ip_add`, `user_id`, `qty`) 
@@ -280,7 +269,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 				if(mysqli_query($con,$sql)){
 					echo "<div class='alert alert-danger'>
 									<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-									<b>Product is removed from wishlist and added to cart</b>
+									<b>Product is added to cart</b>
 							</div>";
 					
 				}
@@ -307,7 +296,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 				if(mysqli_query($con,$sql)){
 					echo "<div class='alert alert-danger'>
 									<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-									<b>Product is removed from wishlist and added to cart</b>
+									<b>Product is added to cart</b>
 							</div>";
 					exit();
 				}
@@ -336,7 +325,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 						<b>Product is already added into the wishlist Continue Shopping..!</b>
 				</div>
-			";//not in video
+			";
 		} else {
 			$sql = "INSERT INTO `wishlist`
 			(`p_id`, `ip_add`, `user_id`) 
@@ -347,7 +336,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 				if(mysqli_query($con,$sql)){
 					echo "<div class='alert alert-danger'>
 									<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-									<b>Product is removed from cart and added to wishlist</b>
+									<b>Product is added to wishlist</b>
 							</div>";
 					
 				}
@@ -373,7 +362,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 				if(mysqli_query($con,$sql)){
 					echo "<div class='alert alert-danger'>
 									<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-									<b>Product is removed from cart and added to wishlist</b>
+									<b>Product is added to wishlist</b>
 							</div>";
 					exit();
 				}
@@ -484,9 +473,9 @@ if (isset($_POST["Common"])) {
     				<thead>
 						<tr>
 							<th style="width:50%">Product</th>
-							<th style="width:10%">Price</th>
+							<th style="width:10%">Price(RM)</th>
 							<th style="width:8%">Quantity</th>
-							<th style="width:7%" class="text-center">Subtotal</th>
+							<th style="width:7%" class="text-center">Subtotal(RM)</th>
 							<th style="width:10%"></th>
 						</tr>
 					</thead>
@@ -635,8 +624,8 @@ if (isset($_POST["wishListCommon"])) {
     				<thead>
 						<tr>
 							<th style="width:50%">Product</th>
-							<th style="width:10%">Price</th>
-							<th style="width:7%" class="text-center">Subtotal</th>
+							<th style="width:10%">Price(RM)</th>
+							<th style="width:7%" class="text-center">Subtotal(RM)</th>
 							<th style="width:10%"></th>
 						</tr>
 					</thead>
@@ -759,13 +748,4 @@ if (isset($_POST["updateCartItem"])) {
 	}
 }
 
-
-
-
 ?>
-
-
-
-
-
-
