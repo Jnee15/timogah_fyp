@@ -81,12 +81,12 @@ if(isset($_SESSION["uid"])){
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Address is required">
                         <span class="label-input100">Address</span>
-                        <input class="input100" type="text" name="address1" id="address1" placeholder="Address">
+                        <input class="input100" type="text" name="address" id="address" placeholder="Address">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="City is required">
                         <span class="label-input100">City</span>
-                        <input class="input100" type="text" name="address2" id="address2" placeholder="City">
+                        <input class="input100" type="text" name="city" id="city" placeholder="City">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="container-login100-form-btn">

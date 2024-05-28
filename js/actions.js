@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	cat();
     cathome();
-	brand();
+	store();
 	product();
     
     producthome();
@@ -30,12 +30,12 @@ $(document).ready(function(){
 			}
 		})
 	}
-	//brand() is a funtion fetching brand record from database whenever page is load
-	function brand(){
+	//store() is a funtion fetching store record from database whenever page is load
+	function store(){
 		$.ajax({
 			url	:	"action.php",
 			method:	"POST",
-			data	:	{brand:1},
+			data	:	{store:1},
 			success	:	function(data){
 				$("#get_brand").html(data);
 			}
@@ -136,8 +136,8 @@ $(document).ready(function(){
 	})
     
 
-	/*	when page is load successfully then there is a list of brands when user click on brand we will get brand id and 
-		according to brand id we will show products
+	/*	when page is load successfully then there is a list of stores when user click on store we will get store id and 
+		according to store id we will show products
 	*/
 	$("body").delegate(".selectBrand","click",function(event){
 		event.preventDefault();
@@ -147,7 +147,7 @@ $(document).ready(function(){
 			$.ajax({
 			url		:	"action.php",
 			method	:	"POST",
-			data	:	{selectBrand:1,brand_id:bid},
+			data	:	{selectBrand:1,store_id:bid},
 			success	:	function(data){
 				$("#get_product").html(data);
 				if($("body").width() < 480){
@@ -310,7 +310,7 @@ $(document).ready(function(){
 			method : "POST",
 			data : {addToWishlist:1,proId:pid},
 			success : function(data){
-				$("#desc").html("Added to WishList");
+				$("#desc").html("Added to Wishlist");
 				launch_toast();
 				count_wishlist_item();
 				count_item();
@@ -433,30 +433,6 @@ $(document).ready(function(){
             })
     })
     
-    
-	/*
-		whenever user click on .update class we will take product id of that row 
-		and send it to action.php to perform product qty updation operation
-	*/
-
-	$("body").delegate(".update","click",function(event){
-		var update = $(this).parent().parent().parent();
-		var update_id = update.find(".update").attr("update_id");
-		var qty = update.find(".qty").val();
-		$.ajax({
-			url	:	"action.php",
-			method	:	"POST",
-			data	:	{updateCartItem:1,update_id:update_id,qty:qty},
-			success	:	function(data){
-				$("#desc").html("Cart Updated");
-				launch_toast();
-				$("#cart_msg").html(data);
-				checkOutDetails();
-			}
-		})
-
-
-	})
 	checkOutDetails();
 	WishlistDetails();
 	net_total();

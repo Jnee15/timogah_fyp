@@ -33,8 +33,8 @@
                   <div class="card-icon">
                       <i class="material-icons">store</i>
                   </div>
-                  <p class="card-category">Total Brands</p>
-                  <h3 class="card-title"><?php  $query = "SELECT brand_id FROM brands"; 
+                  <p class="card-category">Total Stores</p>
+                  <h3 class="card-title"><?php  $query = "SELECT store_id FROM stores"; 
                                       $result = mysqli_query($con, $query); 
                                        if ($result) 
                     { 

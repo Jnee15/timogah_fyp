@@ -34,15 +34,15 @@ include "status.php";
                 <div class="table-responsive ps">
                   <table class="table table-hover tablesorter " id="">
                     <thead class=" text-primary">
-                        <tr><th>ID</th><th>FirstName</th><th>LastName</th><th>Email</th><th>Password</th><th>Contact</th><th>Address</th><th>City</th>
+                        <tr><th>ID</th><th>FirstName</th><th>LastName</th><th>Email</th><th>Password</th><th>Contact</th><th>Address</th><th>City</th><td>State</td><td>Zip</td><td>Points</td>
                     </tr></thead>
                     <tbody>
                       <?php 
                         $result=mysqli_query($con,"select * from user_info")or die ("query 1 incorrect.....");
 
-                        while(list($user_id,$first_name,$last_name,$email,$password,$phone,$address1,$address2)=mysqli_fetch_array($result))
+                        while(list($user_id,$first_name,$last_name,$email,$password,$phone,$address,$city,$state,$zip,$points)=mysqli_fetch_array($result))
                         {	
-                        echo "<tr><td>$user_id</td><td>$first_name</td><td>$last_name</td><td>$email</td><td>$password</td><td>$phone</td><td>$address1</td><td>$address2</td>
+                        echo "<tr><td>$user_id</td><td>$first_name</td><td>$last_name</td><td>$email</td><td>$password</td><td>$phone</td><td>$address</td><td>$city</td><td>$state</td><td>$zip</td><td>$points</td>
 
                         </tr>";
                         }
@@ -90,19 +90,19 @@ include "status.php";
           <div class="col-md-6">
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">Brands List</h4>
+                <h4 class="card-title">Stores List</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive ps">
                   <table class="table table-hover tablesorter " id="">
                     <thead class=" text-primary">
-                        <tr><th>ID</th><th>Brands</th><th>Count</th>
+                        <tr><th>ID</th><th>Stores</th><th>Count</th>
                     </tr></thead>
                     <tbody>
                       <?php 
-                        $result=mysqli_query($con,"select * from brands")or die ("query 1 incorrect.....");
+                        $result=mysqli_query($con,"select * from stores")or die ("query 1 incorrect.....");
                         $i=1;
-                        while(list($brand_id,$brand_title)=mysqli_fetch_array($result))
+                        while(list($store_id,$store_title)=mysqli_fetch_array($result))
                         {	
                             
                             $sql = "SELECT COUNT(*) AS count_items FROM products WHERE product_brand=$i";
@@ -110,7 +110,7 @@ include "status.php";
                             $row = mysqli_fetch_array($query);
                             $count=$row["count_items"];
                             $i++;
-                        echo "<tr><td>$brand_id</td><td>$brand_title</td><td>$count</td>
+                        echo "<tr><td>$store_id</td><td>$store_title</td><td>$count</td>
 
                         </tr>";
                         }

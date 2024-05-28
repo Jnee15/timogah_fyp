@@ -107,6 +107,28 @@ const redeemVoucher = () => {
             if (data.success) {
                 totalPoints -= parseInt(selectedVoucher);
                 finalValue.innerHTML = `<p>Points: ${totalPoints}</p>`;
+                updateVoucherList();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+};
+
+const updateVoucherList = () => {
+    fetch('get_vouchers.php')
+        .then(response => response.json())
+        .then(data => {
+            const voucherList = document.getElementById('voucher-list');
+            voucherList.innerHTML = '';
+            if (data.vouchers.length > 0) {
+                data.vouchers.forEach(voucher => {
+                    const li = document.createElement('li');
+                    li.textContent = `RM${voucher.discount} Discount`;
+                    voucherList.appendChild(li);
+                });
+            } else {
+                voucherList.innerHTML = '<li>No vouchers redeemed yet.</li>';
             }
         })
         .catch(error => {

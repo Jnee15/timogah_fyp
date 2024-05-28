@@ -44,20 +44,20 @@ if(isset($_POST["category"])){
 		echo "</div>";
 	}
 }
-if(isset($_POST["brand"])){
-	$brand_query = "SELECT * FROM brands";
+if(isset($_POST["store"])){
+	$brand_query = "SELECT * FROM stores";
 	$run_query = mysqli_query($con,$brand_query);
 	echo "
 		<div class='aside'>
-							<h3 class='aside-title'>Brand</h3>
+							<h3 class='aside-title'>Store</h3>
 							<div class='btn-group-vertical'>
 	";
 	if(mysqli_num_rows($run_query) > 0){
         $i=1;
 		while($row = mysqli_fetch_array($run_query)){
             
-			$bid = $row["brand_id"];
-			$brand_name = $row["brand_title"];
+			$bid = $row["store_id"];
+			$brand_name = $row["store_title"];
             $sql = "SELECT COUNT(*) AS count_items FROM products WHERE product_brand=$i";
             $query = mysqli_query($con,$sql);
             $row = mysqli_fetch_array($query);
@@ -172,7 +172,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 		$sql = "SELECT * FROM products,categories WHERE product_cat = '$id' AND product_cat=cat_id " ;
         
 	}else if(isset($_POST["selectBrand"])){
-		$id = $_POST["brand_id"];
+		$id = $_POST["store_id"];
 		$sql = "SELECT * FROM products,categories WHERE product_brand = '$id' AND product_cat=cat_id";
 	}else {
         
@@ -519,9 +519,7 @@ if (isset($_POST["Common"])) {
 							</td>
 							<td data-th="Subtotal" class="text-center"><input type="text" class="form-control total" value="'.$product_price.'" readonly="readonly"></td>
 							<td class="actions" data-th="">
-							<div class="btn-group">
-								<a href="#" class="btn btn-info btn-sm update" update_id="'.$product_id.'"><i class="fa fa-refresh"></i></a>
-								
+							<div class="btn-group">								
 								<a href="#" class="btn btn-danger btn-sm remove" remove_id="'.$product_id.'"><i class="fa fa-trash-o"></i></a>		
 							</div>							
 							</td>

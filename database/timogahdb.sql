@@ -6,7 +6,12 @@ SET time_zone = "+00:00";
 --
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)  SELECT * FROM categories WHERE cat_id=cid$$
+USE timogahdb;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)
+BEGIN
+    SELECT * FROM categories WHERE cat_id = cid;
+END;
 
 DELIMITER ;
 
@@ -33,19 +38,19 @@ INSERT INTO `admin_info` (`admin_id`, `admin_name`, `admin_email`, `admin_passwo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brands`
+-- Table structure for table `stores`
 --
 
-CREATE TABLE `brands` (
-  `brand_id` int(100) NOT NULL,
-  `brand_title` text NOT NULL
+CREATE TABLE `stores` (
+  `store_id` int(100) NOT NULL,
+  `store_title` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `brands`
+-- Dumping data for table `stores`
 --
 
-INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
+INSERT INTO `stores` (`store_id`, `store_title`) VALUES
 (1, 'Farley'),
 (2, 'Emart'),
 (3, 'Handcraft');
@@ -172,7 +177,7 @@ CREATE TABLE `products` (
   `product_cat` int(100) NOT NULL,
   `product_brand` int(100) NOT NULL,
   `product_title` varchar(255) NOT NULL,
-  `product_price` int(100) NOT NULL,
+  `product_price` DECIMAL(10, 2) NOT NULL,
   `product_desc` text NOT NULL,
   `product_image` text NOT NULL,
   `product_keywords` text NOT NULL
@@ -213,6 +218,7 @@ CREATE TABLE `user_vouchers` (
   `voucher_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `voucher_value` int(10) NOT NULL,
+  `voucher_discount` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`voucher_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -228,20 +234,23 @@ CREATE TABLE `user_info` (
   `email` varchar(300) NOT NULL,
   `password` varchar(300) NOT NULL,
   `mobile` varchar(10) NOT NULL,
-  `address1` varchar(300) NOT NULL,
-  `address2` varchar(11) NOT NULL,
+  `address` varchar(300) NOT NULL,
+  `city` varchar(255) NOT NULL,  
+  `state` varchar(255) NOT NULL,
+  `zip` varchar(10) NOT NULL,
   `points` int(10) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`, `points`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'Samarahan', 'Sarawak', 0);
+INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`, `state`, `zip`, `points`) VALUES
+(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan', 'Sarawak', '90100', 0);
 
 --
 -- Triggers `user_info`
 --
 DELIMITER $$
-CREATE TRIGGER `after_user_info_insert` AFTER INSERT ON `user_info` FOR EACH ROW BEGIN 
-INSERT INTO user_info_backup VALUES(new.user_id,new.first_name,new.last_name,new.email,new.password,new.mobile,new.address1,new.address2);
+CREATE TRIGGER `after_user_info_insert` AFTER INSERT ON `user_info` FOR EACH ROW 
+BEGIN 
+  INSERT INTO user_info_backup VALUES(NEW.user_id, NEW.first_name, NEW.last_name, NEW.email, NEW.password, NEW.mobile, NEW.address, NEW.city, NEW.state, NEW.zip);
 END
 $$
 DELIMITER ;
@@ -259,16 +268,16 @@ CREATE TABLE `user_info_backup` (
   `email` varchar(300) NOT NULL,
   `password` varchar(300) NOT NULL,
   `mobile` varchar(10) NOT NULL,
-  `address1` varchar(300) NOT NULL,
-  `address2` varchar(11) NOT NULL
+  `address` varchar(300) NOT NULL,
+  `city` varchar(255) NOT NULL,  
+  `state` varchar(255) NOT NULL,
+  `zip` varchar(10) NOT NULL,
+  `points` int(10) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Dumping data for table `user_info_backup`
---
-
-INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'Samarahan', 'Sarawak');
+INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`, `state`, `zip`, `points`) VALUES
+(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan', 'Sarawak', '90100', 0);
 
 -- --------------------------------------------------------
 
@@ -289,10 +298,10 @@ ALTER TABLE `admin_info`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- Indexes for table `brands`
+-- Indexes for table `stores`
 --
-ALTER TABLE `brands`
-  ADD PRIMARY KEY (`brand_id`);
+ALTER TABLE `stores`
+  ADD PRIMARY KEY (`store_id`);
 
 --
 -- Indexes for table `cart`
@@ -380,10 +389,10 @@ ALTER TABLE `admin_info`
   MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `brands`
+-- AUTO_INCREMENT for table `stores`
 --
-ALTER TABLE `brands`
-  MODIFY `brand_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `stores`
+  MODIFY `store_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cart`

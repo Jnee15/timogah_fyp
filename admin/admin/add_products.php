@@ -2,8 +2,8 @@
 session_start();
 include("../../db.php");
 
-$brandsQuery = "SELECT * FROM `brands`";
-$brandsResult = mysqli_query($con, $brandsQuery);
+$storesQuery = "SELECT * FROM `stores`";
+$storesResult = mysqli_query($con, $storesQuery);
 $categoriesQuery = "SELECT * FROM `categories`";
 $categoriesResult = mysqli_query($con, $categoriesQuery);
 
@@ -14,7 +14,7 @@ $details=$_POST['details'];
 $price=$_POST['price'];
 $c_price=$_POST['c_price'];
 $product_type=$_POST['product_type'];
-$brand=$_POST['brand'];
+$store=$_POST['store'];
 $tags=$_POST['tags'];
 
 $picture_name=$_FILES['picture']['name'];
@@ -29,7 +29,7 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 		$pic_name=time()."_".$picture_name;
 		move_uploaded_file($picture_tmp_name,"../product_images/".$pic_name);
 		
-mysqli_query($con,"insert into products (product_cat, product_brand,product_title,product_price, product_desc, product_image,product_keywords) values ('$product_type','$brand','$product_title','$price','$details','$pic_name','$tags')") or die ("query incorrect");
+mysqli_query($con,"insert into products (product_cat, product_brand,product_title,product_price, product_desc, product_image,product_keywords) values ('$product_type','$store','$product_title','$price','$details','$pic_name','$tags')") or die ("query incorrect");
 
  header("location: submit_form.php?success=1");
 }
@@ -112,12 +112,12 @@ include "topheader.php";
 
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">Product Brand</label>
-                          <select id="brand" name="brand" required class="form-control" style="background-color: black;">
+                          <label for="">Product Store</label>
+                          <select id="store" name="store" required class="form-control" style="background-color: black;">
                             <option value="" disabled selected>Select...</option>
                               <?php
-                              while ($row = mysqli_fetch_assoc($brandsResult)) {
-                                  echo "<option value='" . $row['brand_id'] . "'>" . $row['brand_title'] . "</option>";
+                              while ($row = mysqli_fetch_assoc($storesResult)) {
+                                  echo "<option value='" . $row['store_id'] . "'>" . $row['store_title'] . "</option>";
                               }
                               ?>
                           </select>

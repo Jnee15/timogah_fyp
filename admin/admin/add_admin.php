@@ -10,10 +10,10 @@ $last_name=$_POST['last_name'];
 $email=$_POST['email'];
 $user_password=$_POST['password'];
 $mobile=$_POST['phone'];
-$address1=$_POST['city'];
-$address2=$_POST['country'];
+$address=$_POST['city'];
+$city=$_POST['country'];
 
-mysqli_query($con,"insert into user_info(first_name, last_name,email,password,mobile,address1,address2) values ('$first_name','$last_name','$email','$user_password','$mobile','$address1','$address2')") 
+mysqli_query($con,"insert into user_info(first_name, last_name,email,password,mobile,address,city) values ('$first_name','$last_name','$email','$user_password','$mobile','$address','$city')") 
 			or die ("Query 1 is inncorrect........"); 
 mysqli_close($con);
 }

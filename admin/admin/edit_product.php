@@ -6,7 +6,7 @@ $product_id=$_REQUEST['product_id'];
 
 $result=mysqli_query($con,"SELECT `product_id`, `product_cat`, `product_brand`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords` from products  where product_id='$product_id'") or die ("query 1 incorrect.......");
 
-list($product_id,$product_type,$brand,$product_title,$price,$details,$pic_name,$tags)=mysqli_fetch_array($result);
+list($product_id,$product_type,$store,$product_title,$price,$details,$pic_name,$tags)=mysqli_fetch_array($result);
 
 if(isset($_POST['btn_save']))
 {
@@ -14,7 +14,7 @@ $product_title=$_POST['product_title'];
 $details=$_POST['details'];
 $price=$_POST['price'];
 $product_type=$_POST['product_type'];
-$brand=$_POST['brand'];
+$store=$_POST['store'];
 $tags=$_POST['tags'];
 
 $price=$_POST['price']*73.77000;
@@ -31,13 +31,13 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 		$pic_name=time()."_".$picture_name;
         move_uploaded_file($picture_tmp_name,"../../product_images/".$pic_name);
         mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_title', 
-        `product_cat`= '$product_type',`product_brand`='$brand',
+        `product_cat`= '$product_type',`product_brand`='$store',
         `product_price`='$price',`product_desc`='$details',`product_image`='$pic_name',`product_keywords`='$tags' WHERE `product_id` = '$product_id'") or die("Query 2 is inncorrect..........");
     header("location: products_list.php");
    
 }else{
     mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_title', 
-        `product_cat`= '$product_type',`product_brand`='$brand',
+        `product_cat`= '$product_type',`product_brand`='$store',
         `product_price`='$price',`product_desc`='$details',`product_image`='$pic_name',`product_keywords`='$tags' WHERE `product_id` = '$product_id'") or die("Query 2 is inncorrect..........");
     header("location: products_list.php");
 }
@@ -133,17 +133,17 @@ include "topheader.php";
                       <div class="col-md-12">
                           <div class="form-group">
                             <label for="">Product Type</label>
-                            <select id="brand" name="brand" required class="form-control">
+                            <select id="store" name="store" required class="form-control">
                             <option value="" style="color:black;">select Type</option>
                                 <?php
-                                    $result2=mysqli_query($con,"SELECT * FROM `brands`") or die ("query 1 incorrect.....");
+                                    $result2=mysqli_query($con,"SELECT * FROM `stores`") or die ("query 1 incorrect.....");
 
-                                    while(list($brand_id,$brand_title)=mysqli_fetch_array($result2))
+                                    while(list($store_id,$store_title)=mysqli_fetch_array($result2))
                                     {
-                                        if($brand_id==$brand){
-                                            echo "<option value='$brand_id' style='color:black;' selected>$brand_title</option>";
+                                        if($store_id==$store){
+                                            echo "<option value='$store_id' style='color:black;' selected>$store_title</option>";
                                         }else{
-                                            echo "<option value='$brand_id' style='color:black;'>$brand_title</option>";
+                                            echo "<option value='$store_id' style='color:black;'>$store_title</option>";
                                         }
                                     }
                                 ?>

@@ -37,9 +37,9 @@ include "topheader.php";
                     </tr></thead>
                     <tbody>
                       <?php 
-                        $result=mysqli_query($con,"select user_id,first_name,last_name, email, password,mobile,address1,address2 from user_info")or die ("query 2 incorrect.......");
+                        $result=mysqli_query($con,"select user_id,first_name,last_name, email, password,mobile,address,city from user_info")or die ("query 2 incorrect.......");
 
-                        while(list($user_id,$user_name,$user_last,$email,$user_password,$mobile,$address1,$address2)=
+                        while(list($user_id,$user_name,$user_last,$email,$user_password,$mobile,$address,$city)=
                         mysqli_fetch_array($result))
                         {
                         echo "<tr>
@@ -50,8 +50,8 @@ include "topheader.php";
 
                         <td>$user_password</td>
                          <td>$mobile</td>
-                          <td>$address1</td>
-                           <td>$address2</td>";
+                          <td>$address</td>
+                           <td>$city</td>";
                         echo"<td>
                      
                         <a class='btn btn-danger' href='manageuser.php?user_id=$user_id&action=delete'>Delete<div class='ripple-container'></div></a>
