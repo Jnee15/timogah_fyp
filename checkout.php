@@ -267,6 +267,9 @@ span.price {
 
                     // Calculate discount
                     $total_after_discount = $total - $voucher_discount;
+                    if ($total_after_discount < 0) {
+                        $total_after_discount = 0;
+                    }
 
                     echo "
                     </tbody>
@@ -306,6 +309,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var discountElement = document.getElementById('discount');
 
         var totalAfterDiscount = total - discount;
+        if (totalAfterDiscount < 0) {
+            totalAfterDiscount = 0;
+        }
 
         discountElement.textContent = 'Discount: RM -' + discount.toFixed(2);
         totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
