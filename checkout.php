@@ -157,18 +157,18 @@ span.price {
                           <i class="fa fa-cc-discover" style="color:orange;"></i>
                       </div>
                       <label for="cname">Name on Card</label>
-                      <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$">
-                      <div class="form-group" id="card-number-field">
+                          <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$">                      
+                          <div class="form-group" id="card-number-field">
                           <label for="cardNumber">Card Number</label>
-                          <input type="text" class="form-control" id="cardNumber" name="cardNumber">
+                          <input type="text" class="form-control" id="cardNumber" name="cardNumber" pattern="^[0-9]{16}$">
                       </div>
                       <label for="expdate">Exp Date</label>
-                      <input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22">
+                      <input type="text" id="expdate" name="expdate" class="form-control" pattern="^(0[1-9]|1[0-2])\/\d{2}$" placeholder="MM/YY">
                       <div class="row">
                           <div class="col-50">
                               <div class="form-group CVV">
                                   <label for="cvv">CVV</label>
-                                  <input type="text" class="form-control" name="cvv" id="cvv">
+                                  <input type="text" class="form-control" name="cvv" id="cvv" pattern="^[0-9]{3,4}$">
                               </div>
                           </div>
                       </div>
@@ -344,6 +344,48 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
         } else {
             paymentError.style.display = 'none';
+        }
+
+        var cardnameInput = document.getElementById('cname');
+        var cardnumberInput = document.getElementById('cardNumber');
+        var cvvInput = document.getElementById('cvv');
+        var expdateInput = document.getElementById('expdate');
+
+        var cardnameError = document.getElementById('cardname-error');
+        var cardnumberError = document.getElementById('cardnumber-error');
+        var cvvError = document.getElementById('cvv-error');
+        var expdateError = document.getElementById('expdate-error');
+
+        // Check card name pattern
+        if (!cardnameInput.checkValidity()) {
+            cardnameError.textContent = 'Invalid card name';
+            event.preventDefault();
+        } else {
+            cardnameError.textContent = '';
+        }
+
+        // Check card number pattern
+        if (!cardnumberInput.checkValidity()) {
+            cardnumberError.textContent = 'Invalid card number';
+            event.preventDefault();
+        } else {
+            cardnumberError.textContent = '';
+        }
+
+        // Check CVV pattern
+        if (!cvvInput.checkValidity()) {
+            cvvError.textContent = 'Invalid CVV';
+            event.preventDefault();
+        } else {
+            cvvError.textContent = '';
+        }
+
+        // Check expiry date pattern
+        if (!expdateInput.checkValidity()) {
+            expdateError.textContent = 'Invalid expiry date';
+            event.preventDefault();
+        } else {
+            expdateError.textContent = '';
         }
     });
 });
