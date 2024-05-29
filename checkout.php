@@ -182,7 +182,7 @@ span.price {
                             echo '<option value="'.$voucher['voucher_id'].'" data-discount="'.$voucher['voucher_discount'].'">RM'.$voucher['voucher_discount'].' Discount</option>';
                         }
                     echo '  </select>
-
+                    <input type="hidden" id="voucher_discount" name="voucher_discount" value="0">
                     <label for="pay_with_voucher">
                       <input type="checkbox" id="pay_with_voucher" name="pay_with_voucher"> Pay Only using voucher
                     </label>
@@ -293,26 +293,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var payWithVoucherCheckbox = document.getElementById('pay_with_voucher');
     var paymentSection = document.getElementById('payment-section');
     var voucherSelect = document.getElementById('vouchers');
+    var voucherDiscountInput = document.getElementById('voucher_discount');
     var total = <?php echo $total; ?>;
     var voucherError = document.getElementById('voucher-error');
     var paymentError = document.getElementById('payment-error');
 
-    payWithVoucherCheckbox.addEventListener('change', function() {
-        var selectedVoucher = voucherSelect.options[voucherSelect.selectedIndex];
-        var voucherDiscount = parseFloat(selectedVoucher.getAttribute('data-discount')) || 0;
-
-        if (voucherDiscount < total) {
-            payWithVoucherCheckbox.checked = false;
-            voucherError.style.display = 'block';
-        } else {
-            voucherError.style.display = 'none';
-            paymentSection.style.display = this.checked ? 'none' : 'block';
-        }
-    });
-
-    voucherSelect.addEventListener('change', function() {
+    function updateVoucherDiscount() {
         var selectedVoucher = voucherSelect.options[voucherSelect.selectedIndex];
         var discount = parseFloat(selectedVoucher.getAttribute('data-discount')) || 0;
+        voucherDiscountInput.value = discount;
         var totalAfterDiscountElement = document.getElementById('total_after_discount');
         var discountElement = document.getElementById('discount');
 
@@ -328,64 +317,32 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             voucherError.style.display = 'none';
         }
+    }
+
+    payWithVoucherCheckbox.addEventListener('change', function() {
+        var selectedVoucher = voucherSelect.options[voucherSelect.selectedIndex];
+        var voucherDiscount = parseFloat(selectedVoucher.getAttribute('data-discount')) || 0;
+
+        if (voucherDiscount < total) {
+            payWithVoucherCheckbox.checked = false;
+            voucherError.style.display = 'block';
+        } else {
+            voucherError.style.display = 'none';
+            paymentSection.style.display = this.checked ? 'none' : 'block';
+        }
     });
+
+    voucherSelect.addEventListener('change', updateVoucherDiscount);
 
     document.getElementById('checkout_form').addEventListener('submit', function(event) {
         var selectedVoucher = voucherSelect.options[voucherSelect.selectedIndex];
         var voucherDiscount = parseFloat(selectedVoucher.getAttribute('data-discount')) || 0;
 
-        var cardname = document.getElementById('cname').value.trim();
-        var cardnumber = document.getElementById('cardNumber').value.trim();
-        var cvv = document.getElementById('cvv').value.trim();
-        var expdate = document.getElementById('expdate').value.trim();
-
-        if (voucherDiscount < total && (!cardname || !cardnumber || !cvv || !expdate)) {
+        if (voucherDiscount < total && (!document.getElementById('cname').value.trim() || !document.getElementById('cardNumber').value.trim() || !document.getElementById('cvv').value.trim() || !document.getElementById('expdate').value.trim())) {
             paymentError.style.display = 'block';
             event.preventDefault();
         } else {
             paymentError.style.display = 'none';
-        }
-
-        var cardnameInput = document.getElementById('cname');
-        var cardnumberInput = document.getElementById('cardNumber');
-        var cvvInput = document.getElementById('cvv');
-        var expdateInput = document.getElementById('expdate');
-
-        var cardnameError = document.getElementById('cardname-error');
-        var cardnumberError = document.getElementById('cardnumber-error');
-        var cvvError = document.getElementById('cvv-error');
-        var expdateError = document.getElementById('expdate-error');
-
-        // Check card name pattern
-        if (!cardnameInput.checkValidity()) {
-            cardnameError.textContent = 'Invalid card name';
-            event.preventDefault();
-        } else {
-            cardnameError.textContent = '';
-        }
-
-        // Check card number pattern
-        if (!cardnumberInput.checkValidity()) {
-            cardnumberError.textContent = 'Invalid card number';
-            event.preventDefault();
-        } else {
-            cardnumberError.textContent = '';
-        }
-
-        // Check CVV pattern
-        if (!cvvInput.checkValidity()) {
-            cvvError.textContent = 'Invalid CVV';
-            event.preventDefault();
-        } else {
-            cvvError.textContent = '';
-        }
-
-        // Check expiry date pattern
-        if (!expdateInput.checkValidity()) {
-            expdateError.textContent = 'Invalid expiry date';
-            event.preventDefault();
-        } else {
-            expdateError.textContent = '';
         }
     });
 });

@@ -8,36 +8,39 @@ if (isset($_SESSION["uid"])) {
     $address = $_POST['address'];
     $city = $_POST['city'];
     $state = $_POST['state'];
-    $zip= $_POST['zip'];
-    $cardname= $_POST['cardname'];
-    $cardnumber= $_POST['cardNumber'];
-    $expdate= $_POST['expdate'];
-    $cvv= $_POST['cvv'];
-    $user_id=$_SESSION["uid"];
-    $cardnumberstr=(string)$cardnumber;
-    $total_count=$_POST['total_count'];
+    $zip = $_POST['zip'];
+    $cardname = $_POST['cardname'];
+    $cardnumber = $_POST['cardNumber'];
+    $expdate = $_POST['expdate'];
+    $cvv = $_POST['cvv'];
+    $user_id = $_SESSION["uid"];
+    $cardnumberstr = (string)$cardnumber;
+    $total_count = $_POST['total_count'];
     $prod_total = $_POST['total_price'];
-    $voucher_dis = $_POST['voucher_dis']; 
+    $voucher_dis = $_POST['voucher_discount'];  
     
-    $sql0="SELECT order_id from `orders_info`";
-    $runquery=mysqli_query($con,$sql0);
+    $sql0 = "SELECT order_id from `orders_info`";
+    $runquery = mysqli_query($con, $sql0);
     if (mysqli_num_rows($runquery) == 0) {
         echo(mysqli_error($con));
-        $order_id=1;
+        $order_id = 1;
     } else if (mysqli_num_rows($runquery) > 0) {
-        $sql2="SELECT MAX(order_id) AS max_val from `orders_info`";
-        $runquery1=mysqli_query($con,$sql2);
+        $sql2 = "SELECT MAX(order_id) AS max_val from `orders_info`";
+        $runquery1 = mysqli_query($con, $sql2);
         $row = mysqli_fetch_array($runquery1);
-        $order_id= $row["max_val"];
-        $order_id=$order_id+1;
+        $order_id = $row["max_val"];
+        $order_id = $order_id + 1;
         echo(mysqli_error($con));
     }
+
+    // Update the total amount after applying voucher discount
+    $total_after_discount = $prod_total - $voucher_dis;
 
     $sql = "INSERT INTO `orders_info` 
     (`order_id`, `user_id`, `f_name`, `email`, `address`, `city`, `state`, `zip`, 
     `cardname`, `cardnumber`, `expdate`, `cvv`, `voucher_dis`, `prod_count`, `total_amt`) 
     VALUES ($order_id, '$user_id', '$f_name', '$email', '$address', '$city', '$state', '$zip', 
-    '$cardname', '$cardnumberstr', '$expdate', '$cvv', '$voucher_dis', '$total_count', '$prod_total')";
+    '$cardname', '$cardnumberstr', '$expdate', '$cvv', '$voucher_dis', '$total_count', '$total_after_discount')";
 
     if (mysqli_query($con, $sql)) {
         $i = 1;
