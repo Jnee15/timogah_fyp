@@ -238,7 +238,7 @@ CREATE TABLE `user_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 0);
+(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 9999);
 
 --
 -- Triggers `user_info`
@@ -275,7 +275,7 @@ CREATE TABLE `user_info_backup` (
 --
 
 INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 0);
+(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 9999);
 
 -- --------------------------------------------------------
 
