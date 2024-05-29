@@ -107,15 +107,15 @@ span.price {
     <div class="container-fluid">
         <div class="row-checkout">
         <?php
-		if (isset($_SESSION["uid"])) {
-			$user_id = $_SESSION['uid'];
-			$sql = "SELECT * FROM user_info WHERE user_id='$user_id'";
-			$query = mysqli_query($con, $sql);
-			$row = mysqli_fetch_array($query);
+        if (isset($_SESSION["uid"])) {
+            $user_id = $_SESSION['uid'];
+            $sql = "SELECT * FROM user_info WHERE user_id='$user_id'";
+            $query = mysqli_query($con, $sql);
+            $row = mysqli_fetch_array($query);
 
-			$sql_vouchers = "SELECT voucher_id, voucher_discount FROM user_vouchers WHERE user_id='$user_id'";
-			$voucher_query = mysqli_query($con, $sql_vouchers);
-			$vouchers = mysqli_fetch_all($voucher_query, MYSQLI_ASSOC);
+            $sql_vouchers = "SELECT voucher_id, voucher_discount FROM user_vouchers WHERE user_id='$user_id'";
+            $voucher_query = mysqli_query($con, $sql_vouchers);
+            $vouchers = mysqli_fetch_all($voucher_query, MYSQLI_ASSOC);
 
             echo '
             <div class="col-75">
@@ -157,35 +157,37 @@ span.price {
                           <i class="fa fa-cc-discover" style="color:orange;"></i>
                       </div>
                       <label for="cname">Name on Card</label>
-                      <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$" required>
+                      <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$">
                       <div class="form-group" id="card-number-field">
                           <label for="cardNumber">Card Number</label>
-                          <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                          <input type="text" class="form-control" id="cardNumber" name="cardNumber">
                       </div>
                       <label for="expdate">Exp Date</label>
-                      <input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22" required>
+                      <input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22">
                       <div class="row">
                           <div class="col-50">
                               <div class="form-group CVV">
                                   <label for="cvv">CVV</label>
-                                  <input type="text" class="form-control" name="cvv" id="cvv" required>
+                                  <input type="text" class="form-control" name="cvv" id="cvv">
                               </div>
                           </div>
                       </div>
                   </div>
                 </div>
 
-					<label for="vouchers">Apply Voucher</label>
-            <select id="vouchers" name="voucher_id" class="form-control">
-                <option value="0">Select Voucher</option>';
-                foreach ($vouchers as $voucher) {
-                    echo '<option value="'.$voucher['voucher_id'].'">RM'.$voucher['voucher_discount'].' Discount</option>';
-                }
-				echo '  </select>
+                    <label for="vouchers">Apply Voucher</label>
+                    <select id="vouchers" name="voucher_id" class="form-control">
+                        <option value="0">Select Voucher</option>';
+                        foreach ($vouchers as $voucher) {
+                            echo '<option value="'.$voucher['voucher_id'].'" data-discount="'.$voucher['voucher_discount'].'">RM'.$voucher['voucher_discount'].' Discount</option>';
+                        }
+                    echo '  </select>
 
-                  <label for="pay_with_voucher">
-                    <input type="checkbox" id="pay_with_voucher" name="pay_with_voucher"> Pay Only using voucher
-                  </label>';
+                    <label for="pay_with_voucher">
+                      <input type="checkbox" id="pay_with_voucher" name="pay_with_voucher"> Pay Only using voucher
+                    </label>
+                    <p id="voucher-error" style="color: red; display: none;">Voucher discount is not enough to cover the total amount.</p>
+                    <p id="payment-error" style="color: red; display: none;">Please fill in the payment details.</p>';
 
                     $i = 1;
                     $total = 0;
@@ -207,12 +209,12 @@ span.price {
                         $i++;
                     }
 
-                echo '
-                <input type="hidden" name="total_count" value="'.$total_count.'">
-                <input type="hidden" name="total_price" value="'.$total.'">
-                
-                <input type="submit" id="submit" value="Continue to checkout" class="checkout-btn">
-                </form>
+                    echo '
+                    <input type="hidden" name="total_count" value="'.$total_count.'">
+                    <input type="hidden" name="total_price" value="'.$total.'">
+                    
+                    <input type="submit" id="submit" value="Continue to checkout" class="checkout-btn">
+                    </form>
                 </div>
             </div>';
         } else {
@@ -287,23 +289,30 @@ include "footer.php";
 ?>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      var payWithVoucherCheckbox = document.getElementById('pay_with_voucher');
-      var paymentSection = document.getElementById('payment-section');
+document.addEventListener('DOMContentLoaded', function() {
+    var payWithVoucherCheckbox = document.getElementById('pay_with_voucher');
+    var paymentSection = document.getElementById('payment-section');
+    var voucherSelect = document.getElementById('vouchers');
+    var total = <?php echo $total; ?>;
+    var voucherError = document.getElementById('voucher-error');
+    var paymentError = document.getElementById('payment-error');
 
-      payWithVoucherCheckbox.addEventListener('change', function() {
-          if (this.checked) {
-              paymentSection.style.display = 'none';
-          } else {
-              paymentSection.style.display = 'block';
-          }
-      });
-  });
+    payWithVoucherCheckbox.addEventListener('change', function() {
+        var selectedVoucher = voucherSelect.options[voucherSelect.selectedIndex];
+        var voucherDiscount = parseFloat(selectedVoucher.getAttribute('data-discount')) || 0;
 
-	document.addEventListener('DOMContentLoaded', function() {
-        var voucherValue = parseInt(document.getElementById('vouchers').value);
-        var discount = voucherValue;
-        var total = <?php echo $total; ?>;
+        if (voucherDiscount < total) {
+            payWithVoucherCheckbox.checked = false;
+            voucherError.style.display = 'block';
+        } else {
+            voucherError.style.display = 'none';
+            paymentSection.style.display = this.checked ? 'none' : 'block';
+        }
+    });
+
+    voucherSelect.addEventListener('change', function() {
+        var selectedVoucher = voucherSelect.options[voucherSelect.selectedIndex];
+        var discount = parseFloat(selectedVoucher.getAttribute('data-discount')) || 0;
         var totalAfterDiscountElement = document.getElementById('total_after_discount');
         var discountElement = document.getElementById('discount');
 
@@ -311,18 +320,31 @@ include "footer.php";
 
         discountElement.textContent = 'Discount: RM -' + discount.toFixed(2);
         totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
+
+        if (payWithVoucherCheckbox.checked && discount < total) {
+            payWithVoucherCheckbox.checked = false;
+            voucherError.style.display = 'block';
+            paymentSection.style.display = 'block';
+        } else {
+            voucherError.style.display = 'none';
+        }
     });
-	
-document.getElementById('vouchers').addEventListener('change', function() {
-    var voucherValue = parseInt(this.value);
-    var discount = voucherValue;
-    var total = <?php echo $total; ?>;
-    var totalAfterDiscountElement = document.getElementById('total_after_discount');
-    var discountElement = document.getElementById('discount');
 
-    var totalAfterDiscount = total - discount;
+    document.getElementById('checkout_form').addEventListener('submit', function(event) {
+        var selectedVoucher = voucherSelect.options[voucherSelect.selectedIndex];
+        var voucherDiscount = parseFloat(selectedVoucher.getAttribute('data-discount')) || 0;
 
-    discountElement.textContent = 'Discount: RM -' + discount.toFixed(2);
-    totalAfterDiscountElement.textContent = 'RM' + totalAfterDiscount.toFixed(2);
+        var cardname = document.getElementById('cname').value.trim();
+        var cardnumber = document.getElementById('cardNumber').value.trim();
+        var cvv = document.getElementById('cvv').value.trim();
+        var expdate = document.getElementById('expdate').value.trim();
+
+        if (voucherDiscount < total && (!cardname || !cardnumber || !cvv || !expdate)) {
+            paymentError.style.display = 'block';
+            event.preventDefault();
+        } else {
+            paymentError.style.display = 'none';
+        }
+    });
 });
 </script>

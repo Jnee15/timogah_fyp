@@ -141,12 +141,13 @@ CREATE TABLE `orders_info` (
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `zip` int(10) NOT NULL,
-  `cardname` varchar(255) NOT NULL,
-  `cardnumber` varchar(20) NOT NULL,
-  `expdate` varchar(255) NOT NULL,
+  `cardname` varchar(255) DEFAULT NULL,
+  `cardnumber` varchar(20) DEFAULT NULL,
+  `expdate` varchar(255) DEFAULT NULL,
+  `cvv` int(3) DEFAULT NULL,
+  `voucher_dis` DECIMAL(10,2) DEFAULT NULL,
   `prod_count` int(15) DEFAULT NULL,
-  `total_amt` int(15) DEFAULT NULL,
-  `cvv` int(5) NOT NULL
+  `total_amt` DECIMAL(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -158,7 +159,7 @@ CREATE TABLE `order_products` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `qty` int(15) DEFAULT NULL,
-  `amt` int(15) DEFAULT NULL
+  `amt` DECIMAL(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
