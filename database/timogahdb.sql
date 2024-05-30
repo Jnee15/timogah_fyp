@@ -4,12 +4,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `timogahdb`
 --
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)  SELECT * FROM categories WHERE cat_id=cid$$
-
-DELIMITER ;
-
+USE timogahdb;
 -- --------------------------------------------------------
 
 --
