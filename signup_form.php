@@ -46,7 +46,7 @@ if(isset($_SESSION["uid"])){
                     <div class="col-md-8" id="signup_msg"></div>
 
                     <div class="wrap-input100 validate-input" data-validate="Name is required">
-                        <span class="label-input100">Full Name</span>
+                        <span class="label-input100">First Name</span>
                         <input class="input100" type="text" name="f_name" id="f_name" placeholder="First Name">
                         <span class="focus-input100"></span>
                     </div>
