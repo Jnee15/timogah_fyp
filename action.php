@@ -57,8 +57,8 @@ if(isset($_POST["store"])){
 		while($row = mysqli_fetch_array($run_query)){
             
 			$bid = $row["store_id"];
-			$brand_name = $row["store_title"];
-            $sql = "SELECT COUNT(*) AS count_items FROM products WHERE product_brand=$i";
+			$store_name = $row["store_title"];
+            $sql = "SELECT COUNT(*) AS count_items FROM products WHERE product_store=$i";
             $query = mysqli_query($con,$sql);
             $row = mysqli_fetch_array($query);
             $count=$row["count_items"];
@@ -66,11 +66,11 @@ if(isset($_POST["store"])){
 			echo "
 					
                     
-                    <div type='button' class='btn navbar-btn selectBrand' bid='$bid'>
+                    <div type='button' class='btn navbar-btn selectStore' bid='$bid'>
 									
 									<a href='#'>
 										<span ></span>
-										$brand_name
+										$store_name
 										<small >($count)</small>
 									</a>
 								</div>
@@ -117,7 +117,7 @@ if(isset($_POST["getProduct"])){
         while($row = mysqli_fetch_array($run_query)){
             $pro_id    = $row['product_id'];
             $pro_cat   = $row['product_cat'];
-            $pro_brand = $row['product_brand'];
+            $pro_store = $row['product_store'];
             $pro_title = $row['product_title'];
             $pro_price = $row['product_price'];
             $pro_image = $row['product_image'];
@@ -165,15 +165,15 @@ if(isset($_POST["getProduct"])){
 }
 
 
-if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isset($_POST["search"])){
+if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectStore"]) || isset($_POST["search"])){
 	
 	if(isset($_POST["get_seleted_Category"])){
 		$id = $_POST["cat_id"];
 		$sql = "SELECT * FROM products,categories WHERE product_cat = '$id' AND product_cat=cat_id " ;
         
-	}else if(isset($_POST["selectBrand"])){
+	}else if(isset($_POST["selectStore"])){
 		$id = $_POST["store_id"];
-		$sql = "SELECT * FROM products,categories WHERE product_brand = '$id' AND product_cat=cat_id";
+		$sql = "SELECT * FROM products,categories WHERE product_store = '$id' AND product_cat=cat_id";
 	}else {
         
 		$keyword = $_POST["keyword"];
@@ -185,7 +185,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 	while($row=mysqli_fetch_array($run_query)){
 			$pro_id    = $row['product_id'];
 			$pro_cat   = $row['product_cat'];
-			$pro_brand = $row['product_brand'];
+			$pro_store = $row['product_store'];
 			$pro_title = $row['product_title'];
 			$pro_price = $row['product_price'];
 			$pro_image = $row['product_image'];

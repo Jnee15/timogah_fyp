@@ -139,7 +139,7 @@ $(document).ready(function(){
 	/*	when page is load successfully then there is a list of stores when user click on store we will get store id and 
 		according to store id we will show products
 	*/
-	$("body").delegate(".selectBrand","click",function(event){
+	$("body").delegate(".selectStore","click",function(event){
 		event.preventDefault();
 		$("#get_product").html("<h3>Loading...</h3>");
 		var bid = $(this).attr('bid');
@@ -147,7 +147,7 @@ $(document).ready(function(){
 			$.ajax({
 			url		:	"action.php",
 			method	:	"POST",
-			data	:	{selectBrand:1,store_id:bid},
+			data	:	{selectStore:1,store_id:bid},
 			success	:	function(data){
 				$("#get_product").html(data);
 				if($("body").width() < 480){

@@ -166,7 +166,7 @@ CREATE TABLE `order_products` (
 CREATE TABLE `products` (
   `product_id` int(100) NOT NULL,
   `product_cat` int(100) NOT NULL,
-  `product_brand` int(100) NOT NULL,
+  `product_store` int(100) NOT NULL,
   `product_title` varchar(255) NOT NULL,
   `product_price` DECIMAL(10, 2) NOT NULL,
   `product_desc` text NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords`) VALUES
+INSERT INTO `products` (`product_id`, `product_cat`, `product_store`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords`) VALUES
 (1, 1, 1, 'Sawi Hijau', 2.60, 'Sawi Hijau, 200g', 'vegi1.png', 'Sawi Hijau '),
 (2, 1, 1, 'Kailan', 3.60, 'Kailan, 200g', 'vegi2.png', 'Kailan'),
 (3, 1, 1, 'Lengkuas/Galangal', 13.50, 'Lengkuas/Galangal, 1kg', 'vegi3.png', 'Lengkuas/Galangal'),
@@ -229,7 +229,8 @@ CREATE TABLE `user_info` (
   `city` varchar(11) NOT NULL,  
   `state` varchar(255) NOT NULL,
   `zip` int(10) NOT NULL,
-  `points` int(10) DEFAULT 0
+  `points` int(10) DEFAULT 0,
+  `last_spin` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
@@ -262,7 +263,8 @@ CREATE TABLE `user_info_backup` (
   `city` varchar(11) NOT NULL,  
   `state` varchar(255) NOT NULL,
   `zip` int(10) NOT NULL,
-  `points` int(10) DEFAULT 0
+  `points` int(10) DEFAULT 0,
+  `last_spin` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

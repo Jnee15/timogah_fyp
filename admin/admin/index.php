@@ -105,7 +105,7 @@ include "status.php";
                         while(list($store_id,$store_title)=mysqli_fetch_array($result))
                         {	
                             
-                            $sql = "SELECT COUNT(*) AS count_items FROM products WHERE product_brand=$i";
+                            $sql = "SELECT COUNT(*) AS count_items FROM products WHERE product_store=$i";
                             $query = mysqli_query($con,$sql);
                             $row = mysqli_fetch_array($query);
                             $count=$row["count_items"];

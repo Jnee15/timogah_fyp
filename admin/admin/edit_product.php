@@ -4,7 +4,7 @@ include("../../db.php");
 
 $product_id=$_REQUEST['product_id'];
 
-$result=mysqli_query($con,"SELECT `product_id`, `product_cat`, `product_brand`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords` from products  where product_id='$product_id'") or die ("query 1 incorrect.......");
+$result=mysqli_query($con,"SELECT `product_id`, `product_cat`, `product_store`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords` from products  where product_id='$product_id'") or die ("query 1 incorrect.......");
 
 list($product_id,$product_type,$store,$product_title,$price,$details,$pic_name,$tags)=mysqli_fetch_array($result);
 
@@ -31,13 +31,13 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 		$pic_name=time()."_".$picture_name;
         move_uploaded_file($picture_tmp_name,"../../product_images/".$pic_name);
         mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_title', 
-        `product_cat`= '$product_type',`product_brand`='$store',
+        `product_cat`= '$product_type',`product_store`='$store',
         `product_price`='$price',`product_desc`='$details',`product_image`='$pic_name',`product_keywords`='$tags' WHERE `product_id` = '$product_id'") or die("Query 2 is inncorrect..........");
     header("location: products_list.php");
    
 }else{
     mysqli_query($con,"UPDATE `products` SET `product_title` = '$product_title', 
-        `product_cat`= '$product_type',`product_brand`='$store',
+        `product_cat`= '$product_type',`product_store`='$store',
         `product_price`='$price',`product_desc`='$details',`product_image`='$pic_name',`product_keywords`='$tags' WHERE `product_id` = '$product_id'") or die("Query 2 is inncorrect..........");
     header("location: products_list.php");
 }
