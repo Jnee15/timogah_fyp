@@ -50,9 +50,15 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li class="nav-item <?php if ($current_page == 'add_user.php') { echo 'active'; } ?>">
                     <a class="nav-link" href="add_user.php">
                         <i class="material-icons">person</i>
-                        <p>Add Users</p>
+                        <p>Add User</p>
                     </a>
                 </li>
+                <li class="nav-item <?php if ($current_page == '../reg.php') { echo 'active'; } ?>">
+                    <a class="nav-link" href="../reg.php">
+                        <i class="material-icons">badge</i>
+                        <p>Add Admin</p>
+                    </a>
+                </li>                
                 <li class="nav-item <?php if ($current_page == 'add_products.php') { echo 'active'; } ?>">
                     <a class="nav-link" href="add_products.php">
                         <i class="material-icons">add</i>

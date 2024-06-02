@@ -13,6 +13,14 @@
     <!-- Main css -->
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
+<style>
+div.back {
+  padding-top: 20px;
+  padding-inline: 50px;
+}
+</style>
+
 <body>
 
     <div class="main" style="padding-top: 90px;">
@@ -22,10 +30,12 @@
         <!-- Sing in  Form -->
         <section class="sign-in">
             <div class="container">
+                <div class="back">
+                    <a href="../index.php" style="text-decoration: none; font-size:30px; color:black;">&#11013;</a>
+                </div>
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="./assets/images/signin-image.jpg" alt="sing up image"></figure>
-                        <a href="../index.php" class="signin-image-link">Back To Home</a>
                     </div>
 
                     <div class="signin-form">

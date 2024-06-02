@@ -34,7 +34,7 @@ if ($result) {
 <body>
     <div class="page-wrapper">
         <div class="spinwheel-container">
-            <a href="index.php" style="text-align: left; vertical-align: top;">Back</a>
+            <a href="index.php" style="text-align: left; vertical-align: top; text-decoration: none; font-size:30px;">&#11013;</a>
             <div id="final-value">
                 <p>Points Earn: <?php echo $_SESSION['points']; ?></p>
             </div>
