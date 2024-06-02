@@ -280,7 +280,7 @@ $(document).ready(function(){
 		})
 	})
 
-	$("body").delegate("#wishlist","click",function(event){
+	$("body").delegate("#clickwishlist","click",function(event){
 		var pid = $(this).attr("pid");
 		
 		event.preventDefault();
@@ -320,9 +320,6 @@ $(document).ready(function(){
 			url : "action.php",
 			method : "POST",
 			data : {count_Wishlist_item:1},
-			success : function(data){
-				$("#wishlist-badge").html(data);
-			}
 		})
 	}
 	//Count user cart items funtion end

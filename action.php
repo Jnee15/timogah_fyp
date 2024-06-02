@@ -151,7 +151,7 @@ if(isset($_POST["getProduct"])){
                                 }
                             echo "</div>
                             <div class='product-btns'>
-                                <button pid='$pro_id' id='wishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
+                                <button pid='$pro_id' id='clickwishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
                             </div>
                         </div>
                         <div class='add-to-cart'>
@@ -225,7 +225,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectStore"]) || isse
 										}
 										echo "</div>
 										<div class='product-btns'>
-											<button pid='$pro_id' id='wishlist' class='add-to-wishlist' tabindex='0'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
+											<button pid='$pro_id' id='clickwishlist' class='add-to-wishlist' tabindex='0'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
 										</div>
 									</div>
 									<div class='add-to-cart'>
@@ -524,7 +524,7 @@ if (isset($_POST["Common"])) {
 							</div>							
 							</td>
 							<td>
-								<a href="#" id="wishlist" pid="'.$product_id.'" class="btn btn-warning">Move to Wishlist <i class="fa fa-angle-right"></i> </a>
+								<a href="#" id="clickwishlist" pid="'.$product_id.'" class="btn btn-warning">Move to Wishlist <i class="fa fa-angle-right"></i> </a>
 							</td>
 						</tr>
 					

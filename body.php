@@ -110,7 +110,7 @@
 										}
 										echo "</div>
 										<div class='product-btns'>
-											<button pid='$pro_id' id='wishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
+											<button pid='$pro_id' id='clickwishlist' class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
 										</div>
 									</div>
 									<div class='add-to-cart'>
