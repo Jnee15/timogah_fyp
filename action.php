@@ -621,9 +621,8 @@ if (isset($_POST["wishListCommon"])) {
 	               <table id="wishlist" class="table table-hover table-condensed" id="">
     				<thead>
 						<tr>
-							<th style="width:50%">Product</th>
+							<th style="width:65%">Product</th>
 							<th style="width:10%">Price(RM)</th>
-							<th style="width:7%" class="text-center">Subtotal(RM)</th>
 							<th style="width:10%"></th>
 						</tr>
 					</thead>
@@ -662,12 +661,9 @@ if (isset($_POST["wishListCommon"])) {
 				            <input type="hidden" name="" value="'.$wishlist_item_id.'"/>
 							<td data-th="Price"><input type="text" class="form-control price" value="'.$product_price.'" readonly="readonly"></td>
 							
-							<td data-th="Subtotal" class="text-center"><input type="text" class="form-control total" value="'.$product_price.'" readonly="readonly"></td>
 							<td class="actions" data-th="">
 							<div class="btn-group">
-								
 								<a href="#" class="btn btn-danger btn-sm wishlist-remove" remove_id="'.$product_id.'"><i class="fa fa-trash-o"></i></a>	
-									
 							</div>							
 							</td>
 							<td class="actions" data-th="">
@@ -684,9 +680,7 @@ if (isset($_POST["wishListCommon"])) {
 					
 					<tr>
 						<td colspan="2" class="hidden-xs"></td>
-						<td class="hidden-xs text-center"><b class="net_total" ></b></td>
 						</tfoot>
-				
 						</table></div></div>
 							
 							';
