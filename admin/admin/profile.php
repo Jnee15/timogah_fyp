@@ -40,7 +40,7 @@ include "topheader.php";
    <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title">Edit Profile</h4>
@@ -49,7 +49,7 @@ include "topheader.php";
                 <div class="card-body">
                   <form method="post" action="profile.php">
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-6">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">
                             <?php  if (isset($_SESSION['admin_name'])) : ?><?php echo $_SESSION['admin_name']; ?>
@@ -59,30 +59,30 @@ include "topheader.php";
                           <input type="text" class="form-control" disabled="">
                         </div>
                       </div>
-                     <div class="col-md-4">
+                     <div class="col-md-6">
                         <div class="form-group bmd-form-group">
-                          <label class="bmd-label-floating">enter old password</label>
+                          <label class="bmd-label-floating">Old Password</label>
                           <input type="text" class="form-control" name="old_pass" id="npwd">
                         </div>
                       </div>
                     
                   
-                      <div class="col-md-4">
+                      <div class="col-md-12">
                         <div class="form-group bmd-form-group">
-                          <label class="bmd-label-floating">Change Password Here</label>
+                          <label class="bmd-label-floating">New Password </label>
                           <input type="text" class="form-control" name="new_pass" id="npwd">
                         </div>
                       </div>
                      
-                      <div class="col-md-4">
+                      <div class="col-md-12">
                         <div class="form-group bmd-form-group">
-                          <label class="bmd-label-floating">confirm Password Here</label>
+                          <label class="bmd-label-floating">Confirm New Password</label>
                           <input type="text" class="form-control" name="re_pass" id="npwd">
                         </div>
                       </div>
-               
-                    <button class="btn btn-primary pull-right" type="submit" name="re_password">Update Profile</button>
-                   
+                    <div class="col-md-12">
+                      <button class="btn btn-primary pull-right" type="submit" name="re_password">Update Profile</button>
+                    </div>
                     <div class="clearfix"></div>
                   </form>
                 </div>

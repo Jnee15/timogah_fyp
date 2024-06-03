@@ -49,32 +49,38 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </li>
                 <li class="nav-item <?php if ($current_page == 'add_user.php') { echo 'active'; } ?>">
                     <a class="nav-link" href="add_user.php">
-                        <i class="material-icons">person</i>
+                        <i class="material-icons">group_add</i>
                         <p>Add User</p>
                     </a>
                 </li>
-                <li class="nav-item <?php if ($current_page == '../reg.php') { echo 'active'; } ?>">
-                    <a class="nav-link" href="../reg.php">
-                        <i class="material-icons">badge</i>
-                        <p>Add Admin</p>
+                <li class="nav-item <?php if ($current_page == 'manageuser.php') { echo 'active'; } ?>">
+                    <a class="nav-link" href="manageuser.php">
+                        <i class="material-icons">manage_accounts</i>
+                        <p>Manage Users</p>
                     </a>
-                </li>                
+                </li>
                 <li class="nav-item <?php if ($current_page == 'add_products.php') { echo 'active'; } ?>">
                     <a class="nav-link" href="add_products.php">
                         <i class="material-icons">add</i>
                         <p>Add Products</p>
                     </a>
-                </li>
+                </li>             
                 <li class="nav-item <?php if ($current_page == 'products_list.php') { echo 'active'; } ?>">
                     <a class="nav-link" href="products_list.php">
                         <i class="material-icons">list</i>
                         <p>Product List</p>
                     </a>
                 </li>
-                <li class="nav-item <?php if ($current_page == 'manageuser.php') { echo 'active'; } ?>">
-                    <a class="nav-link" href="manageuser.php">
-                        <i class="material-icons">person</i>
-                        <p>Manage Users</p>
+                <li class="nav-item <?php if ($current_page == 'add_cat.php') { echo 'active'; } ?>">
+                    <a class="nav-link" href="add_cat.php">
+                        <i class="material-icons">category</i>
+                        <p>Add Category</p>
+                    </a>
+                </li>
+                <li class="nav-item <?php if ($current_page == 'add_store.php') { echo 'active'; } ?>">
+                    <a class="nav-link" href="add_store.php">
+                        <i class="material-icons">add_business</i>
+                        <p>Add Store</p>
                     </a>
                 </li>
                 <li class="nav-item <?php if ($current_page == 'profile.php') { echo 'active'; } ?>">

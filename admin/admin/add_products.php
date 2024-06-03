@@ -39,6 +39,12 @@ mysqli_close($con);
 include "sidenav.php";
 include "topheader.php";
 ?>
+<style>
+  #product_type, #store {
+    color: #fff;
+    background: #00003f;
+  }
+</style>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
@@ -81,9 +87,6 @@ include "topheader.php";
                       </div>
                     </div>
                   </div>
-                 
-                  
-                
               </div>
               
             </div>
@@ -91,7 +94,7 @@ include "topheader.php";
           <div class="col-md-5">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h5 class="title">Categories</h5>
+                <h5 class="title">Product Category</h5>
               </div>
               <div class="card-body">
                 
@@ -100,7 +103,7 @@ include "topheader.php";
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Product Category</label>
-                              <select id="product_type" name="product_type" required class="form-control" style="background-color: black;">
+                              <select id="product_type" name="product_type" required class="form-control">
                                 <?php
                                 while ($row = mysqli_fetch_assoc($categoriesResult)) {
                                     echo "<option value='" . $row['cat_id'] . "'>" . $row['cat_title'] . "</option>";
@@ -113,7 +116,7 @@ include "topheader.php";
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">Product Store</label>
-                          <select id="store" name="store" required class="form-control" style="background-color: black;">
+                          <select id="store" name="store" required class="form-control" >
                             <option value="" disabled selected>Select...</option>
                               <?php
                               while ($row = mysqli_fetch_assoc($storesResult)) {
@@ -127,21 +130,18 @@ include "topheader.php";
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Product Keywords</label>
-                        <input type="text" id="tags" name="tags" required class="form-control" style="background-color: black;">
+                        <input type="text" id="tags" name="tags" required class="form-control" >
                       </div>
                     </div>
                   </div>
-                
               </div>
-              <div class="card-footer">
-                  <button type="submit" id="btn_save" name="btn_save" required class="btn btn-fill btn-primary">Update Product</button>
-              </div>
+              <div class="col-md-12">
+                <button type="submit" id="btn_save" name="btn_save" required class="btn btn-primary pull-right">Update Product</button>
             </div>
           </div>
-          
-        </div>
+      </div>
          </form>
-          
+      </div>
         </div>
       </div>
       <?php
