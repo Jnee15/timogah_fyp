@@ -193,9 +193,6 @@ if(isset($_SESSION["uid"])){
                 zipError.textContent = '';
             }
         }
-
-
-
     });
     </script>
 </body>
