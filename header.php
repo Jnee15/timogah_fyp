@@ -110,13 +110,12 @@ session_start();
                         <option value="1">Handcraft</option>
                     </select>
                     <input class="input" id="search" type="text" placeholder="Search here">
-                    <button id="search_btn" class="search-btn">Search</button>
+                    <button id="search-btn" class="search-btn">Search</button>
                 </form>
             </div>
             <div class="header-ctn">
                 <!-- Spinwheel -->
                 <div class="spinwheelIcon">
-                    <script src="script.js"></script>
                     <a href="spinwheel.php">
                         <img src="img/spinwheel.png" />
                         <div>Spinwheel</div>
