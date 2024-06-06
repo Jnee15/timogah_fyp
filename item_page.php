@@ -7,9 +7,7 @@ if(isset($_POST["categoryhome"])){
 	
 	echo "
 		
-				<!-- responsive-nav -->
-				<div id='responsive-nav'>
-					<!-- NAV -->
+				<div>
 					<ul class='main-nav nav navbar-nav'>
 						<li class='active'><a href='index.php'>Home</a></li>";
 						$category_query = "SELECT * FROM categories";
@@ -25,9 +23,7 @@ if(isset($_POST["categoryhome"])){
 						}
                     
 				 echo"</ul>
-					<!-- /NAV -->
 				</div>
-				<!-- /responsive-nav -->
                
 			";
 
