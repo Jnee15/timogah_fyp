@@ -9,7 +9,7 @@ session_start();
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" sizes="76x76" href="img/timogahlogo.png">
+        <link rel="icon" sizes="76x76" alt="Timogah Icon" href="img/timogahlogo.png">
 		<title>Timogah</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"/>
@@ -96,7 +96,7 @@ session_start();
             <!-- LOGO -->
             <div class="header-logo">
 				<a class="logo" href="index.php">
-					<img src="img/timogah.png" />
+					<img alt="Timogah Logo" src="img/timogah.png" />
 				</a>            
 			</div>
             <!-- /LOGO -->

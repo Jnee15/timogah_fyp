@@ -467,18 +467,18 @@ $(document).ready(function(){
 	/*
 		net_total function is used to calcuate total amount of cart item
 	*/
-	function net_total(){
+	function net_total() {
 		var net_total = 0;
-		$('.qty').each(function(){
+		$('.qty').each(function () {
 			var row = $(this).parent().parent();
-			var price  = row.find('.price').val();
-			var total = price * $(this).val()-0;
-			row.find('.total').val(total);
-		})
-		$('.total').each(function(){
-			net_total += ($(this).val()-0);
-		})
-		$('.net_total').html("Total : RM " +net_total);
+			var price = parseFloat(row.find('.price').val());
+			var total = price * parseFloat($(this).val());
+			row.find('.total').val(total.toFixed(2));
+		});
+		$('.total').each(function () {
+			net_total += parseFloat($(this).val());
+		});
+		$('.net_total').html("Total : RM " + net_total.toFixed(2)); 
 	}
 
 	//remove product from cart

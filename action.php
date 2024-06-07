@@ -450,12 +450,12 @@ if (isset($_POST["Common"])) {
                         </td>
                         <input type="hidden" name="product_id[]" value="'.$row['product_id'].'"/>
                         <input type="hidden" name="cart_item_id[]" value="'.$row['id'].'"/>
-                        <td data-th="Price"><input type="text" class="form-control price" value="'.$product_price.'" readonly="readonly"></td>
+                        <td data-th="Price"><input type="text" placeholder="" class="form-control price" value="'.$product_price.'" readonly="readonly"/></td>
                         <td data-th="Quantity">
-                            <input type="number" class="form-control qty" value="'.$row['qty'].'" min="1" data-id="'.$row['product_id'].'">
+                            <input type="number" class="form-control placeholder="" qty" value="'.$row['qty'].'" min="1" data-id="'.$row['product_id'].'"/>
                             <div class="qty-notice text-danger"></div>
                         </td>
-                        <td data-th="Subtotal" class="text-center"><input type="text" class="form-control total" value="'.$subtotal.'" readonly="readonly"></td>
+                        <td data-th="Subtotal" class="text-center"><input type="text" placeholder="" class="form-control total" value="'.$subtotal.'" readonly="readonly"/></td>
                         <td class="actions" data-th="">
                             <div class="btn-group">
                                 <a href="#" class="btn btn-danger btn-sm remove" remove_id="'.$row['product_id'].'"><i class="fa fa-trash-o"></i></a>
@@ -483,8 +483,8 @@ if (isset($_POST["Common"])) {
             } else if (isset($_SESSION["uid"])) {
                 echo '</form>
                     <form action="checkout.php" method="post">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="upload" value="1">';
+                        <input type="hidden" name="cmd" value="_cart"/>
+                        <input type="hidden" name="upload" value="1"/>';
 
                 $x = 0;
                 $sql = "SELECT a.product_id, a.product_title, a.product_price, a.product_image, b.id, b.qty, b.subtotal 
@@ -494,15 +494,15 @@ if (isset($_POST["Common"])) {
                 while ($row = mysqli_fetch_array($query)) {
                     $x++;
                     $product_price = number_format($row['product_price'], 2, '.', '');
-                    echo '<input type="hidden" name="total_count" value="'.$x.'">
-                        <input type="hidden" name="item_name_'.$x.'" value="'.$row['product_title'].'">
+                    echo '<input type="hidden" name="total_count" value="'.$x.'"/>
+                        <input type="hidden" name="item_name_'.$x.'" value="'.$row['product_title'].'"/>
                         <input type="hidden" name="item_number_'.$x.'" value="'.$x.'">
-                        <input type="hidden" name="amount_'.$x.'" value="'.$product_price.'">
-                        <input type="hidden" name="quantity_'.$x.'" value="'.$row['qty'].'">';
+                        <input type="hidden" name="amount_'.$x.'" value="'.$product_price.'"/>
+                        <input type="hidden" name="quantity_'.$x.'" value="'.$row['qty'].'"/>';
                 }
                 
                 echo '<input type="hidden" name="custom" value="'.$_SESSION['uid'].'"/>
-                    <input type="submit" id="submit" name="login_user_with_product" class="btn btn-success" value="Ready to Checkout">
+                    <input type="submit" id="submit" name="login_user_with_product" class="btn btn-success" value="Ready to Checkout"/>
                     </form></td>
                     </tr>
                     </tfoot>
@@ -570,7 +570,7 @@ if (isset($_POST["wishListCommon"])) {
 							</td>
                             <input type="hidden" name="product_id[]" value="'.$product_id.'"/>
 				            <input type="hidden" name="" value="'.$wishlist_item_id.'"/>
-							<td data-th="Price"><input type="text" class="form-control price" value="'.$product_price.'" readonly="readonly"></td>
+							<td data-th="Price"><input type="text" placeholder="" class="form-control price" value="'.$product_price.'" readonly="readonly"/></td>
 							
 							<td class="actions" data-th="">
 							<div class="btn-group">
