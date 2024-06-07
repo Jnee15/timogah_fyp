@@ -1,7 +1,6 @@
 (function($) {
 	"use strict"
 
-	// Products Slick
 	$('.products-slick').each(function() {
 		var $this = $(this),
 				$nav = $this.attr('data-nav');
@@ -33,7 +32,6 @@
 		});
 	});
 
-	// Products Widget Slick
 	$('.products-widget-slick').each(function() {
 		var $this = $(this),
 				$nav = $this.attr('data-nav');
@@ -48,9 +46,6 @@
 		});
 	});
 
-	/////////////////////////////////////////
-
-	// Product Main img Slick
 	$('#product-main-img').slick({
     infinite: true,
     speed: 300,
@@ -60,7 +55,6 @@
     asNavFor: '#product-imgs',
   });
 
-	// Product imgs Slick
   $('#product-imgs').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -81,7 +75,6 @@
     ]
   });
 
-	// Product img zoom
 	var zoomMainProduct = document.getElementById('product-main-img');
 	if (zoomMainProduct) {
 		$('#product-main-img .product-preview').zoom();

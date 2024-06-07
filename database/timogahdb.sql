@@ -56,7 +56,8 @@ CREATE TABLE `cart` (
   `p_id` int(10) NOT NULL,
   `ip_add` varchar(250) NOT NULL,
   `user_id` int(10) DEFAULT NULL,
-  `qty` int(10) NOT NULL
+  `qty` int(10) NOT NULL,
+  `subtotal` DECIMAL(10, 2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

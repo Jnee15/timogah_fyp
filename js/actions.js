@@ -161,7 +161,7 @@ $(document).ready(function(){
 		given string and with the help of sql query we will match user given string to our database keywords column then matched product 
 		we will show 
 	*/
-	$("body").delegate("#search_btn","click",function(event){
+	$("body").delegate("#search-btn","click",function(event){
 		$("#get_product").html("<h3>Loading...</h3>");
 		var keyword = $("#search").val();
 		if(keyword != ""){
@@ -348,14 +348,18 @@ $(document).ready(function(){
 		('.total').each() this is loop funtion repeat for class .total and in every repetation we will perform sum operation of class .total value 
 		and then show the result into class .net_total
 	*/
-	$("body").delegate(".qty", "keyup", function (event) {
-		event.preventDefault();
-		var row = $(this).parent().parent();
+	function updateSubtotal() {
+		var row = $(this).closest("tr");
 		var price = parseFloat(row.find('.price').val());
 		var qty = parseFloat(row.find('.qty').val());
+		var cart_item_id = row.find('input[name="cart_item_id[]"]').val();
 
 		if (isNaN(qty) || qty < 1) {
 			qty = 1;
+			row.find('.qty').val(qty);
+			row.find('.qty-notice').text('Quantity must be a positive number. Defaulting to 1.');
+		} else {
+			row.find('.qty-notice').text('');
 		}
 
 		var total = price * qty;
@@ -365,10 +369,24 @@ $(document).ready(function(){
 		$('.total').each(function () {
 			net_total += parseFloat($(this).val());
 		});
-		$('.net_total').html("Total : RM " + net_total.toFixed(2)); 
-	});
-	//Change Quantity end here 
+		$('.net_total').html("Total : RM " + net_total.toFixed(2));
 
+		// AJAX call to update quantity and subtotal in the database
+		$.ajax({
+			url: 'update_cart.php',
+			method: 'POST',
+			data: {
+				cart_item_id: cart_item_id,
+				qty: qty,
+				total: total
+			},
+			success: function (response) {
+				console.log(response);
+			}
+		});
+	}
+
+	$("body").on("keyup change", ".qty", updateSubtotal);
 	/*
 		whenever user click on .remove class we will take product id of that row 
 		and send it to action.php to perform product removal operation
