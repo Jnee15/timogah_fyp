@@ -55,7 +55,7 @@ include "header.php";
                                         <div class="prodTotal cartSection"><p>'.$qty.'</p></div>
                                         <td>
                                         <div class="prodTotal cartSection">
-                                        <p>RM '.$product_price.'</p>
+                                        <p>RM '.$amt.'</p>
                                         </div>
                                         </td>
                                     </div>
@@ -87,7 +87,7 @@ include "header.php";
                                                   <div class="prodTotal cartSection"><p>'.$qty.'</p></div>
                                                   <td>
                                                   <div class="prodTotal cartSection">
-                                                  <p>RM '.$product_price.'</p>
+                                                  <p>RM '.$amt.'</p>
                                                   </div>
                                                   </td>
                                               </div>
