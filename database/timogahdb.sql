@@ -98,7 +98,8 @@ CREATE TABLE `orders_info` (
   `cvv` int(3) DEFAULT NULL,
   `voucher_dis` DECIMAL(10,2) DEFAULT NULL,
   `prod_count` int(15) DEFAULT NULL,
-  `total_amt` DECIMAL(10,2) DEFAULT NULL
+  `total_amt` DECIMAL(10,2) DEFAULT NULL,
+  `net_total` DECIMAL(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

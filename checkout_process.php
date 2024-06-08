@@ -34,12 +34,16 @@ if (isset($_SESSION["uid"])) {
         $total_after_discount = 0;
     }
 
+    // Calculate net_total (total before discount)
+    $net_total = $prod_total;
+
     // Insert order info
     $sql = "INSERT INTO `orders_info` 
-    (`order_id`, `user_id`, `f_name`, `email`, `address`, `city`, `state`, `zip`, 
-    `cardname`, `cardnumber`, `expdate`, `cvv`, `voucher_dis`, `prod_count`, `total_amt`) 
-    VALUES ($order_id, '$user_id', '$f_name', '$email', '$address', '$city', '$state', '$zip', 
-    '$cardname', '$cardnumber', '$expdate', '$cvv', '$voucher_dis', '$total_count', '$total_after_discount')";
+            (`order_id`, `user_id`, `f_name`, `email`, `address`, `city`, `state`, `zip`, 
+            `cardname`, `cardnumber`, `expdate`, `cvv`, `voucher_dis`, `prod_count`, `total_amt`, `net_total`) 
+            VALUES ($order_id, '$user_id', '$f_name', '$email', '$address', '$city', '$state', '$zip', 
+            '$cardname', '$cardnumber', '$expdate', '$cvv', '$voucher_dis', '$total_count', '$total_after_discount', '$net_total')";
+
 
     if (mysqli_query($con, $sql)) {
         $i = 1;
