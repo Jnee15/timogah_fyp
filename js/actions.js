@@ -473,12 +473,12 @@ $(document).ready(function(){
 			var row = $(this).parent().parent();
 			var price = parseFloat(row.find('.price').val());
 			var total = price * parseFloat($(this).val());
-			row.find('.total').val(total.toFixed(2)); // Format total to two decimal places
+			row.find('.total').val(total.toFixed(2)); 
 		});
 		$('.total').each(function () {
 			net_total += parseFloat($(this).val());
 		});
-		$('.net_total').html("Total : RM " + net_total.toFixed(2)); // Format net_total to two decimal places
+		$('.net_total').html("Total : RM " + net_total.toFixed(2)); 
 	}
 
 	//remove product from cart
