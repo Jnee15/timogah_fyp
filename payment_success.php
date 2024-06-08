@@ -7,7 +7,6 @@ if(!isset($_SESSION["uid"])){
 
 if (isset($_GET["st"])) {
 
-    # code...
     $p_st = $_GET["st"];
     $cm_user_id = $_GET["cm"];
     

@@ -79,37 +79,6 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 (3, 'Handicrafts');
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `email_info`
---
-
-CREATE TABLE `email_info` (
-  `email_id` int(100) NOT NULL,
-  `email` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `email_info`
---
-
-INSERT INTO `email_info` (`email_id`, `email`) VALUES
-(1, 'admin@gmail.com');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `logs`
---
-
-CREATE TABLE `logs` (
-  `id` int(11) NOT NULL,
-  `user_id` varchar(50) NOT NULL,
-  `action` varchar(50) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 --
 -- Table structure for table `orders_info`
 --
@@ -298,18 +267,6 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`cat_id`);
 
 --
--- Indexes for table `email_info`
---
-ALTER TABLE `email_info`
-  ADD PRIMARY KEY (`email_id`);
-
---
--- Indexes for table `logs`
---
-ALTER TABLE `logs`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `orders_info`
 --
 ALTER TABLE `orders_info`
@@ -382,17 +339,6 @@ ALTER TABLE `cart`
 ALTER TABLE `categories`
   MODIFY `cat_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
---
--- AUTO_INCREMENT for table `email_info`
---
-ALTER TABLE `email_info`
-  MODIFY `email_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `logs`
---
-ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `orders_info`
 --
