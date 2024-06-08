@@ -372,11 +372,8 @@ if(isset($_POST["addToCart"])){
 			}
 			
 		}
-		
-		
-		
-		
 	}
+
 //Count User cart item
 if (isset($_POST["count_item"])) {
 	//When user is logged in then we will count number of item in cart by using user session id
