@@ -110,20 +110,6 @@ CREATE TABLE `logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `trx_id` varchar(255) NOT NULL,
-  `p_status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Table structure for table `orders_info`
 --
@@ -324,12 +310,6 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
-
---
 -- Indexes for table `orders_info`
 --
 ALTER TABLE `orders_info`
@@ -413,13 +393,6 @@ ALTER TABLE `email_info`
 --
 ALTER TABLE `logs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `orders_info`
 --
