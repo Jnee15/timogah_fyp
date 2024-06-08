@@ -44,8 +44,8 @@ include "header.php";
                                       </div></div>
                                       <div class="subtotal cf">
                                           <ul>
-                                              <li class="totalRow"><span class="label">Voucher Discount</span><span class="value">RM '.$prev_voucher_dis.'</span></li>
                                               <li class="totalRow"><span class="label">Subtotal</span><span class="value">RM '.$prev_net_total.'</span></li>
+                                              <li class="totalRow"><span class="label">Voucher Discount</span><span class="value">- RM '.$prev_voucher_dis.'</span></li>
                                               <li class="totalRow final"><span class="label">Total</span><span class="value">RM'.$prev_total_amt.'</span></li>
                                           </ul>
                                       </div>
@@ -81,8 +81,8 @@ include "header.php";
                               </div></div>
                               <div class="subtotal cf">
                                   <ul>
-                                      <li class="totalRow"><span class="label">Voucher Discount</span><span class="value">RM '.$prev_voucher_dis.'</span></li>
                                       <li class="totalRow"><span class="label">Subtotal</span><span class="value">RM '.$prev_net_total.'</span></li>
+                                      <li class="totalRow"><span class="label">Voucher Discount</span><span class="value">- RM '.$prev_voucher_dis.'</span></li>
                                       <li class="totalRow final"><span class="label">Total</span><span class="value">RM'.$prev_total_amt.'</span></li>
                                   </ul>
                               </div>';
