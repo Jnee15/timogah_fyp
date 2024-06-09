@@ -1,6 +1,15 @@
 <?php
 session_start();
+include 'db.php';
 
+$sql = "SELECT * FROM categories";
+$result = mysqli_query($con, $sql);
+
+$options = ""; // Initialize an empty string to store the options
+
+while($row = mysqli_fetch_assoc($result)) {
+    $options .= "<option value='".$row['cat_id']."'>".$row['cat_title']."</option>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -104,15 +113,15 @@ session_start();
             <!-- SEARCH BAR -->
             <div class="header-search">
                 <form onsubmit="return false">
-                    <select class="input-select">
+                    <select class="input-select" id="category_select" name="cat_id">
                         <option value="0">All Categories</option>
-                        <option value="1">Fresh Vegetables</option>
-                        <option value="1">Handcraft</option>
+                        <?php echo $options; ?>
                     </select>
                     <input class="input" id="search" type="text" placeholder="Search here">
                     <button id="search-btn" class="search-btn">Search</button>
                 </form>
             </div>
+            <!-- SEARCH BAR -->
             <div class="header-ctn">
                 <!-- Spinwheel -->
                 <div class="spinwheelIcon">
