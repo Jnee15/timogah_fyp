@@ -8,16 +8,27 @@ if (!isset($_SESSION['uid'])) {
 }
 
 $user_id = $_SESSION['uid'];
-$sql = "SELECT points FROM user_info WHERE user_id = $user_id";
+$sql = "SELECT points, last_spin FROM user_info WHERE user_id = $user_id";
 $result = mysqli_query($con, $sql);
 
 if ($result) {
     $row = mysqli_fetch_assoc($result);
     $current_points = $row['points'];
     $_SESSION['points'] = $current_points;
+    $last_spin = $row['last_spin'];
 } else {
     echo "Error fetching user points: " . mysqli_error($con);
     exit();
+}
+
+// Check if user has already spun today
+$can_spin = true;
+if ($last_spin) {
+    $last_spin_date = new DateTime($last_spin);
+    $current_date = new DateTime();
+    if ($last_spin_date->format('Y-m-d') == $current_date->format('Y-m-d')) {
+        $can_spin = false;
+    }
 }
 ?>
 
@@ -45,7 +56,7 @@ if ($result) {
             <br>
             <div class="container">
                 <canvas id="wheel"></canvas>
-                <button id="spin-button">Spin</button>
+                <button id="spin-button" <?php echo !$can_spin ? 'disabled' : ''; ?>>Spin</button>
                 <img src="img/arrow.png" alt="spinner arrow" />
             </div>
         </div>
@@ -55,37 +66,37 @@ if ($result) {
                 <p>Voucher Store</p>
             </div>
             <br>
-                <div class="container">
-                    <div class="redeem-section">
-                        <h3>Redeem Voucher</h3>
-                        <form id="redeem-form">
-                            <select id="voucher-select" name="voucher">
-                                <option value="100">RM1.00 Discount (100 points)</option>
-                                <option value="200">RM2.00 Discount (200 points)</option>
-                                <option value="300">RM3.00 Discount (300 points)</option>
-                            </select>
-                            <button type="button" id="redeem-button">Redeem</button>
-                        </form>
-                        <div id="redeem-message"></div>
-                        <br>
-                    </div>
-                    <h3>Your Vouchers</h3>
-                        <ul id="voucher-list">
-                            <?php
-                            $sql_user_vouchers = "SELECT voucher_discount FROM user_vouchers WHERE user_id = $user_id";
-                            $result_user_vouchers = mysqli_query($con, $sql_user_vouchers);
-                            if ($result_user_vouchers && mysqli_num_rows($result_user_vouchers) > 0) {
-                                while ($row_user_vouchers = mysqli_fetch_assoc($result_user_vouchers)) {
-                                    $voucher_discount = $row_user_vouchers['voucher_discount'];
-                                    echo "<li>RM" . ($voucher_discount) . " Discount</li>";
-                                }
-                            } else {
-                                echo "<li>No vouchers redeemed yet.</li>";
-                            }
-                            ?>
-                        </ul>
-                    <a id="back-to-home" href="index.php">Continue Shopping</a>
+            <div class="container">
+                <div class="redeem-section">
+                    <h3>Redeem Voucher</h3>
+                    <form id="redeem-form">
+                        <select id="voucher-select" name="voucher">
+                            <option value="100">RM1.00 Discount (100 points)</option>
+                            <option value="200">RM2.00 Discount (200 points)</option>
+                            <option value="300">RM3.00 Discount (300 points)</option>
+                        </select>
+                        <button type="button" id="redeem-button">Redeem</button>
+                    </form>
+                    <div id="redeem-message"></div>
+                    <br>
                 </div>
+                <h3>Your Vouchers</h3>
+                <ul id="voucher-list">
+                    <?php
+                    $sql_user_vouchers = "SELECT voucher_discount FROM user_vouchers WHERE user_id = $user_id";
+                    $result_user_vouchers = mysqli_query($con, $sql_user_vouchers);
+                    if ($result_user_vouchers && mysqli_num_rows($result_user_vouchers) > 0) {
+                        while ($row_user_vouchers = mysqli_fetch_assoc($result_user_vouchers)) {
+                            $voucher_discount = $row_user_vouchers['voucher_discount'];
+                            echo "<li>RM" . ($voucher_discount) . " Discount</li>";
+                        }
+                    } else {
+                        echo "<li>No vouchers redeemed yet.</li>";
+                    }
+                    ?>
+                </ul>
+                <a id="back-to-home" href="index.php">Continue Shopping</a>
+            </div>
         </div>
 
     </div>
@@ -93,5 +104,13 @@ if ($result) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
     <script src="js/spinwheel.js"></script>
+    <script>
+        // Disable the spin button if the user can't spin today
+        const canSpin = <?php echo $can_spin ? 'true' : 'false'; ?>;
+        if (!canSpin) {
+            document.getElementById('spin-button').disabled = true;
+            document.getElementById('result').innerHTML = '<p>You have already spun the wheel today. Come back tomorrow!</p>';
+        }
+    </script>
 </body>
 </html>

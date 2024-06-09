@@ -64,27 +64,26 @@ const valueGenerator = (angleValue) => {
             totalPoints += pointsEarned;
             finalValue.innerHTML = `<p>Points: ${totalPoints}</p>`;
             result.innerHTML = `<p>You earned ${pointsEarned} points. Total points: ${totalPoints}</p>`; // Clear previous result and add new one
-            updatePoints(totalPoints); // Send the total points to the server
-            spinButton.disabled = false;
+            updatePoints(pointsEarned); // Send the points earned to the server
             break;
         }
     }
 };
 
-const updatePoints = (points) => {
-    fetch('update_points.php', {
+const updatePoints = (pointsEarned) => {
+    fetch('update_spin_time.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ points: points })
+        body: JSON.stringify({ points: pointsEarned })
     })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log('Points updated successfully.');
+                console.log('Points and spin time updated successfully.');
             } else {
-                console.error('Failed to update points.');
+                console.error('Failed to update points and spin time:', data.error);
             }
         })
         .catch(error => {
