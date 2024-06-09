@@ -63,7 +63,10 @@ const valueGenerator = (angleValue) => {
             const pointsEarned = i.value;
             totalPoints += pointsEarned;
             finalValue.innerHTML = `<p>Points: ${totalPoints}</p>`;
-            result.innerHTML = `<p>You earned ${pointsEarned} points. Total points: ${totalPoints}</p>`; // Clear previous result and add new one
+            result.innerHTML = `
+                <p>You earned ${pointsEarned} points. Total points: ${totalPoints}.</p>
+                <p>You have already spun the wheel today. Come back tomorrow!</p>
+            `;
             updatePoints(pointsEarned); // Send the points earned to the server
             break;
         }
