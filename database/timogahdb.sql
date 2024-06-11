@@ -193,44 +193,6 @@ CREATE TABLE `user_info` (
 INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
 (1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 9999);
 
---
--- Triggers `user_info`
---
-DELIMITER $$
-CREATE TRIGGER `after_user_info_insert` AFTER INSERT ON `user_info` FOR EACH ROW BEGIN 
-INSERT INTO user_info_backup VALUES(new.user_id,new.first_name,new.last_name,new.email,new.password,new.mobile,new.address,new.city,new.state,new.zip,new.points);
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_info_backup`
---
-
-CREATE TABLE `user_info_backup` (
-  `user_id` int(10) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(300) NOT NULL,
-  `password` varchar(300) NOT NULL,
-  `mobile` varchar(10) NOT NULL,
-  `address` varchar(300) NOT NULL,
-  `city` varchar(11) NOT NULL,  
-  `state` varchar(255) NOT NULL,
-  `zip` int(10) NOT NULL,
-  `points` int(10) DEFAULT 0,
-  `last_spin` DATETIME DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_info_backup`
---
-
-INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 9999);
-
 -- --------------------------------------------------------
 
 --
@@ -301,12 +263,6 @@ ALTER TABLE `user_info`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `user_info_backup`
---
-ALTER TABLE `user_info_backup`
-  ADD PRIMARY KEY (`user_id`);
-
---
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
@@ -368,12 +324,6 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `user_info_backup`
---
-ALTER TABLE `user_info_backup`
   MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
