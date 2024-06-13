@@ -43,13 +43,15 @@ include "topheader.php";
                     </tr></thead>
                     <tbody>
                       <?php
-                      $query = "SELECT * FROM orders_info";
+                      $query = "SELECT oi.*, ui.mobile FROM orders_info oi
+                                JOIN user_info ui ON oi.user_id = ui.user_id";
                       $run = mysqli_query($con,$query);
                       if(mysqli_num_rows($run) > 0){
 
                        while($row = mysqli_fetch_array($run)){
                          $order_id = $row['order_id'];
                          $email = $row['email'];
+                         $mobile = $row['mobile']; 
                          $address = $row['address'];
                          $total_amount = $row['total_amt'];
                          $user_id = $row['user_id'];
@@ -70,7 +72,7 @@ include "topheader.php";
                            ?>
                               <?php echo $product_title ?> | <?php echo $store_title ?><br>
                             <?php }?></td>
-                            <td><?php echo $email ?></td>
+                            <td><?php echo $mobile ?> | <?php echo $email ?></td> 
                             <td><?php echo $address ?></td>
                             <td><?php echo $total_amount ?></td>
                             <td><?php echo $qty ?></td>
