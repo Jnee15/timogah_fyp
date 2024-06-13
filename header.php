@@ -93,7 +93,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     }
 
     .userdropdown a {
-        color: black;
+        color: white;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
