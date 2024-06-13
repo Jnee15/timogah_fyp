@@ -144,12 +144,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <!-- SEARCH BAR -->
             <?php if ($current_page == 'products.php'): ?>
             <div class="header-search">
-                <form onsubmit="return false">
-                    <select class="input-select" id="category_select" name="cat_id">
-                        <option value="0">All Categories</option>
-                        <?php echo $options; ?>
-                    </select>
-                    <input class="input" id="search" type="text" placeholder="Search here">
+                <form id="search-form" onsubmit="return false">
+                    <input class="input" id="search" type="text" placeholder=" Search here ...">
                     <button id="search-btn" class="search-btn">Search</button>
                 </form>
             </div>

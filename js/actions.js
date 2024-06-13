@@ -161,23 +161,31 @@ $(document).ready(function(){
 		given string and with the help of sql query we will match user given string to our database keywords column then matched product 
 		we will show 
 	*/
-	$("body").delegate("#search-btn","click",function(event){
-		$("#get_product").html("<h3>Loading...</h3>");
-		var keyword = $("#search").val();
-		if(keyword != ""){
+	$(document).ready(function () {
+		$("body").delegate("#search-btn", "click", function (event) {
+			event.preventDefault();
+			$("#get_product").html("<h3>Loading...</h3>");
+			var keyword = $("#search").val();
+
 			$.ajax({
-			url		:	"action.php",
-			method	:	"POST",
-			data	:	{search:1,keyword:keyword},
-			success	:	function(data){ 
-				$("#get_product").html(data);
-				if($("body").width() < 480){
-					$("body").scrollTop(683);
+				url: "action.php",
+				method: "POST",
+				data: {
+					search: 1,
+					keyword: keyword
+				},
+				success: function (data) {
+					$("#get_product").html(data);
+					if ($("body").width() < 480) {
+						$("body").scrollTop(683);
+					}
+				},
+				error: function (xhr, status, error) {
+					console.error(xhr.responseText);
 				}
-			}
-		})
-		}
-	})
+			});
+		});
+	});
 	//end
 
 
