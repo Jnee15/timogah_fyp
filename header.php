@@ -10,6 +10,9 @@ $options = ""; // Initialize an empty string to store the options
 while($row = mysqli_fetch_assoc($result)) {
     $options .= "<option value='".$row['cat_id']."'>".$row['cat_title']."</option>";
 }
+
+// Determine the current page
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -68,9 +71,37 @@ while($row = mysqli_fetch_assoc($result)) {
         content:"\f054"
     }
         
+ .dropdownn {
+        position: relative;
+        display: inline-block;
+        width: 150px; 
+    }
 
-       
-        
+    .dropdownn-toggle {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .userdropdown {
+        display: none;
+        position: absolute;
+        min-width: 150px; 
+        z-index: 1;
+    }
+
+    .userdropdown a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdownn:hover .userdropdown {
+        display: block;
+    }
         </style>
 
     </head>
@@ -111,6 +142,7 @@ while($row = mysqli_fetch_assoc($result)) {
             <!-- /LOGO -->
 
             <!-- SEARCH BAR -->
+            <?php if ($current_page == 'products.php'): ?>
             <div class="header-search">
                 <form onsubmit="return false">
                     <select class="input-select" id="category_select" name="cat_id">
@@ -121,7 +153,9 @@ while($row = mysqli_fetch_assoc($result)) {
                     <button id="search-btn" class="search-btn">Search</button>
                 </form>
             </div>
-            <!-- SEARCH BAR -->
+            <?php endif; ?>
+            <!-- /SEARCH BAR -->
+
             <div class="header-ctn">
                 <!-- Spinwheel -->
                 <div class="spinwheelIcon">
@@ -131,46 +165,44 @@ while($row = mysqli_fetch_assoc($result)) {
                     </a>
                 </div>
                 <!-- ACCOUNT -->
-<div>
-    <?php
-        include "db.php";
-        if(isset($_SESSION["uid"])){
-            $sql = "SELECT first_name FROM user_info WHERE user_id='$_SESSION[uid]'";
-            $query = mysqli_query($con,$sql);
-            $row=mysqli_fetch_array($query);
-            
-            echo '
-            <div class="dropdownn">
-                <a href="#" class="dropdownn-toggle" data-toggle="modal" data-target="#myModal">
-                    <i class="fa fa-user-o"></i> HI '.$row["first_name"].'
-                </a>
-                <div class="userdropdown">
-                    <a href="myorders.php"><i class="fa fa-shopping-basket" aria-hidden="true"></i>My Order</a>
-                    <a href="edit_profile.php"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</a>
-                    <a href="logout.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Log out</a>
-                </div>
-            </div>';
+                <div>
+                    <?php
+                    include "db.php";
+                    if(isset($_SESSION["uid"])){
+                        $sql = "SELECT first_name FROM user_info WHERE user_id='$_SESSION[uid]'";
+                        $query = mysqli_query($con,$sql);
+                        $row=mysqli_fetch_array($query);
 
-        }else{ 
-            echo '
-            <div class="dropdownn">
-                <a href="#" class="dropdownn-toggle" data-toggle="modal" data-target="#myModal">
-                    <div class="icon-container">
-                        <i class="fa fa-user"></i>
-                        <span>My Account</span>
-                    </div>
-                </a>
-                <div class="userdropdown">
-                    <a href="signin_form.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
-                    <a href="signup_form.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
-                    <a href="admin/login.php"><i class="fa fa-user" aria-hidden="true"></i>Admin</a>
-                </div>
-            </div>';
-            
-        }
-		?>
-	</div>
+                        echo '
+                        <div class="dropdownn">
+                            <a href="#" class="dropdownn-toggle" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-user-o"></i> HI '.$row["first_name"].'
+                            </a>
+                            <div class="userdropdown">
+                                <a href="myorders.php"><i class="fa fa-shopping-basket" aria-hidden="true"></i>My Order</a>
+                                <a href="edit_profile.php"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</a>
+                                <a href="logout.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Log out</a>
+                            </div>
+                        </div>';
 
+                    } else {
+                        echo '
+                        <div class="dropdownn">
+                            <a href="#" class="dropdownn-toggle" data-toggle="modal" data-target="#myModal">
+                                <div class="icon-container">
+                                    <i class="fa fa-user"></i>
+                                    <span>My Account</span>
+                                </div>
+                            </a>
+                            <div class="userdropdown">
+                                <a href="signin_form.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+                                <a href="signup_form.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
+                                <a href="admin/login.php"><i class="fa fa-user" aria-hidden="true"></i>Admin</a>
+                            </div>
+                        </div>';
+                    }
+                    ?>
+                </div>
                 <!-- Cart -->
                 <div class="dropdown">
                     <a href="cart.php" style="width:100%;">
@@ -231,4 +263,3 @@ while($row = mysqli_fetch_assoc($result)) {
 
                         </div>
                       </div>
-		
