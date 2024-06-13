@@ -170,10 +170,9 @@ if(isset($_POST["search"])){
 
     // Construct the SQL query based on the keyword input
     if (!empty($keyword)) {
-        // Search by keyword only
+        // Search by keyword 
         $sql = "SELECT * FROM products WHERE product_keywords LIKE '%$keyword%'";
     } else {
-        // No search criteria provided
         $sql = "SELECT * FROM products";
     }
 
