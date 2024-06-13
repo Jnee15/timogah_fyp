@@ -7,10 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Login</title>
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
-    <!-- Main css -->
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
@@ -19,15 +15,15 @@ div.back {
   padding-top: 20px;
   padding-inline: 50px;
 }
+.error p {
+    color: red;
+}
 </style>
 
 <body>
 
     <div class="main" style="padding-top: 90px;">
 
-        <!-- Sign up form -->
-      
-        <!-- Sing in  Form -->
         <section class="sign-in">
             <div class="container">
                 <div class="back">
@@ -35,13 +31,13 @@ div.back {
                 </div>
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="./assets/images/signin-image.jpg" alt="sing up image"></figure>
+                        <figure><img src="./assets/images/signin-image.jpg" alt="sign up image"></figure>
                     </div>
 
                     <div class="signin-form">
                         <h2 class="form-title">ADMIN LOGIN</h2>
                         <form  class="register-form" id="login-form" action="login.php" method="post">
-                            <div class="alert alert-danger"><h4 id="e_msg"><?php include('./server/errors.php'); ?></h4></div>
+                            <?php include('./server/errors.php'); ?>
                             <div class="form-group">
                                 <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="admin_username" id="your_name" placeholder="Admin Email"/>
@@ -63,6 +59,5 @@ div.back {
 
     </div>
 
-    <script src="js/main.js"></script>
 </body>
 </html>
