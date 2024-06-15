@@ -165,71 +165,76 @@ if(isset($_POST["getProduct"])){
 }
 
 
-if(isset($_POST["search"])){
-    $keyword = isset($_POST["keyword"]) ? $_POST["keyword"] : '';
-
-    // Construct the SQL query based on the keyword input
-    if (!empty($keyword)) {
-        // Search by keyword 
-        $sql = "SELECT * FROM products WHERE product_keywords LIKE '%$keyword%'";
-    } else {
-        $sql = "SELECT * FROM products";
-    }
-
-    $run_query = mysqli_query($con, $sql);
-    if (!$run_query) {
-        echo "Error: " . mysqli_error($con);
-        exit();
-    }
-
-    while ($row = mysqli_fetch_array($run_query)) {
-        $pro_id = $row['product_id'];
-        $pro_cat = $row['product_cat'];
-        $pro_store = $row['product_store'];
-        $pro_title = $row['product_title'];
-        $pro_price = $row['product_price'];
-        $pro_image = $row['product_image'];
+if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectStore"]) || isset($_POST["search"])){
+	
+	if(isset($_POST["get_seleted_Category"])){
+		$id = $_POST["cat_id"];
+		$sql = "SELECT * FROM products,categories WHERE product_cat = '$id' AND product_cat=cat_id " ;
         
-        echo "
-                <div class='col-md-4 col-xs-6'>
-                        <a href='product.php?p=$pro_id'><div class='product'>
-                            <div class='product-img'>
-                                <img src='product_images/$pro_image' style='max-height: 170px;' alt=''>
-                            </div></a>
-                            <div class='product-body'>
-                                <h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-                                <h4 class='product-price header-cart-item-info'>RM$pro_price</h4>
-                                <div class='product-rating'>";
-                                $rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating FROM reviews WHERE product_id='$pro_id'";
-                                $run_review_query = mysqli_query($con, $rating_query);
-                                $review_row = mysqli_fetch_array($run_review_query);
-                                if ($review_row > 0) {
-                                    $avg_count = $review_row["avg_rating"];
-                                    $i = 1;
-                                    while ($i <= round($avg_count)) {
-                                        $i++;
-                                        echo '<i class="fa fa-star"></i>';
-                                    }
-                                    $i = 1;
-                                    while ($i <= 5 - round($avg_count)) {
-                                        $i++;
-                                        echo '<i class="fa fa-star-o empty"></i>';
-                                    }
-                                }
-                                echo "</div>
-                                <div class='product-btns'>
-                                    <button pid='$pro_id' id='clickwishlist' class='add-to-wishlist' tabindex='0'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
-                                </div>
-                            </div>
-                            <div class='add-to-cart'>
-                                <button pid='$pro_id' id='product' href='#' tabindex='0' class='add-to-cart-btn'><i class='fa fa-shopping-cart'></i> add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-        ";
-    }
-}
-
+	}else if(isset($_POST["selectStore"])){
+		$id = $_POST["store_id"];
+		$sql = "SELECT * FROM products,categories WHERE product_store = '$id' AND product_cat=cat_id";
+	}else {
+        
+		$keyword = $_POST["keyword"];
+		$sql = "SELECT * FROM products,categories WHERE product_cat=cat_id AND product_keywords LIKE '%$keyword%'";
+       
+	}
+	
+	$run_query = mysqli_query($con,$sql);
+	while($row=mysqli_fetch_array($run_query)){
+			$pro_id    = $row['product_id'];
+			$pro_cat   = $row['product_cat'];
+			$pro_store = $row['product_store'];
+			$pro_title = $row['product_title'];
+			$pro_price = $row['product_price'];
+			$pro_image = $row['product_image'];
+            $cat_name = $row["cat_title"];
+			
+			echo "
+					<div class='col-md-4 col-xs-6'>
+							<a href='product.php?p=$pro_id'><div class='product'>
+								<div class='product-img'>
+									<img  src='product_images/$pro_image'  style='max-height: 170px;' alt=''>
+								</div></a>
+								<div class='product-body'>
+									<p class='product-category'>$cat_name</p>
+									<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
+									<h4 class='product-price header-cart-item-info'>RM$pro_price</h4>
+									<div class='product-rating'>";
+									$rating_query = "SELECT ROUND(AVG(rating),1) AS avg_rating  FROM reviews WHERE product_id='$pro_id '";
+									$run_review_query = mysqli_query($con,$rating_query);
+									$review_row = mysqli_fetch_array($run_review_query);
+									if($review_row > 0){
+										$avg_count=$review_row["avg_rating"];
+											$i=1;
+											while($i <= round($avg_count)){
+												$i++;
+												echo'
+												<i class="fa fa-star"></i>';
+											}
+											$i=1;
+											while($i <= 5-round($avg_count)){
+												$i++;
+												echo'
+												<i class="fa fa-star-o empty"></i>';
+											}
+										
+									}
+									echo "</div>
+									<div class='product-btns'>
+										<button pid='$pro_id' id='clickwishlist' class='add-to-wishlist' tabindex='0'><i class='fa fa-heart-o'></i><span class='tooltipp'>add to wishlist</span></button>
+									</div>
+								</div>
+								<div class='add-to-cart'>
+									<button pid='$pro_id' id='product' href='#' tabindex='0' class='add-to-cart-btn'><i class='fa fa-shopping-cart'></i> add to cart</button>
+								</div>
+							</div>
+						</div>
+			";
+		}
+	}
+    
 // Existing addToCart functionality
 if(isset($_POST["addToCart"])){
     $p_id = $_POST["proId"];
