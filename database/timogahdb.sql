@@ -79,51 +79,6 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 (3, 'Handicrafts');
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `email_info`
---
-
-CREATE TABLE `email_info` (
-  `email_id` int(100) NOT NULL,
-  `email` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `email_info`
---
-
-INSERT INTO `email_info` (`email_id`, `email`) VALUES
-(1, 'admin@gmail.com');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `logs`
---
-
-CREATE TABLE `logs` (
-  `id` int(11) NOT NULL,
-  `user_id` varchar(50) NOT NULL,
-  `action` varchar(50) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `trx_id` varchar(255) NOT NULL,
-  `p_status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Table structure for table `orders_info`
 --
@@ -143,7 +98,8 @@ CREATE TABLE `orders_info` (
   `cvv` int(3) DEFAULT NULL,
   `voucher_dis` DECIMAL(10,2) DEFAULT NULL,
   `prod_count` int(15) DEFAULT NULL,
-  `total_amt` DECIMAL(10,2) DEFAULT NULL
+  `total_amt` DECIMAL(10,2) DEFAULT NULL,
+  `net_total` DECIMAL(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -237,44 +193,6 @@ CREATE TABLE `user_info` (
 INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
 (1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 9999);
 
---
--- Triggers `user_info`
---
-DELIMITER $$
-CREATE TRIGGER `after_user_info_insert` AFTER INSERT ON `user_info` FOR EACH ROW BEGIN 
-INSERT INTO user_info_backup VALUES(new.user_id,new.first_name,new.last_name,new.email,new.password,new.mobile,new.address,new.city,new.state,new.zip,new.points);
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_info_backup`
---
-
-CREATE TABLE `user_info_backup` (
-  `user_id` int(10) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(300) NOT NULL,
-  `password` varchar(300) NOT NULL,
-  `mobile` varchar(10) NOT NULL,
-  `address` varchar(300) NOT NULL,
-  `city` varchar(11) NOT NULL,  
-  `state` varchar(255) NOT NULL,
-  `zip` int(10) NOT NULL,
-  `points` int(10) DEFAULT 0,
-  `last_spin` DATETIME DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_info_backup`
---
-
-INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address`, `city`,`state`,`zip`,`points`) VALUES
-(1, 'jn', 't', 'jnt@gmail.com', 'Jnt1234#', '0123456789', 'taman abc', 'Samarahan','Sarawak','90100', 9999);
-
 -- --------------------------------------------------------
 
 --
@@ -312,24 +230,6 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`cat_id`);
 
 --
--- Indexes for table `email_info`
---
-ALTER TABLE `email_info`
-  ADD PRIMARY KEY (`email_id`);
-
---
--- Indexes for table `logs`
---
-ALTER TABLE `logs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
-
---
 -- Indexes for table `orders_info`
 --
 ALTER TABLE `orders_info`
@@ -360,12 +260,6 @@ ALTER TABLE `reviews`
 -- Indexes for table `user_info`
 --
 ALTER TABLE `user_info`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- Indexes for table `user_info_backup`
---
-ALTER TABLE `user_info_backup`
   ADD PRIMARY KEY (`user_id`);
 
 --
@@ -403,24 +297,6 @@ ALTER TABLE `categories`
   MODIFY `cat_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `email_info`
---
-ALTER TABLE `email_info`
-  MODIFY `email_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `logs`
---
-ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `orders_info`
 --
 ALTER TABLE `orders_info`
@@ -448,12 +324,6 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `user_info_backup`
---
-ALTER TABLE `user_info_backup`
   MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --

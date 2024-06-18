@@ -91,7 +91,6 @@ span.price {
   color: grey;
 }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
 @media (max-width: 800px) {
   .row-checkout {
     flex-direction: column-reverse;
@@ -125,9 +124,9 @@ span.price {
                     <div class="col-50">
                         <h3>Billing Address</h3>
                         <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                        <input type="text" id="fname" class="form-control" name="firstname" pattern="^[a-zA-Z ]+$" value="'.$row["first_name"].' '.$row["last_name"].'">
+                        <input type="text" id="fname" class="form-control" name="firstname" pattern="^[a-zA-Z ]+$" value="'.$row["first_name"].' '.$row["last_name"].'" required>
                         <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="text" id="email" name="email" class="form-control" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$" value="'.$row["email"].'" required>
+                        <input type="text" id="email" name="email" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" value="'.$row["email"].'" required>
                         <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
                         <input type="text" id="adr" name="address" class="form-control" value="'.$row["address"].'" required>
                         <label for="city"><i class="fa fa-institution"></i> City</label>
@@ -140,7 +139,7 @@ span.price {
                         </div>
                         <div class="col-50">
                             <label for="zip">Zip</label>
-                            <input type="text" id="zip" name="zip" class="form-control" value="'.$row["zip"].'" pattern="^[0-9]{5}+$" required>
+                            <input type="text" id="zip" name="zip" class="form-control" value="'.$row["zip"].'" pattern="^[0-9]{5}$" required>
                         </div>
                         </div>
 
@@ -157,18 +156,20 @@ span.price {
                           <i class="fa fa-cc-discover" style="color:orange;"></i>
                       </div>
                       <label for="cname">Name on Card</label>
-                          <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$">                      
-                          <div class="form-group" id="card-number-field">
+                      <input type="text" id="cname" name="cardname" class="form-control">                      
+                      <div class="form-group" id="card-number-field">
                           <label for="cardNumber">Card Number</label>
-                          <input type="text" class="form-control" id="cardNumber" name="cardNumber" pattern="^[0-9]{16}$">
+                          <input type="text" class="form-control" id="cardNumber" name="cardNumber" pattern="^[0-9]{16}$" maxlength="16" minlength="16">
                       </div>
+                      
                       <label for="expdate">Exp Date</label>
                       <input type="text" id="expdate" name="expdate" class="form-control" pattern="^(0[1-9]|1[0-2])\/\d{2}$" placeholder="MM/YY">
+                      
                       <div class="row">
                           <div class="col-50">
                               <div class="form-group CVV">
                                   <label for="cvv">CVV</label>
-                                  <input type="text" class="form-control" name="cvv" id="cvv" pattern="^[0-9]{3,4}$">
+                                  <input type="text" class="form-control" name="cvv" id="cvv" pattern="^[0-9]{3,4}$" maxlength="4" minlength="3">
                               </div>
                           </div>
                       </div>
@@ -352,4 +353,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+ document.getElementById('cname').addEventListener('input', function (e) {
+        if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
+            e.target.setCustomValidity('Name on card must contain only alphabetic characters and spaces.');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+
+  document.getElementById('cardNumber').addEventListener('input', function (e) {
+        if (!/^\d{0,16}$/.test(e.target.value)) {
+            e.target.setCustomValidity('Card number must be 16 digits.');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+
+    document.getElementById('cvv').addEventListener('input', function (e) {
+        if (!/^\d{3,4}$/.test(e.target.value)) {
+            e.target.setCustomValidity('CVV must be 3 or 4 digits.');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+
+    document.getElementById('expdate').addEventListener('input', function (e) {
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(e.target.value)) {
+            e.target.setCustomValidity('Expiry date must be in MM/YY format.');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
 </script>

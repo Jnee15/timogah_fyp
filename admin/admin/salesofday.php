@@ -1,16 +1,8 @@
-
-    <?php
+<?php
 session_start();
 include("./includes/db.php");
 
 error_reporting(0);
-if(isset($_GET['action']) && $_GET['action']!="" && $_GET['action']=='delete')
-{
-$order_id=$_GET['order_id'];
-
-/*this is delet query*/
-mysqli_query($con,"delete from orders where order_id='$order_id'")or die("delete query is incorrect...");
-} 
 
 ///pagination
 $page=$_GET['page'];
@@ -40,18 +32,19 @@ include "topheader.php";
                 <div class="table-responsive ps">
                   <table class="table table-hover tablesorter " id="">
                     <thead class=" text-primary">
-                      <tr><th>order_id</th><th>Products</th><th>Contact | Email</th><th>Address</th><th>amount</th><th>Quantity</th>
+                      <tr><th>order_id</th><th>Products | Store</th><th>Contact | Email</th><th>Address</th><th>Amount</th><th>Quantity</th>
                     </tr></thead>
                     <tbody>
                       <?php
-                      $query = "SELECT * FROM orders_info";
+                      $query = "SELECT oi.*, ui.mobile FROM orders_info oi
+                                JOIN user_info ui ON oi.user_id = ui.user_id";
                       $run = mysqli_query($con,$query);
                       if(mysqli_num_rows($run) > 0){
-
 
                        while($row = mysqli_fetch_array($run)){
                          $order_id = $row['order_id'];
                          $email = $row['email'];
+                         $mobile = $row['mobile']; 
                          $address = $row['address'];
                          $total_amount = $row['total_amt'];
                          $user_id = $row['user_id'];
@@ -61,20 +54,18 @@ include "topheader.php";
                           <tr>
                             <td><?php echo $order_id ?></td>
                            <td> <?php
-                            $query1 = "SELECT * FROM order_products where order_id = $order_id";
+                            $query1 = "SELECT op.*, p.product_title, s.store_title FROM order_products op
+                                       JOIN products p ON op.product_id = p.product_id
+                                       JOIN stores s ON p.product_store = s.store_id
+                                       WHERE op.order_id = $order_id";
                             $run1 = mysqli_query($con,$query1); 
                               while($row1 = mysqli_fetch_array($run1)){
-                               $product_id = $row1['product_id'];
-
-                               $query2 = "SELECT * FROM products where product_id = $product_id";
-                               $run2 = mysqli_query($con,$query2);
-
-                               while($row2 = mysqli_fetch_array($run2)){
-                               $product_title = $row2['product_title'];
+                               $product_title = $row1['product_title'];
+                               $store_title = $row1['store_title'];
                            ?>
-                              <?php echo $product_title ?><br>
-                            <?php }}?></td>
-                            <td><?php echo $email ?></td>
+                              <?php echo $product_title ?> | <?php echo $store_title ?><br>
+                            <?php }?></td>
+                            <td><?php echo $mobile ?> | <?php echo $email ?></td> 
                             <td><?php echo $address ?></td>
                             <td><?php echo $total_amount ?></td>
                             <td><?php echo $qty ?></td>

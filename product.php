@@ -1,6 +1,32 @@
 <?php
-include "header.php";
+include 'header.php';
+
+// Check if the user is logged in
+if (isset($_SESSION['uid'])) {
+    $user_id = $_SESSION['uid'];
+    $product_id = $_GET['p'];
+
+    // SQL query to check if the user has bought the product
+    $sql = "SELECT COUNT(*) AS count 
+            FROM order_products op 
+            JOIN orders_info oi ON op.order_id = oi.order_id 
+            WHERE oi.user_id = '$user_id' AND op.product_id = '$product_id'";
+
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    // Check if the count is greater than 0, meaning the user bought the product
+    if ($row['count'] > 0) {
+        $has_purchased = true;
+    } else {
+        $has_purchased = false;
+    }
+} else {
+    $has_purchased = false; // User is not logged in
+}
 ?>
+
+
 		<!-- /BREADCRUMB -->
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
@@ -186,32 +212,35 @@ include "header.php";
 										<div id="review_action" pid='<?php echo"$product_id"; ?>'></div>
 										
 										<!-- Review Form -->
-										<div class="col-md-3 mainn">
-											<div id="review-form">
-												<form class="review-form" onsubmit="return false" id="review_form" required>
-													<input class="input" type="text" name="name" placeholder="Your Name" required>
-													<input class="input" type="email" name="email" placeholder="Your Email" required>
-													<?php 
-														$product_id = $_GET['p'];
-														echo'<input  name="product_id" value="'.$product_id.'" hidden required>'
-													?>
-													
-													<textarea class="input" name="review" placeholder="Your Review"></textarea>
-													<div class="input-rating">
-														<span>Your Rating: </span>
-														<div class="stars">
-															<input id="star5" name="rating" value="5" type="radio" required><label for="star5"></label>
-															<input id="star4" name="rating" value="4" type="radio" required><label for="star4"></label>
-															<input id="star3" name="rating" value="3" type="radio" required><label for="star3"></label>
-															<input id="star2" name="rating" value="2" type="radio" required><label for="star2"></label>
-															<input id="star1" name="rating" value="1" type="radio" required><label for="star1"></label>
-														</div>
-													</div>
-													<button class="primary-btn" name="review_submit">Submit</button>
-												</form>
-											</div>
-										</div>
-										<!-- /Review Form -->
+<div class="col-md-3 mainn">
+    <div id="review-form">
+        <?php if ($has_purchased) : ?>
+            <form class="review-form" onsubmit="return false" id="review_form" required>
+                <input class="input" type="text" name="name" placeholder="Your Name" required>
+                <input class="input" type="email" name="email" placeholder="Your Email" required>
+                <?php 
+                    $product_id = $_GET['p'];
+                    echo '<input name="product_id" value="'.$product_id.'" hidden required>';
+                ?>
+                <textarea class="input" name="review" placeholder="Your Review"></textarea>
+                <div class="input-rating">
+                    <span>Your Rating: </span>
+                    <div class="stars">
+                        <input id="star5" name="rating" value="5" type="radio" required><label for="star5"></label>
+                        <input id="star4" name="rating" value="4" type="radio" required><label for="star4"></label>
+                        <input id="star3" name="rating" value="3" type="radio" required><label for="star3"></label>
+                        <input id="star2" name="rating" value="2" type="radio" required><label for="star2"></label>
+                        <input id="star1" name="rating" value="1" type="radio" required><label for="star1"></label>
+                    </div>
+                </div>
+                <button class="primary-btn" name="review_submit">Submit</button>
+            </form>
+        <?php else : ?>
+            <p>You need to purchase this product to leave a review.</p>
+        <?php endif; ?>
+    </div>
+</div>
+<!-- /Review Form -->
 									</div>
 								</div>
 								<!-- /tab  -->

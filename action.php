@@ -234,7 +234,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectStore"]) || isse
 			";
 		}
 	}
-
+    
 // Existing addToCart functionality
 if(isset($_POST["addToCart"])){
     $p_id = $_POST["proId"];
@@ -267,7 +267,7 @@ if(isset($_POST["addToCart"])){
             if(mysqli_query($con, $sql)){
                 $sql = "DELETE FROM wishlist WHERE p_id = '$p_id' AND user_id = '$_SESSION[uid]'";
                 if(mysqli_query($con, $sql)){
-                    echo "<div class='alert alert-danger'>
+                    echo "<div class='alert alert-success'>
                             <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                             <b>Product is added to cart</b>
                         </div>";
@@ -299,7 +299,7 @@ if(isset($_POST["addToCart"])){
         if (mysqli_query($con, $sql)){
             $sql = "DELETE FROM wishlist WHERE p_id = '$p_id' AND ip_add = '$ip_add'";
             if(mysqli_query($con, $sql)){
-                echo "<div class='alert alert-danger'>
+                echo "<div class='alert alert-success'>
                         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                         <b>Product is added to cart</b>
                     </div>";
@@ -337,7 +337,7 @@ if(isset($_POST["addToCart"])){
 				$sql = "DELETE FROM cart WHERE p_id = '$p_id' AND user_id = '$_SESSION[uid]'";
 			
 				if(mysqli_query($con,$sql)){
-					echo "<div class='alert alert-danger'>
+					echo "<div class='alert alert-success'>
 									<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 									<b>Product is added to wishlist</b>
 							</div>";
@@ -363,7 +363,7 @@ if(isset($_POST["addToCart"])){
 				$sql = "DELETE FROM cart WHERE p_id = '$p_id' AND ip_add = '$ip_add'";
 
 				if(mysqli_query($con,$sql)){
-					echo "<div class='alert alert-danger'>
+					echo "<div class='alert alert-success'>
 									<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 									<b>Product is added to wishlist</b>
 							</div>";
@@ -372,11 +372,8 @@ if(isset($_POST["addToCart"])){
 			}
 			
 		}
-		
-		
-		
-		
 	}
+
 //Count User cart item
 if (isset($_POST["count_item"])) {
 	//When user is logged in then we will count number of item in cart by using user session id
@@ -462,7 +459,7 @@ if (isset($_POST["Common"])) {
                             </div>
                         </td>
                         <td>
-                            <a href="#" id="clickwishlist" pid="'.$row['product_id'].'" class="btn btn-warning">Move to Wishlist <i class="fa fa-angle-right"></i> </a>
+                            <a href="#" id="clickwishlist" pid="'.$row['product_id'].'" class="btn btn-success">Move to Wishlist <i class="fa fa-angle-right"></i> </a>
                         </td>
                     </tr>';
             }
@@ -486,24 +483,25 @@ if (isset($_POST["Common"])) {
                         <input type="hidden" name="cmd" value="_cart"/>
                         <input type="hidden" name="upload" value="1"/>';
 
-                $x = 0;
-                $sql = "SELECT a.product_id, a.product_title, a.product_price, a.product_image, b.id, b.qty, b.subtotal 
-                        FROM products a, cart b 
-                        WHERE a.product_id=b.p_id AND b.user_id='$_SESSION[uid]'";
-                $query = mysqli_query($con, $sql);
-                while ($row = mysqli_fetch_array($query)) {
-                    $x++;
-                    $product_price = number_format($row['product_price'], 2, '.', '');
-                    echo '<input type="hidden" name="total_count" value="'.$x.'"/>
-                        <input type="hidden" name="item_name_'.$x.'" value="'.$row['product_title'].'"/>
-                        <input type="hidden" name="item_number_'.$x.'" value="'.$x.'">
-                        <input type="hidden" name="amount_'.$x.'" value="'.$product_price.'"/>
-                        <input type="hidden" name="quantity_'.$x.'" value="'.$row['qty'].'"/>';
-                }
-                
-                echo '<input type="hidden" name="custom" value="'.$_SESSION['uid'].'"/>
-                    <input type="submit" id="submit" name="login_user_with_product" class="btn btn-success" value="Ready to Checkout"/>
-                    </form></td>
+						$x = 0;
+						$sql = "SELECT a.product_id, a.product_title, a.product_price, a.product_image, b.id, b.qty, b.subtotal 
+								FROM products a, cart b 
+								WHERE a.product_id=b.p_id AND b.user_id='$_SESSION[uid]'";
+						$query = mysqli_query($con, $sql);
+						while ($row = mysqli_fetch_array($query)) {
+							$x++;
+							$subtotal = number_format($row['subtotal'], 2, '.', '');
+							echo '<input type="hidden" name="total_count" value="'.$x.'">
+								<input type="hidden" name="item_name_'.$x.'" value="'.$row['product_title'].'">
+								<input type="hidden" name="item_number_'.$x.'" value="'.$x.'">
+								<input type="hidden" name="amount_'.$x.'" value="'.$subtotal.'">
+								<input type="hidden" name="quantity_'.$x.'" value="'.$row['qty'].'">';
+						}
+						
+						echo '<input type="hidden" name="custom" value="'.$_SESSION['uid'].'"/>
+							<input type="submit" id="submit" name="login_user_with_product" class="btn btn-success" value="Ready to Checkout">
+                    </form>
+					</td>
                     </tr>
                     </tfoot>
                     </table></div></div>';

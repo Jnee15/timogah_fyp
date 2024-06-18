@@ -161,23 +161,31 @@ $(document).ready(function(){
 		given string and with the help of sql query we will match user given string to our database keywords column then matched product 
 		we will show 
 	*/
-	$("body").delegate("#search-btn","click",function(event){
-		$("#get_product").html("<h3>Loading...</h3>");
-		var keyword = $("#search").val();
-		if(keyword != ""){
+	$(document).ready(function () {
+		$("body").delegate("#search-btn", "click", function (event) {
+			event.preventDefault();
+			$("#get_product").html("<h3>Loading...</h3>");
+			var keyword = $("#search").val();
+
 			$.ajax({
-			url		:	"action.php",
-			method	:	"POST",
-			data	:	{search:1,keyword:keyword},
-			success	:	function(data){ 
-				$("#get_product").html(data);
-				if($("body").width() < 480){
-					$("body").scrollTop(683);
+				url: "action.php",
+				method: "POST",
+				data: {
+					search: 1,
+					keyword: keyword
+				},
+				success: function (data) {
+					$("#get_product").html(data);
+					if ($("body").width() < 480) {
+						$("body").scrollTop(683);
+					}
+				},
+				error: function (xhr, status, error) {
+					console.error(xhr.responseText);
 				}
-			}
-		})
-		}
-	})
+			});
+		});
+	});
 	//end
 
 
@@ -324,7 +332,6 @@ $(document).ready(function(){
 	}
 	//Count user cart items funtion end
 
-	//Fetch Cart item from Database to dropdown menu
 	getCartItem();
 	function getCartItem(){
 		$.ajax({
@@ -381,6 +388,7 @@ $(document).ready(function(){
 				total: total
 			},
 			success: function (response) {
+				window.location.reload();
 				console.log(response);
 			}
 		});
@@ -473,7 +481,7 @@ $(document).ready(function(){
 			var row = $(this).parent().parent();
 			var price = parseFloat(row.find('.price').val());
 			var total = price * parseFloat($(this).val());
-			row.find('.total').val(total.toFixed(2));
+			row.find('.total').val(total.toFixed(2)); 
 		});
 		$('.total').each(function () {
 			net_total += parseFloat($(this).val());
