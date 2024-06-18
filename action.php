@@ -411,10 +411,6 @@ if (isset($_POST["Common"])) {
     }
     $query = mysqli_query($con, $sql);
 
-	if (isset($_SESSION["uid"])) { 
-	echo ' <button id="refreshButton" class="btn btn-success" style="z-index: 3;position: fixed; right: 15px;top: 265px;">Refresh After Edit</button>';
-	}
-
     if (isset($_POST["checkOutDetails"])) {
         if (mysqli_num_rows($query) > 0) {
             echo '<div class="main">
@@ -633,9 +629,3 @@ if (isset($_POST["removeItemFromwishList"])) {
 }
 
 ?>
-
-<script>
-        document.getElementById("refreshButton").addEventListener("click", function() {
-            window.location.reload();
-        });
-</script>

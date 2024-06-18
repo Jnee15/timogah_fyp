@@ -332,7 +332,6 @@ $(document).ready(function(){
 	}
 	//Count user cart items funtion end
 
-	//Fetch Cart item from Database to dropdown menu
 	getCartItem();
 	function getCartItem(){
 		$.ajax({
@@ -389,6 +388,7 @@ $(document).ready(function(){
 				total: total
 			},
 			success: function (response) {
+				window.location.reload();
 				console.log(response);
 			}
 		});
